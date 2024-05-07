@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="AppDBContext">
+  <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="PBL3Entities">
     <EntitySetMapping Name="C_Order">
       <EntityTypeMapping TypeName="PBL3Model.C_Order">
         <MappingFragment StoreEntitySet="_Order">
@@ -195,19 +195,5 @@
         <ScalarProperty Name="productID" ColumnName="productID" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="sp_Login" FunctionName="PBL3Model.Store.sp_Login">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="PBL3Model.sp_Login_Result">
-          <ScalarProperty Name="Result" ColumnName="Result" />
-          <ScalarProperty Name="fullName" ColumnName="fullName" />
-          <ScalarProperty Name="birthDate" ColumnName="birthDate" />
-          <ScalarProperty Name="gender" ColumnName="gender" />
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
-          <ScalarProperty Name="accountStatus" ColumnName="accountStatus" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_Reg" FunctionName="PBL3Model.Store.sp_Reg" />
   </EntityContainerMapping>
 </Mapping>

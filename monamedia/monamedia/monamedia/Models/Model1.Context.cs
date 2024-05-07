@@ -12,13 +12,11 @@ namespace monamedia.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class AppDbContext : DbContext
     {
         public AppDbContext()
-            : base("name=AppDbContext")
+            : base("name=PBL3Entities")
         {
         }
     
@@ -42,63 +40,5 @@ namespace monamedia.Models
         public virtual DbSet<Specification> Specifications { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Wishlist> Wishlists { get; set; }
-    
-        public virtual ObjectResult<sp_Login_Result> sp_Login(string username, string password)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Login_Result>("sp_Login", usernameParameter, passwordParameter);
-        }
-    
-        public virtual int sp_Reg(string userName, string password, string email, string fullName, Nullable<System.DateTime> birthDate, Nullable<bool> gender, string address, string phoneNumber, string accountStatus, string role)
-        {
-            var userNameParameter = userName != null ?
-                new ObjectParameter("userName", userName) :
-                new ObjectParameter("userName", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("email", email) :
-                new ObjectParameter("email", typeof(string));
-    
-            var fullNameParameter = fullName != null ?
-                new ObjectParameter("fullName", fullName) :
-                new ObjectParameter("fullName", typeof(string));
-    
-            var birthDateParameter = birthDate.HasValue ?
-                new ObjectParameter("birthDate", birthDate) :
-                new ObjectParameter("birthDate", typeof(System.DateTime));
-    
-            var genderParameter = gender.HasValue ?
-                new ObjectParameter("gender", gender) :
-                new ObjectParameter("gender", typeof(bool));
-    
-            var addressParameter = address != null ?
-                new ObjectParameter("address", address) :
-                new ObjectParameter("address", typeof(string));
-    
-            var phoneNumberParameter = phoneNumber != null ?
-                new ObjectParameter("phoneNumber", phoneNumber) :
-                new ObjectParameter("phoneNumber", typeof(string));
-    
-            var accountStatusParameter = accountStatus != null ?
-                new ObjectParameter("accountStatus", accountStatus) :
-                new ObjectParameter("accountStatus", typeof(string));
-    
-            var roleParameter = role != null ?
-                new ObjectParameter("role", role) :
-                new ObjectParameter("role", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Reg", userNameParameter, passwordParameter, emailParameter, fullNameParameter, birthDateParameter, genderParameter, addressParameter, phoneNumberParameter, accountStatusParameter, roleParameter);
-        }
     }
 }

@@ -397,22 +397,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="sp_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="username" Type="nvarchar" Mode="In" />
-    <Parameter Name="password" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_Reg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="userName" Type="varchar" Mode="In" />
-    <Parameter Name="password" Type="varchar" Mode="In" />
-    <Parameter Name="email" Type="varchar" Mode="In" />
-    <Parameter Name="fullName" Type="nvarchar" Mode="In" />
-    <Parameter Name="birthDate" Type="date" Mode="In" />
-    <Parameter Name="gender" Type="bit" Mode="In" />
-    <Parameter Name="address" Type="nvarchar" Mode="In" />
-    <Parameter Name="phoneNumber" Type="varchar" Mode="In" />
-    <Parameter Name="accountStatus" Type="nvarchar" Mode="In" />
-    <Parameter Name="role" Type="varchar" Mode="In" />
-  </Function>
   <EntityContainer Name="PBL3ModelStoreContainer">
     <EntitySet Name="_Order" EntityType="Self._Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />

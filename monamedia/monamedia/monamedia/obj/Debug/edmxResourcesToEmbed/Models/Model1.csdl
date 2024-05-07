@@ -403,7 +403,7 @@
     <End Role="Discount" Type="Self.Discount" Multiplicity="*" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="AppDBContext" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="PBL3Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="C_Order" EntityType="Self.C_Order" />
     <EntitySet Name="Accounts" EntityType="Self.Account" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -487,30 +487,5 @@
       <End Role="Discount" EntitySet="Discounts" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
-    <FunctionImport Name="sp_Login" ReturnType="Collection(PBL3Model.sp_Login_Result)">
-      <Parameter Name="username" Mode="In" Type="String" />
-      <Parameter Name="password" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_Reg">
-      <Parameter Name="userName" Mode="In" Type="String" />
-      <Parameter Name="password" Mode="In" Type="String" />
-      <Parameter Name="email" Mode="In" Type="String" />
-      <Parameter Name="fullName" Mode="In" Type="String" />
-      <Parameter Name="birthDate" Mode="In" Type="DateTime" />
-      <Parameter Name="gender" Mode="In" Type="Boolean" />
-      <Parameter Name="address" Mode="In" Type="String" />
-      <Parameter Name="phoneNumber" Mode="In" Type="String" />
-      <Parameter Name="accountStatus" Mode="In" Type="String" />
-      <Parameter Name="role" Mode="In" Type="String" />
-    </FunctionImport>
   </EntityContainer>
-  <ComplexType Name="sp_Login_Result">
-    <Property Type="String" Name="Result" Nullable="false" MaxLength="20" />
-    <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
-    <Property Type="DateTime" Name="birthDate" Nullable="true" />
-    <Property Type="Boolean" Name="gender" Nullable="true" />
-    <Property Type="String" Name="address" Nullable="true" MaxLength="70" />
-    <Property Type="String" Name="phoneNumber" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="accountStatus" Nullable="true" MaxLength="30" />
-  </ComplexType>
 </Schema>
