@@ -1,0 +1,424 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Staff/Views/Shared/StaffLayoutPage1.cshtml";
+}
+@model List<monamedia.Models.Product>
+@section Styles {
+    <style>
+        .product-info {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .details-button {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+
+            .product-info img {
+                margin-left: auto;
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                object-position: center;
+            }
+
+        .card {
+            background: linear-gradient(145deg, #e0e0e0, #ffffff);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+            }
+        }
+    </style>
+    <h2>Danh sách sản phẩm</h2>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <form class="d-flex" style="width:100%" onsubmit="return search()">
+                        <input id="searchInput" class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" style="width: 80%">
+                        <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-6" style="display: flex; align-items: center;">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="productType" id="allProducts" value="all" checked>
+                <label class="form-check-label" for="allProducts">
+                    Tất cả
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="productType" id="phones" value="Phone">
+                <label class="form-check-label" for="phones">
+                    Điện thoại
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="productType" id="tablets" value="Tablet">
+                <label class="form-check-label" for="tablets">
+                    Máy tính bảng
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="productType" id="laptops" value="Laptop">
+                <label class="form-check-label" for="laptops">
+                    Laptop
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div id="searchResults" class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-3" data-product-type="@product.type">
+                    <div class="product-info">
+                        <div>
+                            <h5 class="card-title">@product.name</h5>
+                            <p class="card-text">Thương hiệu: @product.brand</p>
+                            <p class="card-text">Màu sắc: @product.color</p>
+                            <p class="card-text">Số lượng: @product.quantity</p>
+                            <p class="card-text">Giá: @(string.Format("{0:#,##0}", product.price)) đ</p>
+                            <button class="btn btn-primary details-button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-product-id="@product.productID">Chỉnh sửa</button>
+                        </div>
+                        <img src="~/img/@product.img" alt="Product Image" class="custom-img">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thông tin chi tiết</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                    <input type="hidden" id="modalProductID">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductName"><strong>Tên sản phẩm</strong></label>
+                                <input type="text" class="form-control" id="modalProductName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductBrand"><strong>Thương hiệu</strong></label>
+                                <input type="text" class="form-control" id="modalProductBrand">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductRam"><strong>Ram</strong></label>
+                                <input type="text" class="form-control" id="modalProductRam">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductMemory"><strong>Bộ nhớ</strong></label>
+                                <input type="text" class="form-control" id="modalProductMemory">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductQuantity"><strong>Số lượng</strong></label>
+                                <input type="text" class="form-control" id="modalProductQuantity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductPrice"><strong>Giá</strong></label>
+                                <input type="text" class="form-control" id="modalProductPrice">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductColor"><strong>Màu sắc</strong></label>
+                                <input type="text" class="form-control" id="modalProductColor">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductCPU"><strong>CPU</strong></label>
+                                <input type="text" class="form-control" id="modalProductCPU">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductGPU"><strong>GPU</strong></label>
+                                <input type="text" class="form-control" id="modalProductGPU">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductOS"><strong>Hệ điều hành</strong></label>
+                                <input type="text" class="form-control" id="modalProductOS">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductScreen"><strong>Màn hình</strong></label>
+                                <input type="text" class="form-control" id="modalProductScreen">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductPin"><strong>Pin</strong></label>
+                                <input type="text" class="form-control" id="modalProductPin">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductCharge"><strong>Sạc</strong></label>
+                                <input type="text" class="form-control" id="modalProductCharge">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductCamera"><strong>Camera</strong></label>
+                                <input type="text" class="form-control" id="modalProductCamera">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductSize"><strong>Kích thước</strong></label>
+                                <input type="text" class="form-control" id="modalProductSize">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductWarrantly"><strong>Bảo hành</strong></label>
+                                <input type="text" class="form-control" id="modalProductWarrantly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductSound"><strong>Âm thanh</strong></label>
+                                <input type="text" class="form-control" id="modalProductSound">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductWeight"><strong>Trọng lượng</strong></label>
+                                <input type="text" class="form-control" id="modalProductWeight">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductCT"><strong>Công nghệ kết nối</strong></label>
+                                <input type="text" class="form-control" id="modalProductCT">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductYear"><strong>Năm ra mắt</strong></label>
+                                <input type="text" class="form-control" id="modalProductYear">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmButton">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script>
+        function search() {
+            var input, filter, cards, cardContainer, title, i, column;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            cardContainer = document.getElementById("searchResults");
+            cards = cardContainer.getElementsByClassName("card");
+            for (i = 0; i < cards.length; i++) {
+                title = cards[i].querySelector(".card-title");
+                if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                    column = cards[i].closest(".col-md-6");
+                    column.style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+            var columns = cardContainer.getElementsByClassName("col-md-6");
+            for (var j = 0; j < columns.length; j++) {
+                if (!columns[j].querySelector(".card:not([style='display: none;'])")) {
+                    columns[j].style.display = "none";
+                }
+            }
+            return false;
+        }
+        function filterProductsByType(type) {
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function (card) {
+                var productType = card.getAttribute('data-product-type');
+                if (type === 'all' || productType === type) {
+                    card.parentNode.style.display = 'block';
+                } else {
+                    card.parentNode.style.display = 'none';
+                }
+            });
+        }
+        $(document).ready(function () {
+            $('.details-button').click(function () {
+                var productId = $(this).data('product-id');
+                getProductDetails(productId);
+            });
+        });
+
+        function getProductDetails(productId) {
+            $.ajax({
+                url: '/Product/GetProductDetails',
+                type: 'GET',
+                data: { productId: productId },
+                success: function (response) {
+                    $('#modalProductID').val(response.ProductID);
+                    $('#modalProductName').val(response.ProductName);
+                    $('#modalProductBrand').val(response.ProductBrand);
+                    $('#modalProductPrice').val(response.ProductPrice);
+                    $('#modalProductQuantity').val(response.ProductQuantity);
+                    $('#modalProductColor').val(response.ProductColor);
+                    $('#modalProductRam').val(response.ProductRam);
+                    $('#modalProductMemory').val(response.ProductMemory);
+                    $('#modalProductCPU').val(response.CPU);
+                    $('#modalProductGPU').val(response.GPU);
+                    $('#modalProductOS').val(response.OS);
+                    $('#modalProductScreen').val(response.Screen);
+                    $('#modalProductPin').val(response.Pin);
+                    $('#modalProductCamera').val(response.Camera);
+                    $('#modalProductSize').val(response.Size);
+                    $('#modalProductWarrantly').val(response.Warrantly);
+                    $('#modalProductSound').val(response.Sound);
+                    $('#modalProductWeight').val(response.Weight);
+                    $('#modalProductCT').val(response.CT);
+                    $('#modalProductCharge').val(response.Charge);
+                    $('#modalProductYear').val(response.Year);
+                    $('#exampleModal').modal('show');
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error:', xhr, status, error);
+                }
+            });
+
+        }
+        $(document).ready(function () {
+            $('#confirmButton').click(function () {
+                var productID = $('#modalProductID').val();
+                var name = $('#modalProductName').val();
+                var brand = $('#modalProductBrand').val();
+                var ram = $('#modalProductRam').val();
+                var memory = $('#modalProductMemory').val();
+                var quantity = $('#modalProductQuantity').val();
+                var price = $('#modalProductPrice').val();
+                var color = $('#modalProductColor').val();
+                var cpu = $('#modalProductCPU').val();
+                var gpu = $('#modalProductGPU').val();
+                var os = $('#modalProductOS').val();
+                var screen = $('#modalProductScreen').val();
+                var pin = $('#modalProductPin').val();
+                var charge = $('#modalProductCharge').val();
+                var camera = $('#modalProductCamera').val();
+                var size = $('#modalProductSize').val();
+                var warrantly = $('#modalProductWarrantly').val();
+                var sound = $('#modalProductSound').val();
+                var weight = $('#modalProductWeight').val();
+                var ct = $('#modalProductCT').val();
+                var year = $('#modalProductYear').val();
+                var productViewModel = {
+                    ProductID:productID,
+                    Name: name,
+                    Brand:brand,
+                    Ram: ram,
+                    Memory: memory,
+                    Quantity: quantity,
+                    Price: price,
+                    Color: color,
+                    CPU: cpu,
+                    GPU: gpu,
+                    OS: os,
+                    Screen: screen,
+                    Pin: pin,
+                    Charge: charge,
+                    Camera: camera,
+                    Size: size,
+                    Warrantly: warrantly,
+                    Sound: sound,
+                    Weight: weight,
+                    CT: ct,
+                    Year: year
+                };
+                $.ajax({
+                    url: '/Product/UpdateProduct',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(productViewModel),
+                    success: function (response) {
+                        $('#exampleModal').modal('hide');
+                        location.reload(true); // Tải lại trang và bỏ qua cache
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error:', xhr, status, error);
+                    }
+                });
+            });
+        });
+
+        var radioButtons = document.querySelectorAll('input[name="productType"]');
+        radioButtons.forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                var selectedType = this.value;
+                filterProductsByType(selectedType);
+            });
+        });
+    </script>

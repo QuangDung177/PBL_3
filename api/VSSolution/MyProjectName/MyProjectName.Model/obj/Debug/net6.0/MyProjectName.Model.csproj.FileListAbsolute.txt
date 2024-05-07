@@ -1,0 +1,36 @@
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\bin\Debug\net6.0\MyProjectName.Model.deps.json
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\bin\Debug\net6.0\MyProjectName.Model.dll
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\bin\Debug\net6.0\MyProjectName.Model.pdb
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.csproj.AssemblyReference.cache
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.AssemblyInfoInputs.cache
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.AssemblyInfo.cs
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.csproj.CoreCompileInputs.cache
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.dll
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\refint\MyProjectName.Model.dll
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.pdb
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\ref\MyProjectName.Model.dll
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\bin\Debug\net6.0\MyProjectName.Model.deps.json
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\bin\Debug\net6.0\MyProjectName.Model.dll
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\bin\Debug\net6.0\MyProjectName.Model.pdb
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.csproj.AssemblyReference.cache
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.GeneratedMSBuildEditorConfig.editorconfig
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.AssemblyInfoInputs.cache
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.AssemblyInfo.cs
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.csproj.CoreCompileInputs.cache
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.dll
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\refint\MyProjectName.Model.dll
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.pdb
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\ref\MyProjectName.Model.dll
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\bin\Debug\net6.0\MyProjectName.Model.deps.json
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\bin\Debug\net6.0\MyProjectName.Model.dll
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\bin\Debug\net6.0\MyProjectName.Model.pdb
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.csproj.AssemblyReference.cache
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.AssemblyInfoInputs.cache
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.AssemblyInfo.cs
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.csproj.CoreCompileInputs.cache
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.dll
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\refint\MyProjectName.Model.dll
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\MyProjectName.Model.pdb
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.Model\obj\Debug\net6.0\ref\MyProjectName.Model.dll
