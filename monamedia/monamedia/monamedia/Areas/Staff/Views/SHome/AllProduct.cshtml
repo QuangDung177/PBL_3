@@ -53,6 +53,29 @@
             border: 2px solid #ced4da;
             background: linear-gradient(to right, #81c3d7, #e0e5ef);
         }
+        .card-text,.card-title
+        {
+            margin-left:10px;
+        }
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background-color: rgba(40, 167, 69, 0.9);
+            color: white;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            font-weight: bold; /* This line makes the text bold */
+            display: none;
+        }
+        .name-staff{
+            border:2px solid #ccc;
+            border-radius:10px;
+            width:200px;
+            height:50px;
+        }
 }
     </style>
     <h2>Danh sách sản phẩm</h2>
@@ -450,6 +473,12 @@
             </div>
         </div>
     </div>
+    <div id="editAlert" class="custom-alert" role="alert">
+        <strong>Thành công!</strong> Sản phẩm đã được chỉnh sửa
+    </div>
+    <div id="addAlert" class="custom-alert" role="alert">
+        <strong>Thành công!</strong> Sản phẩm đã được thêm
+    </div>
     <script src="~/Scripts/jquery-3.7.1.min.js"></script>
     <script>
         function search() {
@@ -583,7 +612,12 @@
                     data: JSON.stringify(productViewModel),
                     success: function (response) {
                         $('#exampleModal').modal('hide');
-                        location.reload(true);
+                        var alertElement = document.getElementById("editAlert");
+                        alertElement.style.display = "block";
+                        setTimeout(function () {
+                            location.reload(true);
+                            alertElement.style.display = "none";
+                        }, 2500);
                     },
                     error: function (xhr, status, error) {
                         console.log('Error:', xhr, status, error);
@@ -675,8 +709,13 @@
                         contentType: 'application/json',
                         data: JSON.stringify({ product: product, spec: spec }),
                         success: function (response) {
-                            location.reload(true);
-
+                            $('#addProductModal').modal('hide');
+                            var alertElement = document.getElementById("addAlert");
+                            alertElement.style.display = "block";
+                            setTimeout(function () {
+                                location.reload(true);
+                                alertElement.style.display = "none";
+                            }, 2500);
                         },
                         error: function (xhr, status, error) {
                             console.log('Error:', xhr, status, error);
@@ -689,7 +728,13 @@
                         contentType: 'application/json',
                         data: JSON.stringify({ product: product, specID: specID2 }),
                         success: function (response) {
-                            location.reload(true);
+                            $('#addProductModal').modal('hide');
+                            var alertElement = document.getElementById("addAlert");
+                            alertElement.style.display = "block";
+                            setTimeout(function () {
+                                location.reload(true);
+                                alertElement.style.display = "none";
+                            }, 2500);
                         },
                         error: function (xhr, status, error) {
                             console.log('Error:', xhr, status, error);

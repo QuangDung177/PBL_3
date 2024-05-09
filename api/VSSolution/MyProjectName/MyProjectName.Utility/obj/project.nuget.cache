@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9xxBoX789QkuwVck/QKwtQNN61p9zP5ajuISyScoPYswPrH1xkO/fpgWGMsaLvVTWHhZEjx4KyOiOaHH3tO1iw==",
+  "dgSpecHash": "+5KXJ9uZXvmkr99JsWYUYSvfCyoZFeYkp2w0cC142FR1z9o8acDfFoGDBdloeLOnuxDvUshNbPOpBV0kxxLxtw==",
   "success": true,
-  "projectFilePath": "D:\\Applications\\Zalo\\Zalo Received Files\\PBL3\\VSSolution\\MyProjectName\\MyProjectName.Utility\\MyProjectName.Utility.csproj",
+  "projectFilePath": "D:\\DUT\\Năm 2 Kì 2\\PBL 3\\Clone PBL3\\PBL_3\\api\\VSSolution\\MyProjectName\\MyProjectName.Utility\\MyProjectName.Utility.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dattr\\.nuget\\packages\\log4net\\2.0.13\\log4net.2.0.13.nupkg.sha512",
     "C:\\Users\\dattr\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

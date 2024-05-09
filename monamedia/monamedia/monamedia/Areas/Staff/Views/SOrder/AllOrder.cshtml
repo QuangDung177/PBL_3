@@ -43,6 +43,15 @@
                 border-color: #218838;
             }
 
+        .btn-danger {
+            background-color: #f44336;
+            border-color: #f44336;
+        }
+
+            .btn-danger:hover {
+                background-color: #da190b;
+                border-color: #da190b;
+            }
         .navbar {
             margin-left: 90px;
         }
@@ -63,8 +72,19 @@
             overflow: hidden;
             border: 2px solid #ced4da;
         }
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background-color: rgba(40, 167, 69, 0.5);
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            display: none;
+        }
     </style>
-
 }
 <h2>Danh sách đơn hàng chờ xác nhận</h2>
 <div id="orderContainer" class="container-fluid">
@@ -87,6 +107,7 @@
                             <th scope="col">Địa chỉ</th>
                             <th scope="col">Tổng tiền</th>
                             <th scope="col">Chi tiết đơn hàng</th>
+                            <th scope="col">Hủy đơn hàng</th>
                             <th scope="col">Xác nhận đơn hàng</th>
                         </tr>
                     </thead>
@@ -113,7 +134,8 @@
                                         Xem chi tiết
                                     </button>
                                 </td>
-                                <td><button class="btn btn-success">Xác nhận</button></td>
+                                <td><button class="btn btn-danger cancel-button" data-bs-toggle="modal" data-bs-target="#confirmCancelModal" data-order-id="@order.OrderID">Hủy</button></td>
+                                <td><button class="btn btn-success confirm-button">Xác nhận</button></td>
                             </tr>
                         }
                     </tbody>
@@ -203,7 +225,26 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmCancelModalLabel">Xác nhận hủy đơn hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn hủy đơn hàng này?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-danger confirm--button">Có</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="cancelAlert" class="custom-alert" role="alert">
+    <strong>Thành công!</strong> Đơn hàng đã được hủy.
+</div>
 <script src="~/Scripts/jquery-3.7.1.min.js"></script>
 <script>
     function search() {
@@ -306,6 +347,35 @@
     function formatCurrency(amount) {
         return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
+    var orderID = 0;
+    $(document).ready(function () {
+        $('.cancel-button').click(function () {
+            orderID = $(this).data('order-id');
+        });
+    });
+    $(document).ready(function () {
+        $('.confirm--button').click(function () {
+            var modal = document.getElementById("confirmCancelModal");
+            var modalBS = bootstrap.Modal.getInstance(modal);
+            modalBS.hide();
+            $.ajax({
+                url: '/Order/DeleteOrder',
+                type: 'POST',
+                data: { orderId: orderID },
+                success: function (data) {
+                    var alertElement = document.getElementById("cancelAlert");
+                    alertElement.style.display = "block";
+                    setTimeout(function () {
+                        location.reload(true);
+                        alertElement.style.display = "none";
+                    }, 1500);
+                },
+                error: function (xhr, status, error) {
+                    console.log('Lỗi:', xhr, status, error);
+                }
+            });
+        });
+    });
 
 </script>
 

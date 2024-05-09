@@ -1613,11 +1613,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Applications\\Zalo\\Zalo Received Files\\PBL3\\VSSolution\\MyProjectName\\MyProjectName.Utility\\MyProjectName.Utility.csproj",
+      "projectUniqueName": "D:\\DUT\\Năm 2 Kì 2\\PBL 3\\Clone PBL3\\PBL_3\\api\\VSSolution\\MyProjectName\\MyProjectName.Utility\\MyProjectName.Utility.csproj",
       "projectName": "MyProjectName.Utility",
-      "projectPath": "D:\\Applications\\Zalo\\Zalo Received Files\\PBL3\\VSSolution\\MyProjectName\\MyProjectName.Utility\\MyProjectName.Utility.csproj",
+      "projectPath": "D:\\DUT\\Năm 2 Kì 2\\PBL 3\\Clone PBL3\\PBL_3\\api\\VSSolution\\MyProjectName\\MyProjectName.Utility\\MyProjectName.Utility.csproj",
       "packagesPath": "C:\\Users\\dattr\\.nuget\\packages\\",
-      "outputPath": "D:\\Applications\\Zalo\\Zalo Received Files\\PBL3\\VSSolution\\MyProjectName\\MyProjectName.Utility\\obj\\",
+      "outputPath": "D:\\DUT\\Năm 2 Kì 2\\PBL 3\\Clone PBL3\\PBL_3\\api\\VSSolution\\MyProjectName\\MyProjectName.Utility\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\dattr\\AppData\\Roaming\\NuGet\\NuGet.Config",

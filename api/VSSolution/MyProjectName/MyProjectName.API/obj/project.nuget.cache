@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4gp3TMbxGXAUeNBv8kexjTs3JTK65hPE6cOS7MEZ7RID5ljLWirADQth7Yw8fSV4vHluhtvcU7b640uRX8AH+g==",
+  "dgSpecHash": "MYR1XluodUvtrdizoB8fBnt52dTNH8T35e4K5YbLFIGSHVbkMUWCCTMkVbBqFfQ+jvZmTXPt4R4XTiYwrFqoUA==",
   "success": true,
-  "projectFilePath": "D:\\Applications\\Zalo\\Zalo Received Files\\PBL3\\VSSolution\\MyProjectName\\MyProjectName.API\\MyProjectName.API.csproj",
+  "projectFilePath": "D:\\DUT\\Năm 2 Kì 2\\PBL 3\\Clone PBL3\\PBL_3\\api\\VSSolution\\MyProjectName\\MyProjectName.API\\MyProjectName.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dattr\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\dattr\\.nuget\\packages\\log4net\\2.0.13\\log4net.2.0.13.nupkg.sha512",

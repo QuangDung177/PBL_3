@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace monamedia.Controllers
 {
     public class OrderController : Controller
@@ -46,6 +45,36 @@ namespace monamedia.Controllers
             }
 
             return Json(orderDetails, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DeleteOrder(int? orderId)
+        {
+            try
+            {
+                using (AppDbContext db = new AppDbContext())
+                {
+                    C_Order order = new C_Order();
+                    foreach(var i in db.C_Order)
+                    {
+                        if (i.orderID == orderId)
+                            order = i;
+                    }
+                    if (order == null)
+                    {
+                        return HttpNotFound(); 
+                    }
+                    List<orderDetail> orderDetails = db.orderDetails.Where(od => od.orderID == orderId).ToList();
+
+                    db.orderDetails.RemoveRange(orderDetails);
+                    db.C_Order.Remove(order);
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Xoa thanh cong" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Xoa that bai " });
+            }
         }
 
     }
