@@ -900,7 +900,7 @@
           <End Role="Discount" Type="Self.Discount" Multiplicity="*" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="PBL3Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AppDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C_Order" EntityType="Self.C_Order" />
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -990,7 +990,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="PBL3Entities">
+        <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="AppDbContext">
           <EntitySetMapping Name="C_Order">
             <EntityTypeMapping TypeName="PBL3Model.C_Order">
               <MappingFragment StoreEntitySet="_Order">
