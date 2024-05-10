@@ -165,7 +165,7 @@
         <ul class="header__navbar-list">
             <!-- User Menu-->
             <li class="header__navbar-item">
-                <a href="" class="header__navbar-item-link">
+                <a class="header__navbar-item-link" href="https://localhost:44347/AdminStaff/LoginForm" id="logout-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16" ;>
                         <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
                         <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
@@ -179,13 +179,13 @@
     <!--sidebar-->
     <div class="sidebar"></div>
     <aside class="sidebar">
-        <p class="sidebar__username"><b>Nguyễn Quang Dũng </b></p>
+        <p class="sidebar__username"><b>@ViewBag.ManagerName </b></p>
         <p class="sidebar__user-designation">Chào mừng bạn trở lại</p>
 
         <hr>
         <ul class="sidebar__menu">
             <li>
-                <a class="sidebar__menu__control" href="#">
+                <a class="sidebar__menu__control" href="~/Admin/AHome/Information">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-button-wide" viewBox="0 0 16 16">
                         <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v2A1.5 1.5 0 0 1 14.5 5h-13A1.5 1.5 0 0 1 0 3.5zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5z" />
                         <path d="M2 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m10.823.323-.396-.396A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0M0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5" />
@@ -231,7 +231,7 @@
                     </svg><span class="app-menu__label">Thống kê doanh thu </span>
                 </a>
             </li>
-      
+
 
         </ul>
     </aside>
@@ -264,6 +264,21 @@
                 }
             });
 
+        });
+    </script>
+    <script>
+        document.getElementById("logout-link").addEventListener("click", function (e) {
+            fetch("/AdminStaff/Logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => {
+
+                })
+                .catch(error => {
+                });
         });
     </script>
     <script>
