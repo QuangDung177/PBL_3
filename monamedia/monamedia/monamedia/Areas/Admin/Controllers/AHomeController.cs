@@ -19,18 +19,30 @@ namespace monamedia.Areas.Admin.Controllers
             AppDbContext db = new AppDbContext();
             List<monamedia.Models.Staff> Staffs = db.Staffs.Where(row => row.fullName.Contains(search)).ToList();
             ViewBag.Search = search;
+            Filter();
             return View(Staffs);
         }
-        public ActionResult Information(int idManager, int idAccount)
+        public void Filter()
         {
             AppDbContext db = new AppDbContext();
-            monamedia.Models.Manager Managers = db.Managers.Where(row => row.managerID == idManager).FirstOrDefault();
+            int idAccount = Convert.ToInt32(Session["AccountID"]);
+            monamedia.Models.Manager Managers = db.Managers.Where(row => row.accountID == idAccount).FirstOrDefault();
+            ViewBag.ManagerName = Managers.fullName;
+        }
+        public ActionResult Information()
+        {
+            int idAccount = Convert.ToInt32(Session["AccountID"]);
+            AppDbContext db = new AppDbContext();
+            monamedia.Models.Manager Managers = db.Managers.Where(row => row.accountID == idAccount).FirstOrDefault();
             monamedia.Models.Account Accounts = db.Accounts.Where(row => row.accountID == idAccount).FirstOrDefault();
             var viewModel = new monamedia.Areas.Admin.Data.EditInformation
             {
                 Manager = Managers,
                 Account = Accounts
             };
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+            ViewBag.ManagerName = Managers.fullName;
+            ViewBag.accountID = idAccount;
             return View(viewModel);
         }
         [HttpPost]
@@ -42,7 +54,6 @@ namespace monamedia.Areas.Admin.Controllers
             //Update
             //account
             Accounts.userName = a.userName;
-            Accounts.password = a.password;
             Accounts.email = a.email;
             Accounts.role = a.role;
             //Staff
@@ -53,9 +64,32 @@ namespace monamedia.Areas.Admin.Controllers
             Managers.gender = m.gender;
             Managers.fullName = m.fullName;
             db.SaveChanges();
-            return RedirectToAction("Information", new { idManager = m.managerID, idAccount = a.accountID });
+            TempData["SuccessMessage"] = "Thông tin đã được cập nhật thành công!";
+            return RedirectToAction("Information");
         }
-
+        [HttpPost]
+        public ActionResult ChangePassword(string password, int accountid)
+        {
+        
+            AppDbContext db = new AppDbContext();
+            monamedia.Models.Manager Managers = db.Managers.Where(row => row.accountID == accountid).FirstOrDefault();
+            monamedia.Models.Account account = db.Accounts.FirstOrDefault(a => a.accountID == accountid);
+            if (account != null)
+            {
+                account.password = password;
+                db.SaveChanges();
+                var viewModel = new monamedia.Areas.Admin.Data.EditInformation
+                {
+                 Manager = db.Managers.Where(row => row.accountID == accountid).FirstOrDefault(),
+                Account = account
+                };
+                return Json(new { success = true, message = "Đổi mật khẩu thành công!" });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Đổi mật khẩu thất bại! Không tìm thấy tài khoản." });
+            }
+        }
         public ActionResult AccountManage(string search = "", string filter = "")
         {
             AppDbContext db = new AppDbContext();
@@ -76,12 +110,13 @@ namespace monamedia.Areas.Admin.Controllers
                     Accounts = db.Accounts.Where(row => row.userName.Contains(search)).ToList();
                     break;
             }
-
+            Filter();
             ViewBag.Search = search;
             return View(Accounts);
         }
         public ActionResult CreateStaff()
         {
+            Filter();
             return View();
         }
         [HttpPost]
@@ -105,7 +140,7 @@ namespace monamedia.Areas.Admin.Controllers
                 Staff = Staffs,
                 Account = Accounts
             };
-
+            Filter();
             return View(viewModel);
         }
         [HttpPost]
