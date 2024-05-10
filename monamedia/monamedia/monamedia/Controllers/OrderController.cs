@@ -76,6 +76,55 @@ namespace monamedia.Controllers
                 return Json(new { success = false, message = "Xoa that bai " });
             }
         }
-
+        public ActionResult ConfirmOrder(int? orderId)
+        {
+            int accountId = Convert.ToInt32(Session["AccountID"]);
+            AppDbContext db= new AppDbContext();
+            Staff s=db.Staffs.FirstOrDefault(staff=>staff.accountID== accountId);
+            C_Order order=db.C_Order.FirstOrDefault(o=>o.orderID == orderId);
+            order.status = "Đã xác nhận";
+            order.staffID = s.staffID;
+            db.SaveChanges();
+            return Json(new { success = true, });
+        }
+        public ActionResult ReceiveDelivery(int? orderId)
+        {
+            int accountId = Convert.ToInt32(Session["AccountID"]);
+            AppDbContext db = new AppDbContext();
+            Staff s = db.Staffs.FirstOrDefault(staff => staff.accountID == accountId);
+            C_Order order = db.C_Order.FirstOrDefault(o => o.orderID == orderId);
+            var export = new Export
+            {
+                staffID = s.staffID,
+                managerID = 1,
+                orderID = orderId,
+                pickUpTime = DateTime.Now,
+                status = "Đang giao hàng"
+            };
+            db.Exports.Add(export);
+            order.status = "Chờ giao hàng";
+            db.SaveChanges();
+            return Json(new { success = true, });
+        }
+        public ActionResult DeliveryFailure(int ? orderId)
+        {
+            AppDbContext db = new AppDbContext();
+            C_Order order = db.C_Order.FirstOrDefault(o => o.orderID == orderId);
+            Export export=db.Exports.FirstOrDefault(e=>e.orderID == orderId);
+            order.status = "Đã xác nhận";
+            db.Exports.Remove(export);
+            db.SaveChanges();
+            return Json(new { success = true, });
+        }
+        public ActionResult DeliverySuccess(int? orderId)
+        {
+            AppDbContext db = new AppDbContext();
+            C_Order order = db.C_Order.FirstOrDefault(o => o.orderID == orderId);
+            Export export = db.Exports.FirstOrDefault(e => e.orderID == orderId);
+            order.status = "Giao thành công";
+            export.status= "Giao thành công";
+            db.SaveChanges();
+            return Json(new { success = true, });
+        }
     }
 }

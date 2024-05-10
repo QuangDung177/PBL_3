@@ -403,7 +403,7 @@
     <End Role="Discount" Type="Self.Discount" Multiplicity="*" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="AppDbContext" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="PBL3Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="C_Order" EntityType="Self.C_Order" />
     <EntitySet Name="Accounts" EntityType="Self.Account" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />

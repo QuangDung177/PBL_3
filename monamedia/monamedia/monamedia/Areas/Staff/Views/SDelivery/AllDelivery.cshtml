@@ -1,6 +1,6 @@
 ﻿@using monamedia.Models
 @{
-    ViewBag.Title = "Giao hàng";
+    ViewBag.Title = "ĐƠN HÀNG - CHỜ GIAO";
     Layout = "~/Areas/Staff/Views/Shared/StaffLayoutPage1.cshtml";
 }
 @model List<monamedia.ViewModels.OrderViewModel>
@@ -75,7 +75,18 @@
         #orderContainer .form-check-inline label {
                 margin-bottom: 0;
          }
-
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background-color: rgba(40, 167, 69, 0.5);
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            display: none;
+        }
 
     </style>
 }
@@ -150,7 +161,7 @@
                                         Xem chi tiết
                                     </button>
                                 </td>
-                                <td><button class="btn btn-success">Giao hàng</button></td>
+                                <td><button class="btn btn-success delivery-btn" data-order-id="@order.OrderID">Giao hàng</button></td>
                             </tr>
                         }
                     </tbody>
@@ -238,6 +249,9 @@
             </div>
         </div>
     </div>
+</div>
+<div id="deliveryAlert" class="custom-alert" role="alert">
+    <strong>Nhận giao hàng thành công!</strong>
 </div>
 <script src="~/Scripts/jquery-3.7.1.min.js"></script>
 <script>
@@ -341,5 +355,43 @@
     function formatCurrency(amount) {
         return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
+    $(document).ready(function () {
+        $('.delivery-btn').click(function () {
+            var orderId = $(this).data('order-id');
+            console.log(orderId);
+            $.ajax({
+                url: '/Order/ReceiveDelivery', 
+                type: 'POST',
+                data: { orderId: orderId },
+                success: function (data) {
+                    var alertElement = document.getElementById("deliveryAlert");
+                    alertElement.style.display = "block";
+                    setTimeout(function () {
+                        alertElement.style.display = "none";
+                        location.reload(true);
+                    }, 1500);
+                },
+                error: function (xhr, status, error) {
+                    console.log('Lỗi:', xhr, status, error);
+                }
+            });
+        });
+    });
+    $('input[type=radio][name=productType]').change(function () {
+        var selectedValue = $('input[type=radio][name=productType]:checked').val();
+        switch (selectedValue) {
+            case 'waiting':
+                window.location.href = '/Staff/SDelivery/AllDelivery'; 
+                break;
+            case 'delivering':
+                window.location.href = '/Staff/SDelivery/AllDelivering';
+                break;
+            case 'delivered':
+                window.location.href = '/Staff/SDelivery/AllDelivered';
+                break;
+            default:
+                break;
+        }
+    });
 
 </script>

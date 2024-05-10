@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'F:\PBL3_Index\PBL_3\monamedia\monamedia\monamedia\Models\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\DUT\Năm 2 Kì 2\PBL 3\Clone PBL3\PBL_3\monamedia\monamedia\monamedia\Models\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -135,7 +135,7 @@
                                     </button>
                                 </td>
                                 <td><button class="btn btn-danger cancel-button" data-bs-toggle="modal" data-bs-target="#confirmCancelModal" data-order-id="@order.OrderID">Hủy</button></td>
-                                <td><button class="btn btn-success confirm-button">Xác nhận</button></td>
+                                <td><button class="btn btn-success confirm-button" data-order-id="@order.OrderID">Xác nhận</button></td>
                             </tr>
                         }
                     </tbody>
@@ -244,6 +244,9 @@
 </div>
 <div id="cancelAlert" class="custom-alert" role="alert">
     <strong>Thành công!</strong> Đơn hàng đã được hủy.
+</div>
+<div id="confirmSucessAlert" class="custom-alert" role="alert">
+    <strong>Thành công!</strong> Đơn hàng đã được xác nhận.
 </div>
 <script src="~/Scripts/jquery-3.7.1.min.js"></script>
 <script>
@@ -366,12 +369,32 @@
                     var alertElement = document.getElementById("cancelAlert");
                     alertElement.style.display = "block";
                     setTimeout(function () {
-                        location.reload(true);
                         alertElement.style.display = "none";
+                        location.reload(true);
                     }, 1500);
                 },
                 error: function (xhr, status, error) {
                     console.log('Lỗi:', xhr, status, error);
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('.confirm-button').click(function () {
+            var orderId = $(this).data('order-id');
+            $.ajax({
+                url: '/Order/ConfirmOrder', 
+                type: 'POST', 
+                data: { orderId: orderId },
+                success: function (data) {
+                    var alertElement = document.getElementById("confirmSucessAlert");
+                    alertElement.style.display = "block";
+                    setTimeout(function () {
+                        alertElement.style.display = "none";
+                        location.reload(true);
+                    }, 1500);
+                },
+                error: function (xhr, status, error) {
                 }
             });
         });
