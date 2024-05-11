@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "11c4b8f6-f2cc-428b-8a4c-903041e306d7",
+		"name": "MyProjectName",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+  "item": [
+    {
+			"name": "TokenGenerator",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "73739e23-fb26-474e-b202-7ea845e06c55",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var token = jsonData.document.AccessToken;\r",
+							"postman.setEnvironmentVariable(\"token\", token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\":\"admin\",\n\"password\":\"admin123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{DEVServerURL}}/{{APIBaseString}}/token/",
+					"host": [
+						"{{DEVServerURL}}"
+					],
+					"path": [
+						"{{APIBaseString}}",
+						"token"
+						
+					]
+				}
+			},
+			"response": []
+		},
+    {"name": "Sp_Login - Execute", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"username\":\"\",\"password\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{APIBaseString}}","sp","Sp_Login"] } }, "response": [] }
+,{"name": "Sp_Reg - Execute", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"accountID\":\"\",\"userName\":\"\",\"password\":\"\",\"email\":\"\",\"customerID\":\"\",\"fullName\":\"\",\"birthDate\":\"\",\"gender\":\"\",\"address\":\"\",\"phoneNumber\":\"\",\"accountStatus\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{APIBaseString}}","sp","Sp_Reg"] } }, "response": [] }
+
+  ],
+	"protocolProfileBehavior": {}
+}

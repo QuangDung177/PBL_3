@@ -1,0 +1,4 @@
+2024-05-02 20:21:15,648 [.NET ThreadPool Worker] INFO  Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 POST https://localhost:44376/api/login application/json;+charset=utf-8 39
+2024-05-02 20:21:15,764 [.NET ThreadPool Worker] INFO  Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/1.1 POST https://localhost:44376/api/login application/json;+charset=utf-8 39 - 404 - - 119.4173ms
+2024-05-02 20:21:55,602 [.NET ThreadPool Worker] INFO  Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 POST https://localhost:44376/api/login application/json;+charset=utf-8 39
+2024-05-02 20:21:55,608 [.NET ThreadPool Worker] INFO  Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/1.1 POST https://localhost:44376/api/login application/json;+charset=utf-8 39 - 404 - - 9.9882ms

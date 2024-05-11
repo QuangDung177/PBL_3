@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "/TNbOQvGJdshN/IgQLUF9z9yBmUk4zvdMInuvR+3HxBF8wabjFqNkRN7EhmwupnvNrwofsERwCWX9J0VRipUWw==",
+  "success": true,
+  "projectFilePath": "D:\\Applications\\Zalo\\Zalo Received Files\\PBL3\\VSSolution\\MyProjectName\\MyProjectName.Model\\MyProjectName.Model.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dattr\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

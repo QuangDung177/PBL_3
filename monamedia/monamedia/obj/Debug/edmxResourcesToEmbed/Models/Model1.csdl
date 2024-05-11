@@ -1,0 +1,491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PBL3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C_Order">
+    <Key>
+      <PropertyRef Name="orderID" />
+    </Key>
+    <Property Name="orderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="staffID" Type="Int32" />
+    <Property Name="customerID" Type="Int32" />
+    <Property Name="timeOrder" Type="DateTime" Precision="3" />
+    <Property Name="method" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="fee" Type="Int32" />
+    <Property Name="total" Type="Int32" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK___Order__staffID__6A30C649" FromRole="C_Order" ToRole="Staff" />
+    <NavigationProperty Name="Exports" Relationship="Self.FK__Export__orderID__6D0D32F4" FromRole="C_Order" ToRole="Export" />
+    <NavigationProperty Name="orderDetails" Relationship="Self.FK__orderDeta__order__70DDC3D8" FromRole="C_Order" ToRole="orderDetail" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__orderID__72C60C4A" FromRole="C_Order" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="accountID" />
+    </Key>
+    <Property Name="accountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__accoun__3B75D760" FromRole="Account" ToRole="Customer" />
+    <NavigationProperty Name="Managers" Relationship="Self.FK__Manager__account__6FE99F9F" FromRole="Account" ToRole="Manager" />
+    <NavigationProperty Name="Staffs" Relationship="Self.FK__Staff__accountID__797309D9" FromRole="Account" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="accountID" Type="Int32" Nullable="false" />
+    <Property Name="fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="birthDate" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="Boolean" />
+    <Property Name="address" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="phoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="accountStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK__Customer__accoun__3B75D760" FromRole="Customer" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="discountID" />
+    </Key>
+    <Property Name="discountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nameDiscount" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ngayBatDau" Type="DateTime" Precision="3" />
+    <Property Name="ngayKetThuc" Type="DateTime" Precision="3" />
+    <Property Name="per_cent" Type="Int32" />
+    <NavigationProperty Name="Products" Relationship="Self.Product_Discount" FromRole="Discount" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Export">
+    <Key>
+      <PropertyRef Name="exportID" />
+    </Key>
+    <Property Name="exportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="staffID" Type="Int32" />
+    <Property Name="managerID" Type="Int32" />
+    <Property Name="orderID" Type="Int32" />
+    <Property Name="pickUpTime" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C_Order" Relationship="Self.FK__Export__orderID__6D0D32F4" FromRole="Export" ToRole="C_Order" />
+    <NavigationProperty Name="Manager" Relationship="Self.FK__Export__managerI__6C190EBB" FromRole="Export" ToRole="Manager" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__Export__staffID__6E01572D" FromRole="Export" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Import">
+    <Key>
+      <PropertyRef Name="importID" />
+    </Key>
+    <Property Name="importID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="managerID" Type="Int32" />
+    <Property Name="importDate" Type="DateTime" Precision="3" />
+    <Property Name="total" Type="Int32" />
+    <NavigationProperty Name="Manager" Relationship="Self.FK__Import__managerI__6EF57B66" FromRole="Import" ToRole="Manager" />
+    <NavigationProperty Name="ProductImports" Relationship="Self.FK__ProductIm__impor__76969D2E" FromRole="Import" ToRole="ProductImport" />
+  </EntityType>
+  <EntityType Name="Manager">
+    <Key>
+      <PropertyRef Name="managerID" />
+    </Key>
+    <Property Name="managerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="accountID" Type="Int32" />
+    <Property Name="fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="birthDate" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="Boolean" />
+    <Property Name="address" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="phoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="experience" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK__Manager__account__6FE99F9F" FromRole="Manager" ToRole="Account" />
+    <NavigationProperty Name="Exports" Relationship="Self.FK__Export__managerI__6C190EBB" FromRole="Manager" ToRole="Export" />
+    <NavigationProperty Name="Imports" Relationship="Self.FK__Import__managerI__6EF57B66" FromRole="Manager" ToRole="Import" />
+  </EntityType>
+  <EntityType Name="orderDetail">
+    <Key>
+      <PropertyRef Name="orderDetailID" />
+    </Key>
+    <Property Name="orderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="orderID" Type="Int32" />
+    <Property Name="productID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="C_Order" Relationship="Self.FK__orderDeta__order__70DDC3D8" FromRole="orderDetail" ToRole="C_Order" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__orderDeta__produ__71D1E811" FromRole="orderDetail" ToRole="Product" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK__Review__orderDet__787EE5A0" FromRole="orderDetail" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="paymentID" />
+    </Key>
+    <Property Name="paymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="orderID" Type="Int32" />
+    <Property Name="paymentTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="C_Order" Relationship="Self.FK__Payment__orderID__72C60C4A" FromRole="Payment" ToRole="C_Order" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="color" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ram" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="memory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="specID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="img" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="orderDetails" Relationship="Self.FK__orderDeta__produ__71D1E811" FromRole="Product" ToRole="orderDetail" />
+    <NavigationProperty Name="Specification" Relationship="Self.FK__Product__specID__73BA3083" FromRole="Product" ToRole="Specification" />
+    <NavigationProperty Name="ProductImports" Relationship="Self.FK__ProductIm__produ__778AC167" FromRole="Product" ToRole="ProductImport" />
+    <NavigationProperty Name="Wishlists" Relationship="Self.FK__Wishlist__produc__7A672E12" FromRole="Product" ToRole="Wishlist" />
+    <NavigationProperty Name="Discounts" Relationship="Self.Product_Discount" FromRole="Product" ToRole="Discount" />
+  </EntityType>
+  <EntityType Name="ProductImport">
+    <Key>
+      <PropertyRef Name="importID" />
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="importID" Type="Int32" Nullable="false" />
+    <Property Name="productID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="priceImport" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="Import" Relationship="Self.FK__ProductIm__impor__76969D2E" FromRole="ProductImport" ToRole="Import" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__produ__778AC167" FromRole="ProductImport" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="reviewID" />
+    </Key>
+    <Property Name="reviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="orderDetailID" Type="Int32" />
+    <Property Name="star" Type="Int32" />
+    <Property Name="cmtCustomer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="cmtStaff" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="cmtTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="orderDetail" Relationship="Self.FK__Review__orderDet__787EE5A0" FromRole="Review" ToRole="orderDetail" />
+  </EntityType>
+  <EntityType Name="Specification">
+    <Key>
+      <PropertyRef Name="SpecID" />
+    </Key>
+    <Property Name="SpecID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CPU" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="GPU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="OS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="screen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="pin" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="camera" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="size" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="warrantly" Type="Int32" />
+    <Property Name="sound" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="weight" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="conectivityTechnologies" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="charge" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="yearOfDebut" Type="Int32" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__specID__73BA3083" FromRole="Specification" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="staffID" />
+    </Key>
+    <Property Name="staffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="accountID" Type="Int32" />
+    <Property Name="fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="birthDate" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="Boolean" />
+    <Property Name="address" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="phoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="salary" Type="Int32" />
+    <NavigationProperty Name="C_Order" Relationship="Self.FK___Order__staffID__6A30C649" FromRole="Staff" ToRole="C_Order" />
+    <NavigationProperty Name="Account" Relationship="Self.FK__Staff__accountID__797309D9" FromRole="Staff" ToRole="Account" />
+    <NavigationProperty Name="Exports" Relationship="Self.FK__Export__staffID__6E01572D" FromRole="Staff" ToRole="Export" />
+  </EntityType>
+  <EntityType Name="Wishlist">
+    <Key>
+      <PropertyRef Name="customerID" />
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="customerID" Type="Int32" Nullable="false" />
+    <Property Name="productID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Wishlist__produc__7A672E12" FromRole="Wishlist" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK___Order__staffID__6A30C649">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="C_Order" Type="Self.C_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="staffID" />
+      </Principal>
+      <Dependent Role="C_Order">
+        <PropertyRef Name="staffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Export__orderID__6D0D32F4">
+    <End Role="C_Order" Type="Self.C_Order" Multiplicity="0..1" />
+    <End Role="Export" Type="Self.Export" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="Export">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orderDeta__order__70DDC3D8">
+    <End Role="C_Order" Type="Self.C_Order" Multiplicity="0..1" />
+    <End Role="orderDetail" Type="Self.orderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="orderDetail">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payment__orderID__72C60C4A">
+    <End Role="C_Order" Type="Self.C_Order" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customer__accoun__3B75D760">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="accountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Manager__account__6FE99F9F">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountID" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="accountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__accountID__797309D9">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountID" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="accountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Export__managerI__6C190EBB">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+    <End Role="Export" Type="Self.Export" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="managerID" />
+      </Principal>
+      <Dependent Role="Export">
+        <PropertyRef Name="managerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Export__staffID__6E01572D">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Export" Type="Self.Export" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="staffID" />
+      </Principal>
+      <Dependent Role="Export">
+        <PropertyRef Name="staffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Import__managerI__6EF57B66">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+    <End Role="Import" Type="Self.Import" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="managerID" />
+      </Principal>
+      <Dependent Role="Import">
+        <PropertyRef Name="managerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIm__impor__76969D2E">
+    <End Role="Import" Type="Self.Import" Multiplicity="1" />
+    <End Role="ProductImport" Type="Self.ProductImport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Import">
+        <PropertyRef Name="importID" />
+      </Principal>
+      <Dependent Role="ProductImport">
+        <PropertyRef Name="importID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orderDeta__produ__71D1E811">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="orderDetail" Type="Self.orderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="orderDetail">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Review__orderDet__787EE5A0">
+    <End Role="orderDetail" Type="Self.orderDetail" Multiplicity="0..1" />
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orderDetail">
+        <PropertyRef Name="orderDetailID" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="orderDetailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__specID__73BA3083">
+    <End Role="Specification" Type="Self.Specification" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specification">
+        <PropertyRef Name="SpecID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="specID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIm__produ__778AC167">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductImport" Type="Self.ProductImport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="ProductImport">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wishlist__produc__7A672E12">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="Wishlist">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Product_Discount">
+    <End Role="Discount" Type="Self.Discount" Multiplicity="*" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="AppDbContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C_Order" EntityType="Self.C_Order" />
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Discounts" EntityType="Self.Discount" />
+    <EntitySet Name="Exports" EntityType="Self.Export" />
+    <EntitySet Name="Imports" EntityType="Self.Import" />
+    <EntitySet Name="Managers" EntityType="Self.Manager" />
+    <EntitySet Name="orderDetails" EntityType="Self.orderDetail" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductImports" EntityType="Self.ProductImport" />
+    <EntitySet Name="Reviews" EntityType="Self.Review" />
+    <EntitySet Name="Specifications" EntityType="Self.Specification" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="Wishlists" EntityType="Self.Wishlist" />
+    <AssociationSet Name="FK___Order__staffID__6A30C649" Association="Self.FK___Order__staffID__6A30C649">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="C_Order" EntitySet="C_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Export__orderID__6D0D32F4" Association="Self.FK__Export__orderID__6D0D32F4">
+      <End Role="C_Order" EntitySet="C_Order" />
+      <End Role="Export" EntitySet="Exports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orderDeta__order__70DDC3D8" Association="Self.FK__orderDeta__order__70DDC3D8">
+      <End Role="C_Order" EntitySet="C_Order" />
+      <End Role="orderDetail" EntitySet="orderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payment__orderID__72C60C4A" Association="Self.FK__Payment__orderID__72C60C4A">
+      <End Role="C_Order" EntitySet="C_Order" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customer__accoun__3B75D760" Association="Self.FK__Customer__accoun__3B75D760">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Manager__account__6FE99F9F" Association="Self.FK__Manager__account__6FE99F9F">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Manager" EntitySet="Managers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__accountID__797309D9" Association="Self.FK__Staff__accountID__797309D9">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Export__managerI__6C190EBB" Association="Self.FK__Export__managerI__6C190EBB">
+      <End Role="Manager" EntitySet="Managers" />
+      <End Role="Export" EntitySet="Exports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Export__staffID__6E01572D" Association="Self.FK__Export__staffID__6E01572D">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="Export" EntitySet="Exports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Import__managerI__6EF57B66" Association="Self.FK__Import__managerI__6EF57B66">
+      <End Role="Manager" EntitySet="Managers" />
+      <End Role="Import" EntitySet="Imports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIm__impor__76969D2E" Association="Self.FK__ProductIm__impor__76969D2E">
+      <End Role="Import" EntitySet="Imports" />
+      <End Role="ProductImport" EntitySet="ProductImports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orderDeta__produ__71D1E811" Association="Self.FK__orderDeta__produ__71D1E811">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="orderDetail" EntitySet="orderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Review__orderDet__787EE5A0" Association="Self.FK__Review__orderDet__787EE5A0">
+      <End Role="orderDetail" EntitySet="orderDetails" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__specID__73BA3083" Association="Self.FK__Product__specID__73BA3083">
+      <End Role="Specification" EntitySet="Specifications" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIm__produ__778AC167" Association="Self.FK__ProductIm__produ__778AC167">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductImport" EntitySet="ProductImports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wishlist__produc__7A672E12" Association="Self.FK__Wishlist__produc__7A672E12">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Wishlist" EntitySet="Wishlists" />
+    </AssociationSet>
+    <AssociationSet Name="Product_Discount" Association="Self.Product_Discount">
+      <End Role="Discount" EntitySet="Discounts" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

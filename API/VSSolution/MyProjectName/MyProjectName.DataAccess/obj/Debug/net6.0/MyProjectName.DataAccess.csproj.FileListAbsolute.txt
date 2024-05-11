@@ -1,0 +1,51 @@
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.DataAccess.deps.json
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.DataAccess.dll
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.DataAccess.pdb
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Model.dll
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Utility.dll
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Model.pdb
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Utility.pdb
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.csproj.AssemblyReference.cache
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.AssemblyInfoInputs.cache
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.AssemblyInfo.cs
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.csproj.CoreCompileInputs.cache
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.csproj.CopyComplete
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.dll
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\refint\MyProjectName.DataAccess.dll
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.pdb
+C:\D\Automator\Git\Automator\nkv.RestAPIMSSQL\nkv.RestAPI.NetCore\nkv.RestAPI.NetCore\bin\Debug\netcoreapp3.1\Template\solution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\ref\MyProjectName.DataAccess.dll
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.DataAccess.deps.json
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.DataAccess.dll
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.DataAccess.pdb
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Model.dll
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Utility.dll
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Model.pdb
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Utility.pdb
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.csproj.AssemblyReference.cache
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.AssemblyInfoInputs.cache
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.AssemblyInfo.cs
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.csproj.CoreCompileInputs.cache
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjec.96D7C86F.Up2Date
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.dll
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\refint\MyProjectName.DataAccess.dll
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.pdb
+E:\Tool API\MicroServiceGenerator_DotNetCore6\MyProjectName\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\ref\MyProjectName.DataAccess.dll
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.DataAccess.deps.json
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.DataAccess.dll
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.DataAccess.pdb
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Model.dll
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Utility.dll
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Model.pdb
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\bin\Debug\net6.0\MyProjectName.Utility.pdb
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.csproj.AssemblyReference.cache
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.AssemblyInfoInputs.cache
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.AssemblyInfo.cs
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.csproj.CoreCompileInputs.cache
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjec.96D7C86F.Up2Date
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.dll
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\refint\MyProjectName.DataAccess.dll
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\MyProjectName.DataAccess.pdb
+D:\Applications\Zalo\Zalo Received Files\PBL3\VSSolution\MyProjectName\MyProjectName.DataAccess\obj\Debug\net6.0\ref\MyProjectName.DataAccess.dll

@@ -1,0 +1,334 @@
+﻿
+@{
+    ViewBag.Title = "AccountManage";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
+}
+<style>
+    .row_element-button {
+        display: flex;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        text-size-adjust: 100%;
+        justify-content: space-between;
+    }
+
+    .safe {
+        color: red;
+    }
+</style>
+@model List<monamedia.Models.Account>
+<main class="main">
+    <div class="main_title">
+        <p class="main_title-label "><b>Danh sách tài khoản</b></p>
+        <div id="clock"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title">
+                <div class="row_element-button">
+                    <div>
+                        <label class="control-label"><b>Lọc</b></label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="show" id="customer" value="customer">
+                            <label class="form-check-label" for="customer">Khách hàng</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="show" id="staff" value="staff">
+                            <label class="form-check-label" for="staff">Nhân viên</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="show" id="all" value="all">
+                            <label class="form-check-label" for="all">Tất cả</label>
+                        </div>
+                    </div>
+                    <div>
+                        <form class="d-flex flex-row align-items-center flex-wrap" action="/Admin/AHome/AccountManage">
+                            <label for="search" class="mx-2 my-1">Tìm kiếm</label>
+                            <input type="search" class="form-control w-auto" id="search" name="search" placeholder="Tìm kiếm " value="@ViewBag.Search" />
+                            <input type="hidden" name="filter" id="filter" value="" />
+                            <button type="submit" class="btn btn-primary mx-2" style="background-color:blue">Hiển thị</button>
+                        </form>
+                    </div>
+
+                </div>
+
+                <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+                       id="sampleTable">
+                    <thead>
+                        <tr>
+                            <th width="100">ID tài khoản</th>
+                            <th width="150">Tên đăng nhập</th>
+                            <th width="150">Mật khẩu</th>
+                            <th width="300">Email</th>
+                            <th width="100">Vai trò</th>
+                            <th width="100">Tính năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var account in Model)
+                        {
+                            string roleClass = "";
+                            string safeClass = "";
+                            string safe = account.password;
+                            switch (account.role)
+                            {
+                                case "Customer":
+                                    roleClass = "khach-hang";
+                                    safe = "BẢO MẬT";
+                                    break;
+                                case "Staff":
+                                    roleClass = "nhan-vien";
+                                    break;
+                                case "Admin":
+                                    continue;
+                                default:
+                                    roleClass = "";
+                                    break;
+                            }
+                            if (safe == "BẢO MẬT")
+                            {
+                                safeClass = "safe";
+                            }
+                            <tr class="@roleClass">
+                                <td>@account.accountID</td>
+                                <td>@account.userName</td>
+                                <td class="@safeClass">@safe</td>
+                                <td>@account.email</td>
+                                <td>@account.role</td>
+                                <td class="table-td-center">
+                                    <button class="btn btn-primary details-button" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" data-account-id="@account.accountID"
+                                            style="background-color: white; ">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-three-dots" viewBox="0 0 16 16" style="background-color:white">
+                                            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                                        </svg>
+                                        <i class="fas fa-edit"></i>
+
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel">Chi tiết thông tin tài khoản</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form chỉnh sửa thông tin tài khoản -->
+                <div id="accountForm">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <input type="hidden" id="accountID" />
+                        <div class="form-group col-md-6">
+                            <label for="userName">Tên đăng nhập</label>
+                            <input type="text" class="form-control" id="userName" name="userName" readonly>
+                        </div>
+                        <div class="form-group col-md-6" id="passwordGroup">
+                            <label for="password">Mật khẩu</label>
+                            <input type="text" class="form-control" id="password" name="password" readonly>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="fullName">Họ và Tên</label>
+                            <input type="text" class="form-control" id="fullName" name="fullName" readonly>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="form-group col-md-6">
+                            <label for="birthDate">Ngày sinh</label>
+                            <input type="text" class="form-control" id="birthDate" name="birthDate" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="gender">Giới tính</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="male" readonly>
+                                <label class="form-check-label" for="male">Nam</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="female" readonly>
+                                <label class="form-check-label" for="female">Nữ</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="form-group col-md-6">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" class="form-control" id="address" name="address" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="phoneNumber">Số điện thoại</label>
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" readonly>
+                        </div>
+                    </div>
+                    <!-- Thêm các trường dữ liệu riêng của nhân viên -->
+                    <input type="hidden" id="staffID" />
+                    <div id="staffFields">
+                        <div class="form-group col-md-6">
+                            <label for="salary">Lương</label>
+                            <input type="number" class="form-control" id="salary" name="salary" readonly>
+                        </div>
+                    </div>
+                    <!-- Thêm các trường dữ liệu riêng của khách hàng -->
+                    <input type="hidden" id="customerID" />
+                    <div id="customerFields">
+                        <div class="form-group col-md-6">
+                            <label for="accountStatus">Trạng thái tài khoản</label>
+                            <input type="text" class="form-control" id="accountStatus" name="accountStatus" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts\jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var savedFilter = sessionStorage.getItem('selectedFilter');
+
+        // Nếu có giá trị lưu trữ, đặt nút radio button tương ứng thành checked
+        if (savedFilter) {
+            $('#' + savedFilter).prop('checked', true);
+
+            // Thực hiện việc hiển thị dữ liệu tương ứng
+            showData(savedFilter);
+        } else {
+            // Nếu không có nút radio nào được chọn, tự động chọn nút radio "Tất cả"
+            $('#all').prop('checked', true);
+            showData(''); // Hiển thị tất cả dữ liệu
+        }
+
+        $('input[name="show"]').change(function () {
+            var filter = $(this).val();
+            $("#filter").val(filter); // Cập nhật giá trị của ô ẩn "filter"
+            sessionStorage.setItem('selectedFilter', filter); // Lưu giá trị của nút radio button được chọn vào sessionStorage
+            showData(filter);
+        });
+        function showData(filter) {
+            if (filter == "customer") {
+                $(".khach-hang").show();
+                $(".nhan-vien").hide();
+            } else if (filter == "staff") {
+                $(".nhan-vien").show();
+                $(".khach-hang").hide();
+            } else {
+                $(".khach-hang, .nhan-vien").show();
+            }
+        }
+    });
+
+    //detail script
+
+    $(document).ready(function () {
+        $('.details-button').click(function () {
+
+            var accountId = $(this).data('account-id');
+            var role = $(this).closest('tr').find('td:eq(4)').text();
+            if (role === 'Staff') {
+                getStaffDetails(accountId);
+                $('#staffFields').show(); // Hiển thị các trường dữ liệu riêng của nhân viên
+                $('#customerFields').hide(); // Ẩn các trường dữ liệu riêng của khách hàng
+            } else if (role === 'Customer') {
+                getcustomerfDetails(accountId);
+                $('#staffFields').hide(); // Ẩn các trường dữ liệu riêng của nhân viên
+                $('#customerFields').show(); // Hiển thị các trường dữ liệu riêng của khách hàng
+            } else {
+                $('#staffFields').hide(); // Ẩn các trường dữ liệu riêng của nhân viên
+                $('#customerFields').hide(); // Ẩn các trường dữ liệu riêng của khách hàng
+            }
+        });
+    });
+    function formatDateFromJson(jsonDate) {
+        // Chuyển đổi từ dạng /Date(milliseconds)/ sang dạng milliseconds
+        var milliseconds = parseInt(jsonDate.replace("/Date(", "").replace(")/", ""));
+
+        // Tạo đối tượng Date từ milliseconds
+        var date = new Date(milliseconds);
+
+        // Trả về ngày tháng định dạng dd/MM/yyyy
+        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    }
+    function getStaffDetails(accountId) {
+        $.ajax({
+            url: '/Admin/Staff/GetStaffDetails',
+            type: 'GET',
+            data: { accountid: accountId },
+            success: function (response) {
+                $('#userName').val(response.UserName);
+                $('#email').val(response.Email);
+                $('#fullName').val(response.FullName);
+                $('#password').val(response.Password);
+                $('#birthDate').val(formatDateFromJson(response.BirthDate));
+                if (response.Gender) {
+                    $('#male').prop('checked', true);
+                } else {
+                    $('#female').prop('checked', true);
+                }
+                $('#address').val(response.Address);
+                $('#phoneNumber').val(response.PhoneNumber);
+                $('#salary').val(response.Salary);
+                $('#detailModal').modal('show');
+
+            },
+            error: function (xhr, status, error) {
+                console.log('Error:', xhr, status, error);
+            }
+        });
+
+    }
+    function getcustomerfDetails(accountId) {
+        $.ajax({
+            url: '/Admin/Customer/GetCustomerDetails',
+            type: 'GET',
+            data: { accountid: accountId },
+            success: function (response) {
+                $('#userName').val(response.UserName);
+                $('#email').val(response.Email);
+                $('#fullName').val(response.FullName);
+                $('#password').val("*Bảo mật*");
+                $('#birthDate').val(formatDateFromJson(response.BirthDate));
+                if (response.Gender) {
+                    $('#male').prop('checked', true);
+                } else {
+                    $('#female').prop('checked', true);
+                }
+                $('#address').val(response.Address);
+                $('#phoneNumber').val(response.PhoneNumber);
+                $('#accountStatus').val(response.AccountStatus);
+                $('#detailModal').modal('show');
+
+            },
+            error: function (xhr, status, error) {
+                console.log('Error:', xhr, status, error);
+            }
+        });
+
+    }
+
+
+</script>
+
