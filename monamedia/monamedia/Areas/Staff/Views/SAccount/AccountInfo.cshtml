@@ -130,7 +130,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="salary">Lương:</label>
-                <input type="number" class="form-control" id="salary" name="salary" step="any" readonly>
+                <input type="text" class="form-control" id="salary" name="salary" readonly>
             </div>
         </div>
         <div class="form-actions">
@@ -200,7 +200,8 @@
                 $('#dob').val(formattedDate);
                 $('#address').val(data.address);
                 $('#phone').val(data.phone);
-                $('#salary').val(data.salary);
+                var formattedSalary = formatMoney(data.salary);
+                $('#salary').val(formattedSalary);
                 if (data.gender ==true) {
                     $('#male').prop('checked', true);
                 } else {
@@ -297,5 +298,7 @@ $(document).ready(function () {
         });
     });
 });
-
+    function formatMoney(amount) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+    }
 </script>

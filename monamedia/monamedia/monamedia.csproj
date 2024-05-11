@@ -139,6 +139,7 @@
     <Compile Include="Areas\Staff\Controllers\SDeliveryController.cs" />
     <Compile Include="Areas\Staff\Controllers\SHomeController.cs" />
     <Compile Include="Areas\Staff\Controllers\SOrderController.cs" />
+    <Compile Include="Areas\Staff\Controllers\SReviewController.cs" />
     <Compile Include="Areas\Staff\StaffAreaRegistration.cs" />
     <Compile Include="Controllers\AdminStaffController.cs" />
     <Compile Include="Controllers\ExportController.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\ReviewViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -434,6 +436,8 @@
     </Content>
     <Content Include="Areas\Admin\Views\AHome\AllExport.cshtml" />
     <Content Include="Areas\Admin\Views\AHome\AllExported.cshtml" />
+    <Content Include="Areas\Staff\Views\SReview\AllReview.cshtml" />
+    <Content Include="Areas\Staff\Views\SReview\AllReviewed.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
