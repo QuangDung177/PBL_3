@@ -1,4 +1,5 @@
 ﻿using monamedia.Models;
+using monamedia.ViewModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -204,6 +205,57 @@ namespace monamedia.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+        public ActionResult AllExport()
+        {
+            AppDbContext db=new AppDbContext();
+            List<OrderViewModel> li = new List<OrderViewModel>();
+            foreach(var i in db.C_Order)
+            {
+                if (i.status == "Đã xác nhận")
+                {
+                    Customer customer = db.Customers.FirstOrDefault(c => c.customerID == i.customerID);
+                    OrderViewModel order = new OrderViewModel();
+                    order.OrderID = i.orderID;
+                    order.StaffID = i.staffID;
+                    order.NameCustomer = customer.fullName;
+                    order.Phone = customer.phoneNumber;
+                    order.Address = customer.address;
+                    order.TimeOrder=i.timeOrder;
+                    order.Method= i.method;
+                    order.fee=i.fee;
+                    order.total=i.total;
+                    li.Add(order);
+                }
+            }
+            return View(li);
+        }
+        public ActionResult AllExported()
+        {
+            AppDbContext db = new AppDbContext();
+            List<ExportViewModel> li = new List<ExportViewModel>();
+            foreach (var i in db.C_Order)
+            {
+                if (i.status == "Đang giao hàng"||i.status=="Giao thành công")
+                {
+                    Customer customer = db.Customers.FirstOrDefault(c => c.customerID == i.customerID);
+                    ExportViewModel order = new ExportViewModel();
+                    order.OrderID = i.orderID;
+                    order.StaffID = i.staffID;
+                    order.NameStaff=db.Staffs.FirstOrDefault(s=>s.staffID == i.staffID).fullName;
+                    order.NameCustomer = customer.fullName;
+                    order.Phone = customer.phoneNumber;
+                    order.Address = customer.address;
+                    order.TimeOrder = i.timeOrder;
+                    order.Method = i.method;
+                    order.fee = i.fee;
+                    order.total = i.total;
+                    order.status=i.status;
+                    order.pickUpTime = db.Exports.FirstOrDefault(e => e.orderID == i.orderID).pickUpTime;
+                    li.Add(order);
+                }
+            }
+            return View(li);
         }
 
 

@@ -96,18 +96,14 @@ namespace monamedia.Controllers
         {
             int accountId = Convert.ToInt32(Session["AccountID"]);
             AppDbContext db = new AppDbContext();
-            Staff s = db.Staffs.FirstOrDefault(staff => staff.accountID == accountId);
-            C_Order order = db.C_Order.FirstOrDefault(o => o.orderID == orderId);
-            var export = new Export
-            {
-                staffID = s.staffID,
-                managerID = 1,
-                orderID = orderId,
-                pickUpTime = DateTime.Now,
-                status = "Đang giao hàng"
-            };
-            db.Exports.Add(export);
-            order.status = "Chờ giao hàng";
+            C_Order order=db.C_Order.FirstOrDefault(o=>o.orderID == orderId);
+            Export e=db.Exports.FirstOrDefault(ex=>ex.orderID == orderId);
+            order.status = "Đang giao hàng";
+            e.status = "Đang giao hàng";
+            e.staffID=db.Staffs.FirstOrDefault(s=>s.accountID==accountId).staffID;
+            DateTime now = DateTime.Now;
+            string formattedDateTime = now.ToString("HH:mm dd/MM/yyyy");
+            e.pickUpTime = now;
             db.SaveChanges();
             return Json(new { success = true, });
         }
@@ -116,8 +112,7 @@ namespace monamedia.Controllers
             AppDbContext db = new AppDbContext();
             C_Order order = db.C_Order.FirstOrDefault(o => o.orderID == orderId);
             Export export=db.Exports.FirstOrDefault(e=>e.orderID == orderId);
-            order.status = "Đã xác nhận";
-            db.Exports.Remove(export);
+            order.status = "Chờ giao hàng";
             db.SaveChanges();
             return Json(new { success = true, });
         }

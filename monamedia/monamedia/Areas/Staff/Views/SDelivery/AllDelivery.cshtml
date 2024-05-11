@@ -364,7 +364,6 @@
     $(document).ready(function () {
         $('.delivery-btn').click(function () {
             var orderId = $(this).data('order-id');
-            console.log(orderId);
             $.ajax({
                 url: '/Order/ReceiveDelivery', 
                 type: 'POST',

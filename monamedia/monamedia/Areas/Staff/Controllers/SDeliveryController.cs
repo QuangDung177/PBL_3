@@ -16,7 +16,7 @@ namespace monamedia.Areas.Staff.Controllers
             List<OrderViewModel> li = new List<OrderViewModel>();
             foreach (var i in db.C_Order)
             {
-                if (i.status == "Đã xác nhận")
+                if (i.status == "Chờ giao hàng")
                 {
                     Customer customer = db.Customers.Find(i.customerID);
                     OrderViewModel orderViewModel = new OrderViewModel();
@@ -40,7 +40,7 @@ namespace monamedia.Areas.Staff.Controllers
             List<DeliveringViewModel> li = new List<DeliveringViewModel>();
             foreach (var i in db.C_Order)
             {
-                if (i.status == "Chờ giao hàng")
+                if (i.status == "Đang giao hàng")
                 {
                     Customer customer = db.Customers.Find(i.customerID);
                     DeliveringViewModel deliveringViewModel = new DeliveringViewModel();
