@@ -286,13 +286,14 @@
                 type: 'GET',
                 data: { orderId: orderId },
                 success: function (data) {
-
                     var productListHTML = '';
                     productListHTML += '<div class="row mb-3">';
                     productListHTML += '<div class="col"><span>Hình ảnh</span></div>';
                     productListHTML += '<div class="col"><span>Tên sản phẩm</span></div>';
+                    productListHTML += '<div class="col"><span>Màu</span></div>';
+                    productListHTML += '<div class="col"><span>Giá sản phẩm</span></div>';
                     productListHTML += '<div class="col"><span>Số lượng</span></div>';
-                    productListHTML += '<div class="col"><span>Giá tiền</span></div>';
+                    productListHTML += '<div class="col"><span>Tổng tiền</span></div>';
                     productListHTML += '</div>';
                     productListHTML += '<div class="table-container">';
                     $.each(data, function (index, item) {
@@ -304,18 +305,23 @@
                         productListHTML += item.ProductName;
                         productListHTML += '</div>';
                         productListHTML += '<div class="col">';
+                        productListHTML += item.ProductColor;
+                        productListHTML += '</div>';
+                        productListHTML += '<div class="col">';
+                        productListHTML += parseFloat(item.UnitPrice).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                        productListHTML += '</div>';
+                        productListHTML += '<div class="col">';
                         productListHTML += item.Quantity;
                         productListHTML += '</div>';
                         productListHTML += '<div class="col">';
-                        productListHTML += parseFloat(item.Price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });;
+                        productListHTML += parseFloat(item.Price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
                         productListHTML += '</div>';
                         productListHTML += '</div>';
-
                     });
                     productListHTML += '</div>';
 
-
                     orderDetailsList.html(productListHTML);
+
                 },
                 error: function (xhr, status, error) {
                     console.log('Error:', xhr, status, error);

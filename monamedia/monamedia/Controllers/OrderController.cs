@@ -17,7 +17,10 @@ namespace monamedia.Controllers
         {
             public string ProductImage { get; set; }
             public string ProductName { get; set; }
+            public string ProductColor {  get; set; }
+            public int? UnitPrice { get; set; }
             public int? Quantity { get; set; }
+
             public int? Price { get; set; }
         }
 
@@ -38,6 +41,8 @@ namespace monamedia.Controllers
                 {
                     ProductImage = productInfo.img,
                     ProductName = productInfo.name,
+                    ProductColor=productInfo.color,
+                    UnitPrice = productInfo.price,
                     Quantity = detail.quantity,
                     Price = detail.quantity * productInfo.price
                 };

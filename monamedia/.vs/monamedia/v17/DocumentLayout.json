@@ -1,0 +1,204 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|d:\\dut\\n\u0103m 2 k\u00EC 2\\pbl_3\\monamedia\\monamedia\\areas\\staff\\views\\sdelivery\\alldelivered.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\areas\\staff\\views\\sdelivery\\alldelivered.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|d:\\dut\\n\u0103m 2 k\u00EC 2\\pbl_3\\monamedia\\monamedia\\areas\\staff\\views\\sdelivery\\alldelivery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\areas\\staff\\views\\sdelivery\\alldelivery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|d:\\dut\\n\u0103m 2 k\u00EC 2\\pbl_3\\monamedia\\monamedia\\areas\\staff\\views\\sorder\\allorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\areas\\staff\\views\\sorder\\allorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|d:\\dut\\n\u0103m 2 k\u00EC 2\\pbl_3\\monamedia\\monamedia\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|d:\\dut\\n\u0103m 2 k\u00EC 2\\pbl_3\\monamedia\\monamedia\\areas\\staff\\views\\shome\\allproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\areas\\staff\\views\\shome\\allproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|d:\\dut\\n\u0103m 2 k\u00EC 2\\pbl_3\\monamedia\\monamedia\\areas\\staff\\views\\saccount\\accountinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\areas\\staff\\views\\saccount\\accountinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|d:\\dut\\n\u0103m 2 k\u00EC 2\\pbl_3\\monamedia\\monamedia\\areas\\staff\\controllers\\saccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\areas\\staff\\controllers\\saccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\controllers\\adminstaffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\controllers\\adminstaffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\views\\adminstaff\\loginform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\views\\adminstaff\\loginform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AllDelivered.cshtml",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Views\\SDelivery\\AllDelivered.cshtml",
+              "RelativeDocumentMoniker": "monamedia\\Areas\\Staff\\Views\\SDelivery\\AllDelivered.cshtml",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Views\\SDelivery\\AllDelivered.cshtml",
+              "RelativeToolTip": "monamedia\\Areas\\Staff\\Views\\SDelivery\\AllDelivered.cshtml",
+              "ViewState": "AQIAACQBAAAAAAAAAAAAADcBAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T03:26:57.149Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "monamedia\\Controllers\\OrderController.cs",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "monamedia\\Controllers\\OrderController.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAmwCwAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-11T03:20:04.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AllOrder.cshtml",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Views\\SOrder\\AllOrder.cshtml",
+              "RelativeDocumentMoniker": "monamedia\\Areas\\Staff\\Views\\SOrder\\AllOrder.cshtml",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Views\\SOrder\\AllOrder.cshtml",
+              "RelativeToolTip": "monamedia\\Areas\\Staff\\Views\\SOrder\\AllOrder.cshtml",
+              "ViewState": "AQIAABYBAAAAAAAAAAAAACoBAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T03:18:25.413Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AllProduct.cshtml",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Views\\SHome\\AllProduct.cshtml",
+              "RelativeDocumentMoniker": "monamedia\\Areas\\Staff\\Views\\SHome\\AllProduct.cshtml",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Views\\SHome\\AllProduct.cshtml",
+              "RelativeToolTip": "monamedia\\Areas\\Staff\\Views\\SHome\\AllProduct.cshtml",
+              "ViewState": "AQIAAMUAAAAAAAAAAAAAALgAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T03:17:35.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AllDelivery.cshtml",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Views\\SDelivery\\AllDelivery.cshtml",
+              "RelativeDocumentMoniker": "monamedia\\Areas\\Staff\\Views\\SDelivery\\AllDelivery.cshtml",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Views\\SDelivery\\AllDelivery.cshtml",
+              "RelativeToolTip": "monamedia\\Areas\\Staff\\Views\\SDelivery\\AllDelivery.cshtml",
+              "ViewState": "AQIAABUBAAAAAAAAAAAAAEQBAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T03:02:43.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountInfo.cshtml",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Views\\SAccount\\AccountInfo.cshtml",
+              "RelativeDocumentMoniker": "monamedia\\Areas\\Staff\\Views\\SAccount\\AccountInfo.cshtml",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Views\\SAccount\\AccountInfo.cshtml",
+              "RelativeToolTip": "monamedia\\Areas\\Staff\\Views\\SAccount\\AccountInfo.cshtml",
+              "ViewState": "AQIAAOIAAAAAAAAAAAAAAPoAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T03:02:34.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SAccountController.cs",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Controllers\\SAccountController.cs",
+              "RelativeDocumentMoniker": "monamedia\\Areas\\Staff\\Controllers\\SAccountController.cs",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Areas\\Staff\\Controllers\\SAccountController.cs",
+              "RelativeToolTip": "monamedia\\Areas\\Staff\\Controllers\\SAccountController.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAA1wAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-11T03:02:07.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Web.config",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Web.config",
+              "RelativeDocumentMoniker": "monamedia\\Web.config",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Web.config",
+              "RelativeToolTip": "monamedia\\Web.config",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAAEkAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-05-11T02:03:18.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AdminStaffController.cs",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Controllers\\AdminStaffController.cs",
+              "RelativeDocumentMoniker": "monamedia\\Controllers\\AdminStaffController.cs",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Controllers\\AdminStaffController.cs",
+              "RelativeToolTip": "monamedia\\Controllers\\AdminStaffController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-11T02:03:04.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "monamedia\\Controllers\\LoginController.cs",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "monamedia\\Controllers\\LoginController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-11T02:02:59.011Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "loginform.cshtml",
+              "DocumentMoniker": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Views\\AdminStaff\\loginform.cshtml",
+              "RelativeDocumentMoniker": "monamedia\\Views\\AdminStaff\\loginform.cshtml",
+              "ToolTip": "D:\\DUT\\N\u0103m 2 K\u00EC 2\\PBL_3\\monamedia\\monamedia\\Views\\AdminStaff\\loginform.cshtml",
+              "RelativeToolTip": "monamedia\\Views\\AdminStaff\\loginform.cshtml",
+              "ViewState": "AQIAAJ8AAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-11T02:02:08.177Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -44,7 +44,19 @@
             margin-top: 4px;
             right: 2px;
         }
-
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background-color: rgba(40, 167, 69, 0.5);
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            display: none;
+            z-index:9999;
+        }
     </style>
 }
 <head>
@@ -158,6 +170,12 @@
         </div>
     </div>
 </div>
+<div id="changepasswordAlert" class="custom-alert" role="alert">
+    <strong>Đổi mật khẩu thành công</strong>
+</div>
+<div id="updateInfoAlert" class="custom-alert" role="alert">
+    <strong>Cập nhật thông tin thành công</strong>
+</div>
 <script src="~/Scripts/jquery-3.7.1.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script>
@@ -226,7 +244,12 @@
                 gender: gender
             },
             success: function (response) {
-                location.reload(true);
+                var alertElement = document.getElementById("updateInfoAlert");
+                alertElement.style.display = "block";
+                setTimeout(function () {
+                    alertElement.style.display = "none";
+                    location.reload(true);
+                }, 1500);
             },
             error: function () {
                 console.log("sai");
@@ -246,8 +269,10 @@ $(document).ready(function () {
         var confirmNewPassword = $('#confirmNewPassword').val();
         if (newPassword !== confirmNewPassword) {
             alert("Mật khẩu mới và xác nhận mật khẩu mới không khớp!");
-            return;
+            return; 
         }
+        var alertElement = document.getElementById("changepasswordAlert");
+        alertElement.style.display = "block";
         var accountID = @ViewBag.accountId;
         $.ajax({
             url: '/Staff/SAccount/ChangePassword',
@@ -259,7 +284,12 @@ $(document).ready(function () {
                 newPassword: newPassword
             },
             success: function (response) {
-                location.reload(true);
+                var alertElement = document.getElementById("changepasswordAlert");
+                alertElement.style.display = "block";
+                setTimeout(function () {
+                    alertElement.style.display = "none";
+                    location.reload(true);
+                }, 1500);
             },
             error: function () {
                 console.log("Có lỗi xảy ra khi đổi mật khẩu!");
