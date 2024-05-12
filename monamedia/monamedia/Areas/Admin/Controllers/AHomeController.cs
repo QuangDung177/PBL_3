@@ -228,6 +228,7 @@ namespace monamedia.Areas.Admin.Controllers
                     li.Add(order);
                 }
             }
+            Filter();
             return View(li);
         }
         public ActionResult AllExported()
@@ -255,9 +256,24 @@ namespace monamedia.Areas.Admin.Controllers
                     li.Add(order);
                 }
             }
+            Filter();
             return View(li);
         }
-
+        public ActionResult Discount(string search = "")
+        {
+            AppDbContext db = new AppDbContext();
+            List<monamedia.Models.Discount> Discounts = db.Discounts.Where(row => row.nameDiscount.Contains(search)).ToList();
+            ViewBag.Search = search;
+            Filter();
+            return View(Discounts);
+        }
+        public ActionResult AddDiscount()
+        {
+            AppDbContext db = new AppDbContext();
+            List<monamedia.Models.Product> Products = db.Products.ToList();
+            Filter();
+            return View(Products);
+        }
 
 
     }

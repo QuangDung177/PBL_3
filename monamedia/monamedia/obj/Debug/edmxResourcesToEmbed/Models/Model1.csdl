@@ -198,6 +198,16 @@
     <NavigationProperty Name="Account" Relationship="Self.FK__Staff__accountID__797309D9" FromRole="Staff" ToRole="Account" />
     <NavigationProperty Name="Exports" Relationship="Self.FK__Export__staffID__6E01572D" FromRole="Staff" ToRole="Export" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="Wishlist">
     <Key>
       <PropertyRef Name="customerID" />
@@ -418,6 +428,7 @@
     <EntitySet Name="Reviews" EntityType="Self.Review" />
     <EntitySet Name="Specifications" EntityType="Self.Specification" />
     <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Wishlists" EntityType="Self.Wishlist" />
     <AssociationSet Name="FK___Order__staffID__6A30C649" Association="Self.FK___Order__staffID__6A30C649">
       <End Role="Staff" EntitySet="Staffs" />

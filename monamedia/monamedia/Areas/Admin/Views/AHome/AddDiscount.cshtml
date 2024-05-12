@@ -1,0 +1,272 @@
+﻿
+@{
+    ViewBag.Title = "AddDiscount";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
+}
+<style>
+    #pagination {
+        margin-top: 10px;
+    }
+
+    #prevPage,
+    #nextPage {
+        padding: 5px 10px;
+        margin-right: 10px;
+    }
+</style>
+@model List<monamedia.Models.Product>
+<main class="main">
+    <div class="main_title">
+        <p class="main_title-label "><b>Danh sách đợt giảm giá/Tạo đợt giảm giá</b></p>
+        <div id="clock"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title">
+                <h1 style="font-size:medium "><b>Tạo đợt giảm giá</b></h1>
+                <form>
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Tên đợt giảm giá</label>
+                            <input class="form-control" type="text" id="nameDiscount" name="nameDiscount" placeholder="Tên đợt giảm giá" required>
+                        </div>
+                        <div class="form-group  col-md-4">
+                            <label class="control-label">Phần trăm</label>
+                            <input class="form-control" type="number" id="per_cent" name="per_cent" placeholder="Phần trăm" required>
+                        </div>
+
+                    </div>
+
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Ngày bắt đầu</label>
+                            <input class="form-control" type="date" id="ngayBatDau" name="ngayBatDau" placeholder="Ngày bắt đầu" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Ngày kết thúc</label>
+                            <input class="form-control" type="date" id="ngayKetThuc" name="ngayKetThuc" placeholder="Ngày kết thúc" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <input type="radio" id="Discountbrand" name="Discount" value="brand">
+                        <label for="brandDiscount">Áp dụng theo thương hiệu</label><br>
+                        <input type="radio" id="Discountproduct" name="Discount" value="product">
+                        <label for="specIdOptionNew">Áp dụng theo từng sản phẩm</label>
+                    </div>
+                    <div class="brandselect" style="display: none; padding-bottom: 20px">
+                        <label for="brand">Chọn thương hiệu:</label>
+                        <select id="brand">
+                            <option value="">Chọn thương hiệu</option>
+                        </select>
+                        <div style="display:flex">
+                            <label for="productTypes">Chọn loại sản phẩm:</label>
+                            <div id="productTypes" style="display:flex">
+
+                                <!-- Các checkbox loại sản phẩm khác có thể được thêm vào đây -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="productselect" style="display: none;">
+                        <div class="row" style="padding-bottom: 20px;">
+                            <div id="tableContainer">
+                                <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+                                       id="sampleTable">
+                                    <thead>
+                                        <tr>
+                                            <th width="10"><input type="checkbox" id="selectAll"></th>
+                                            <th width="100">ID sản phẩm</th>
+                                            <th width="300">Tên sản phẩm</th>
+                                            <th width="100">Màu sắc</th>
+                                            <th width="100">Thương hiệu</th>
+                                            <th width="100">Loại sản phẩm</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var product in Model)
+                                        {
+                                            <tr data-productid="@product.productID">
+                                                <td><input type="checkbox" class="rowCheckbox"></td>
+                                                <td>@product.productID</td>
+                                                <td>@product.name</td>
+                                                <td>@product.color</td>
+                                                <td>@product.brand</td>
+                                                <td>@product.type</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="pagination">
+                                <button id="prevPage">Trang trước</button>
+                                <button id="nextPage">Trang sau</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <button type="button" id="createDiscountBtn" class="btn btn-success">Tạo</button>
+                    <a href="/Admin/AHome/Discount" class="btn btn-danger">Hủy</a>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</main>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts\jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('input[name="Discount"]').change(function () {
+            if (this.value === 'brand') {
+                $('.brandselect').show();
+                $('.productselect').hide();
+            } else if (this.value === 'product') {
+                $('.brandselect').hide();
+                $('.productselect').show();
+            }
+        });
+    });
+    $(document).ready(function () {
+        $.getJSON('/Discount/GetAllBrands', function (data) {
+            var brandDropdown = $('#brand');
+            brandDropdown.empty().append('<option value="">Chọn thương hiệu</option>');
+            if (data && data.length > 0) {
+                $.each(data, function (index, item) {
+                    brandDropdown.append($('<option></option>').text(item).val(item));
+                });
+            }
+        });
+    });
+    $(document).ready(function () {
+        $('#brand').change(function () {
+            var selectedBrand = $(this).val();
+            if (selectedBrand) {
+                $.getJSON('/Discount/GetProductTypesByBrand', { brand: selectedBrand }, function (data) {
+                    var productTypesDiv = $('#productTypes');
+                    productTypesDiv.empty();
+                    if (data && data.length > 0) {
+                        $.each(data, function (index, item) {
+                            productTypesDiv.append('<label><input type="checkbox" name="productType" value="' + item + '"> ' + item + '</label><br>');
+                        });
+                        productTypesDiv.show();
+                    } else {
+                        productTypesDiv.hide();
+                    }
+                });
+            } else {
+                $('#productTypes').hide();
+            }
+        });
+    });
+    $(document).ready(function () {
+        var rowsPerPage = 20; // Số dòng trên mỗi trang
+        var totalRows = $('#sampleTable tbody tr').length; // Tổng số dòng trong bảng
+        var totalPages = Math.ceil(totalRows / rowsPerPage); // Tổng số trang
+        var currentPage = 1; // Trang hiện tại, bắt đầu từ trang 1
+
+        // Ẩn tất cả các dòng trừ các dòng trong trang đầu tiên
+        $('#sampleTable tbody tr').hide();
+        $('#sampleTable tbody tr').slice(0, rowsPerPage).show();
+
+        // Xử lý sự kiện chuyển trang
+        $('#prevPage').click(function () {
+            if (currentPage > 1) {
+                $('#sampleTable tbody tr').hide();
+                $('#sampleTable tbody tr').slice((currentPage - 2) * rowsPerPage, (currentPage - 1) * rowsPerPage).show();
+                currentPage--;
+            }
+        });
+
+        $('#nextPage').click(function () {
+            if (currentPage < totalPages) {
+                $('#sampleTable tbody tr').hide();
+                $('#sampleTable tbody tr').slice(currentPage * rowsPerPage, (currentPage + 1) * rowsPerPage).show();
+                currentPage++;
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('#createDiscountBtn').click(function () {
+            // Lấy thông tin từ các input
+            var name = $('#nameDiscount').val();
+            var percent = $('#per_cent').val();
+            var ngayBatDau = $('#ngayBatDau').val();
+            var ngayKetThuc = $('#ngayKetThuc').val();
+            var selectedProductIds = [];
+
+            if (name.trim() === '' || percent.trim() === '' || ngayBatDau.trim() === '' || ngayKetThuc.trim() === '') {
+                alert("Vui lòng nhập đầy đủ thông tin.");
+                return; // Dừng thực thi nếu thông tin còn thiếu
+            }
+           
+           
+            var startDate = new Date($('#ngayBatDau').val()); 
+            var endDate = new Date($('#ngayKetThuc').val());
+            var currentDate = new Date();
+            if (startDate < currentDate) {
+                alert("Ngày bắt đầu phải lớn hơn ngày hiện tại. Vui lòng chọn lại!");
+                return; // Dừng thực thi nếu ngày bắt đầu không hợp lệ
+            }
+            if (startDate > endDate) {
+                alert("Ngày bắt đầu phải trước ngày kết thúc. Vui lòng chọn lại!");
+                return; // Dừng thực thi nếu ngày bắt đầu lớn hơn hoặc bằng ngày kết thúc
+            }
+            if (!$('input[name="Discount"]:checked').val()) {
+                alert("Vui lòng chọn ít nhất một loại giảm giá.");
+                return; // Dừng thực thi nếu không có loại giảm giá nào được chọn
+            }
+
+            // Kiểm tra loại giảm giá được chọn
+            var selectedDiscountType = $('input[name="Discount"]:checked').val();
+            if (selectedDiscountType === 'brand') {
+                var selectedBrand = $('#brand').val();
+                var selectedType = [];
+                $('input[name="productType"]:checked').each(function () {
+                    selectedType.push($(this).val());
+                });
+                $('#sampleTable tbody tr').each(function () {
+                    var productId = $(this).data('productid');
+                    var productBrand = $(this).find('td:nth-child(4)').text(); // Lấy brand của sản phẩm
+                    var productType = $(this).find('td:nth-child(5)').text(); // Lấy type của sản phẩm
+                    if (productBrand === selectedBrand && selectedType.includes(productType)) {
+                        selectedProductIds.push(productId);
+                    }
+                });
+            } else if (selectedDiscountType === 'product') {
+                $('.rowCheckbox:checked').each(function () {
+                    selectedProductIds.push($(this).closest('tr').data('productid'));
+                });
+            }
+
+            // Gửi yêu cầu đến controller AddDiscount
+            $.ajax({
+                url: '/Discount/AddDiscount',
+                type: 'POST',
+                data: {
+                    Name: name,
+                    Percent: percent,
+                    DateStart: ngayBatDau,
+                    DateEnd: ngayKetThuc,
+                    SelectedProductIds: selectedProductIds
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                        window.location.href = 'https://localhost:44347/Admin/AHome/Discount';
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Xử lý lỗi (nếu cần)
+                    console.log(error);
+                }
+            });
+        });
+    });
+
+</script>
+
