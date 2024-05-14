@@ -274,7 +274,10 @@ namespace monamedia.Areas.Admin.Controllers
             Filter();
             return View(Products);
         }
-
+        public ActionResult Revenue()
+        {
+            return View();
+        }
 
     }
 }

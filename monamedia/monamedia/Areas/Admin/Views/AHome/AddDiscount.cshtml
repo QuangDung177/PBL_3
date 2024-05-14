@@ -24,7 +24,7 @@
         <div class="col-md-12">
             <div class="title">
                 <h1 style="font-size:medium "><b>Tạo đợt giảm giá</b></h1>
-                <form>
+                <div>
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="form-group col-md-4">
                             <label class="control-label">Tên đợt giảm giá</label>
@@ -107,7 +107,7 @@
 
                     <button type="button" id="createDiscountBtn" class="btn btn-success">Tạo</button>
                     <a href="/Admin/AHome/Discount" class="btn btn-danger">Hủy</a>
-                </form>
+                </div>
             </div>
         </div>
 
@@ -221,7 +221,7 @@
 
             // Kiểm tra loại giảm giá được chọn
             var selectedDiscountType = $('input[name="Discount"]:checked').val();
-            if (selectedDiscountType === 'brand') {
+            if (selectedDiscountType == 'brand') {
                 var selectedBrand = $('#brand').val();
                 var selectedType = [];
                 $('input[name="productType"]:checked').each(function () {
@@ -229,13 +229,13 @@
                 });
                 $('#sampleTable tbody tr').each(function () {
                     var productId = $(this).data('productid');
-                    var productBrand = $(this).find('td:nth-child(4)').text(); // Lấy brand của sản phẩm
-                    var productType = $(this).find('td:nth-child(5)').text(); // Lấy type của sản phẩm
+                    var productBrand = $(this).find('td:nth-child(5)').text(); // Lấy brand của sản phẩm
+                    var productType = $(this).find('td:nth-child(6)').text(); // Lấy type của sản phẩm
                     if (productBrand === selectedBrand && selectedType.includes(productType)) {
                         selectedProductIds.push(productId);
                     }
                 });
-            } else if (selectedDiscountType === 'product') {
+            } else if (selectedDiscountType == 'product') {
                 $('.rowCheckbox:checked').each(function () {
                     selectedProductIds.push($(this).closest('tr').data('productid'));
                 });
