@@ -77,6 +77,7 @@
     <Property Name="managerID" Type="Int32" />
     <Property Name="importDate" Type="DateTime" Precision="3" />
     <Property Name="total" Type="Int32" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Manager" Relationship="Self.FK__Import__managerI__6EF57B66" FromRole="Import" ToRole="Manager" />
     <NavigationProperty Name="ProductImports" Relationship="Self.FK__ProductIm__impor__76969D2E" FromRole="Import" ToRole="ProductImport" />
   </EntityType>
@@ -147,6 +148,7 @@
     <Property Name="productID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="priceImport" Type="Int32" />
     <Property Name="quantity" Type="Int32" />
+    <Property Name="price" Type="Int32" />
     <NavigationProperty Name="Import" Relationship="Self.FK__ProductIm__impor__76969D2E" FromRole="ProductImport" ToRole="Import" />
     <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__produ__778AC167" FromRole="ProductImport" ToRole="Product" />
   </EntityType>

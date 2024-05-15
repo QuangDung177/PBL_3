@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7799d1a71397414dabb3a3fd53a54e3b" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="PBL3Model.C_Order" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Account" Width="1.5" PointX="1.5" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Customer" Width="1.5" PointX="3.75" PointY="22.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Discount" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Export" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Import" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Manager" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.orderDetail" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Payment" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Product" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.ProductImport" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Review" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Specification" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Staff" Width="1.5" PointX="0.75" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.sysdiagram" Width="1.5" PointX="7.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Wishlist" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+      <Diagram DiagramId="ba2844867dd64f0285ab7fbadd37ea5e" Name="Diagram1">
+        <EntityTypeShape EntityType="PBL3Model.C_Order" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Account" Width="1.5" PointX="1.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Customer" Width="1.5" PointX="3.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Discount" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Export" Width="1.5" PointX="10" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Import" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Manager" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.orderDetail" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Payment" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Product" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.ProductImport" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Review" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Specification" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Staff" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.sysdiagram" Width="1.5" PointX="8.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Wishlist" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
         <AssociationConnector Association="PBL3Model.FK___Order__staffID__6A30C649" ManuallyRouted="false" />
         <AssociationConnector Association="PBL3Model.FK__Export__orderID__6D0D32F4" ManuallyRouted="false" />
         <AssociationConnector Association="PBL3Model.FK__orderDeta__order__70DDC3D8" ManuallyRouted="false" />

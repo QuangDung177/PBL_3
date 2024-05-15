@@ -65,6 +65,7 @@
     <Property Name="managerID" Type="int" />
     <Property Name="importDate" Type="datetime" />
     <Property Name="total" Type="int" />
+    <Property Name="status" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Manager">
     <Key>
@@ -129,6 +130,7 @@
     <Property Name="productID" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="priceImport" Type="int" />
     <Property Name="quantity" Type="int" />
+    <Property Name="price" Type="int" />
   </EntityType>
   <EntityType Name="Review">
     <Key>

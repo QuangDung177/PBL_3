@@ -3,6 +3,7 @@ using monamedia.ViewModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Security.Principal;
@@ -278,6 +279,32 @@ namespace monamedia.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult Import(string search="")
+        {
+            AppDbContext db = new AppDbContext(); DateTime searchDate;
+            List<monamedia.Models.Import> imports=db.Imports.ToList();
+            // Kiểm tra nếu search không rỗng và có thể chuyển đổi thành DateTime
+            if (!string.IsNullOrEmpty(search) && DateTime.TryParse(search, out searchDate))
+            {
+                // Tìm kiếm các phiếu nhập hàng có ngày nhập trùng với ngày tìm kiếm
+                imports = db.Imports
+                            .Where(i => DbFunctions.TruncateTime(i.importDate) == DbFunctions.TruncateTime(searchDate))
+                            .ToList();
+            }
+            // Truyền giá trị tìm kiếm đến View
+            ViewBag.Search = search;
+            Filter();
+            // Trả về View với danh sách phiếu nhập hàng
+            return View(imports);
+        }
+        public ActionResult AddImport()
+        {
+            AppDbContext db = new AppDbContext();
+            List<monamedia.Models.Product> Products = db.Products.ToList();
+           Filter();
+            return View(Products);
+        }
+
 
     }
 }

@@ -70,6 +70,7 @@
           <ScalarProperty Name="managerID" ColumnName="managerID" />
           <ScalarProperty Name="importDate" ColumnName="importDate" />
           <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="status" ColumnName="status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -130,6 +131,7 @@
           <ScalarProperty Name="productID" ColumnName="productID" />
           <ScalarProperty Name="priceImport" ColumnName="priceImport" />
           <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="price" ColumnName="price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

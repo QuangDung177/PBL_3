@@ -24,6 +24,7 @@ namespace monamedia.Models
         public Nullable<int> managerID { get; set; }
         public Nullable<System.DateTime> importDate { get; set; }
         public Nullable<int> total { get; set; }
+        public string status { get; set; }
     
         public virtual Manager Manager { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

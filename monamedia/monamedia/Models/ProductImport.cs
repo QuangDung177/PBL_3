@@ -18,6 +18,7 @@ namespace monamedia.Models
         public string productID { get; set; }
         public Nullable<int> priceImport { get; set; }
         public Nullable<int> quantity { get; set; }
+        public Nullable<int> price { get; set; }
     
         public virtual Import Import { get; set; }
         public virtual Product Product { get; set; }

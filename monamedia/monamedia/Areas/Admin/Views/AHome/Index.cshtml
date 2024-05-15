@@ -206,7 +206,34 @@
         </div>
     </div>
 </main>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts\jquery-3.7.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#deleteSelected').click(function () {
+            var selectedStaffIds = [];
+            var selectedAccountIDs = [];
+            $('.rowCheckbox:checked').each(function () {
+                var staffID = $(this).closest('tr').data('staffid'); // Lấy staffID của nhân viên từ dòng chứa checkbox được chọn
+                selectedStaffIds.push(staffID);
+                var accountID = $(this).closest('tr').data('accountid');
+                selectedAccountIDs.push(accountID);
+            });
 
+            if (selectedStaffIds.length > 0 && selectedAccountIDs.length > 0) {
+                // Hiển thị hộp thoại xác nhận
+                if (confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')) {
+                    // Nếu người dùng chọn "OK" trong hộp thoại xác nhận, chuyển hướng đến trang DeleteStaff và truyền danh sách ID
+                    window.location.href = '/Admin/AHome/DeleteStaff?selectedStaffIDs=' + selectedStaffIds.join(',') + '&selectedAccountIDs=' + selectedAccountIDs.join(',');
+                }
+            } else {
+                // Nếu không có nhân viên nào được chọn, thông báo cho người dùng
+                alert('Vui lòng chọn ít nhất một nhân viên để xóa.');
+            }
+        });
+    });
+</script>
 
 
 

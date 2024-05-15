@@ -1,0 +1,429 @@
+﻿
+@{
+    ViewBag.Title = "AddImport";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
+}
+@model List<monamedia.Models.Product>
+<style>
+    .row_element-button {
+        display: flex;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        text-size-adjust: 100%;
+        color: black;
+    }
+
+    .btn + .btn {
+        margin-left: 20px;
+    }
+
+    .btn-delete {
+        background-color: rgb(208, 208, 208);
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+    }
+
+    #sampleTable {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+</style>
+<main class="main">
+    <div class="main_title">
+        <p class="main_title-label "><b>Danh sách phiếu nhập kho/Tạo phiếu nhập kho</b></p>
+        <div id="clock"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title">
+                <div class="row_element-button">
+                    <button class="btn btn-sm old" data-bs-toggle="modal" data-bs-target="#oldModal" title="Sản phẩm cũ" id="show-emp"
+                            style="background-color: rgb(157, 249, 157); ">
+                        Nhập sản phẩm cũ
+                    </button>
+                    <button class="btn btn-sm new" data-bs-toggle="modal" data-bs-target="#newModal" title="Sản phẩm mới" id="show-emp"
+                            style="background-color: rgb(56, 212, 243) ">
+                        Nhập sản phẩm mới
+                    </button>
+                    <button class="btn btn-delete" id="deleteSelected">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                        </svg> <i class="fas fa-trash-alt"></i> Xóa tất cả
+                    </button>
+                </div>
+                <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+                       id="sampleTable1">
+                    <thead>
+                        <tr>
+                            <th width="10"><input type="checkbox" id="selectAll"></th>
+                            <th width="100">ID sản phẩm</th>
+                            <th width="200">Tên sản phẩm</th>
+                            <th width="100">Màu sắc</th>
+                            <th width="100">Thương hiệu</th>
+                            <th width="100">Loại sản phẩm</th>
+                            <th width="100">Số lượng</th>
+                            <th width="100">Giá nhập</th>
+                            <th width="100">Giá bán</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="row" style="padding-bottom: 20px;">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Ngày nhập hàng</label>
+                        <input class="form-control" type="date" id="ngaynhaphang" name="ngaynhaphang" placeholder="Ngày nhập hàng" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Tổng tiền</label>
+                        <input class="form-control" type="number" id="total" name="total" placeholder="Tổng tiền" required readonly>
+                    </div>
+                </div>
+                <button type="button" id="createImportBtn" class="btn btn-success">Thêm</button>
+                <a href="/Admin/AHome/Import" class="btn btn-danger">Hủy</a>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="modal fade" id="oldModal" tabindex="-1" aria-labelledby="oldModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header" style="display: flex;">
+                <div>
+                    <h5 class="modal-title my-auto" id="detailModalLabel">
+                        Danh sách sản phẩm
+                    </h5>
+                </div>
+
+                <div class="input-group ml-auto" style="max-width: 300px;">
+                    <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" id="searchInput">
+                    <button class="btn btn-outline-secondary" type="button" id="searchButton">Tìm kiếm</button>
+                </div>
+                <div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="tableContainer">
+                    <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+                           id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th width="100">ID sản phẩm</th>
+                                <th width="300">Tên sản phẩm</th>
+                                <th width="100">Màu sắc</th>
+                                <th width="100">Thương hiệu</th>
+                                <th width="100">Loại sản phẩm</th>
+                                <th width="100">Tính năng</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model)
+                            {
+                                <tr data-productid="@product.productID">
+                                    <td>@product.productID</td>
+                                    <td>@product.name</td>
+                                    <td>@product.color</td>
+                                    <td>@product.brand</td>
+                                    <td>@product.type</td>
+                                    <td class="table-td-center">
+                                        <button class="show-detail-modal" data-bs-toggle="modal" data-bs-target="#detailModal" title="Chi tiết" id="show-emp">
+                                            Nhập sản phẩm
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <div id="pagination">
+                    <button id="prevPage">Trang trước</button>
+                    <button id="nextPage">Trang sau</button>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel">Chi tiết nhập sản phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="padding-bottom: 20px;">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">ID sản phẩm</label>
+                        <input class="form-control" type="text" id="productId" name="productId" placeholder="ID sản phẩm" required readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Tên sản phẩm</label>
+                        <input class="form-control" type="text" id="productName" name="productName" placeholder="Tên sản phẩm" required readonly>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 20px;">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Màu sắc</label>
+                        <input class="form-control" type="text" id="color" name="color" placeholder="Màu sắc" required readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Thương hiệu</label>
+                        <input class="form-control" type="text" id="brand" name="brand" placeholder="Thương hiệu" required readonly>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 20px;">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Loại sản phẩm</label>
+                        <input class="form-control" type="text" id="type" name="type" placeholder="Loại sản phẩm" required readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Số lượng</label>
+                        <input class="form-control" type="number" id="numberproduct" name="numberproduct" placeholder="Số lượng" required>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 20px;">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Giá nhập</label>
+                        <input class="form-control" type="number" id="importprice" name="importprice" placeholder="Giá nhập" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Giá bán</label>
+                        <input class="form-control" type="number" id="price" name="price" placeholder="Giá bán" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="createImportBtndetail" data-bs-dismiss="modal">Thêm</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts\jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var rowsPerPage = 10; // Số dòng trên mỗi trang
+        var totalRows = $('#sampleTable tbody tr').length; // Tổng số dòng trong bảng
+        var totalPages = Math.ceil(totalRows / rowsPerPage); // Tổng số trang
+        var currentPage = 1; // Trang hiện tại, bắt đầu từ trang 1
+
+        // Ẩn tất cả các dòng trừ các dòng trong trang đầu tiên
+        $('#sampleTable tbody tr').hide();
+        $('#sampleTable tbody tr').slice(0, rowsPerPage).show();
+        $('#searchButton').click(function () {
+            var searchText = $('#searchInput').val().toLowerCase();
+            $('#sampleTable tbody tr').hide().filter(function () {
+                return $(this).text().toLowerCase().indexOf(searchText) > -1;
+            }).show();
+        });
+        // Xử lý sự kiện chuyển trang
+        $('#prevPage').click(function () {
+            if (currentPage > 1) {
+                $('#sampleTable tbody tr').hide();
+                $('#sampleTable tbody tr').slice((currentPage - 2) * rowsPerPage, (currentPage - 1) * rowsPerPage).show();
+                currentPage--;
+            }
+        });
+
+        $('#nextPage').click(function () {
+            if (currentPage < totalPages) {
+                $('#sampleTable tbody tr').hide();
+                $('#sampleTable tbody tr').slice(currentPage * rowsPerPage, (currentPage + 1) * rowsPerPage).show();
+                currentPage++;
+            }
+        });
+        $('#oldModal').on('hidden.bs.modal', function (e) {
+            $('#searchInput').val(''); // Xóa dữ liệu trong ô tìm kiếm
+            resetTable(); // Đặt lại trạng thái của bảng
+        });
+
+        function resetTable() {
+            $('#sampleTable tbody tr').hide(); // Ẩn tất cả các dòng trong bảng
+            $('#sampleTable tbody tr').slice(0, rowsPerPage).show(); // Hiển thị lại số dòng trên mỗi trang
+            currentPage = 1; // Đặt lại trang hiện tại về 1
+        }
+        $('.show-detail-modal').click(function () {
+            $('#oldModal').modal('hide'); // Ẩn modal "oldModal"
+        });
+
+        // Xử lý sự kiện khi modal "detailModal" được đóng để quay lại modal "oldModal"
+        $('#detailModal').on('hidden.bs.modal', function (e) {
+            $('#oldModal').modal('show'); // Hiển thị lại modal "oldModal"
+        });
+    });
+    $(document).ready(function () {
+        // Xử lý sự kiện click vào nút "Nhập sản phẩm"
+        $('.show-detail-modal').click(function () {
+            // Lấy thông tin của sản phẩm từ dòng mà bạn chọn
+            var row = $(this).closest('tr');
+            var productId = row.find('td:eq(0)').text(); // ID sản phẩm
+            var productName = row.find('td:eq(1)').text(); // Tên sản phẩm
+            var color = row.find('td:eq(2)').text(); // Màu sắc
+            var brand = row.find('td:eq(3)').text(); // Thương hiệu
+            var type = row.find('td:eq(4)').text(); // Loại sản phẩm
+
+            // Hiển thị thông tin sản phẩm lên modal chi tiết
+            $('#productId').val(productId);
+            $('#productName').val(productName);
+            $('#color').val(color);
+            $('#brand').val(brand);
+            $('#type').val(type);
+
+            // Hiển thị modal chi tiết
+            $('#detailModal').modal('show');
+        });
+    });
+    $(document).ready(function () {
+        // Khi người dùng nhấn nút "Tạo" trên modal chi tiết
+        $('#createImportBtndetail').click(function () {
+            // Lấy thông tin từ các trường input trong modal chi tiết
+            var productId = $('#detailModal').find('#productId').val();
+            var productName = $('#detailModal').find('#productName').val();
+            var color = $('#detailModal').find('#color').val();
+            var brand = $('#detailModal').find('#brand').val();
+            var type = $('#detailModal').find('#type').val();
+            var quantity = $('#detailModal').find('#numberproduct').val();
+            var importPrice = $('#detailModal').find('#importprice').val();
+            var price = $('#detailModal').find('#price').val();
+
+            // Tạo một hàng mới trong bảng ở trang AddImport và thêm thông tin vào
+            var newRow = '<tr>' +
+                '<td><input type="checkbox" class="rowCheckbox"></td>' +
+                '<td>' + productId + '</td>' +
+                '<td>' + productName + '</td>' +
+                '<td>' + color + '</td>' +
+                '<td>' + brand + '</td>' +
+                '<td>' + type + '</td>' +
+                '<td>' + quantity + '</td>' +
+                '<td>' + importPrice + '</td>' +
+                '<td>' + price + '</td>' +
+                '</tr>';
+            $('#sampleTable1 tbody').append(newRow);
+            calculateTotal();
+            // Đóng modal chi tiết
+            $('#detailModal').modal('hide');
+        });
+    });
+    $(document).ready(function () {
+        // Xử lý sự kiện khi nút "Xóa tất cả" được nhấn
+        $('#deleteSelected').click(function () {
+            // Kiểm tra xem người dùng có chắc chắn muốn xóa hay không
+            if (confirm("Bạn có chắc chắn muốn xóa các mục đã chọn không?")) {
+                // Nếu người dùng chọn "OK" trong hộp thoại xác nhận, tiến hành xóa các hàng đã chọn
+                $('#sampleTable1 tbody tr').each(function () {
+                    // Kiểm tra xem checkbox trong hàng này có được chọn không
+                    if ($(this).find('.rowCheckbox').prop('checked')) {
+                        // Nếu được chọn, xóa hàng này
+                        $(this).remove();
+                    }
+                });
+                calculateTotal();
+            } else {
+
+                return false;
+            }
+        });
+
+
+    });
+
+    function calculateTotal() {
+        // Khởi tạo biến tổng tiền
+        var total = 0;
+
+        // Duyệt qua từng dòng trong bảng
+        $('#sampleTable1 tbody tr').each(function () {
+            // Lấy giá nhập và số lượng từ các ô input tương ứng trong hàng
+            var importPrice = parseFloat($(this).find('td:eq(7)').text()) || 0;
+            var quantity = parseFloat($(this).find('td:eq(6)').text()) || 0;
+
+            // Tính thành tiền của sản phẩm trong hàng hiện tại
+            var subtotal = importPrice * quantity;
+
+            // Cộng vào tổng tiền
+            total += subtotal;
+        });
+
+        // Hiển thị tổng tiền trong ô input có id="total"
+        $('#total').val(total);
+    }
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#createImportBtn').click(function () {
+            var ngaynhaphang = $('#ngaynhaphang').val();
+            var total = $('#total').val();
+
+            // Gửi yêu cầu đến controller AddDiscount
+            $.ajax({
+                url: '/Import/AddImport',
+                type: 'POST',
+                data: {
+                    importDate: ngaynhaphang,
+                    total: total,
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // Lấy giá trị importID từ phản hồi và gán cho biến importid
+                        var importid = response.importID;
+
+                        // Gọi hàm xử lý thêm sản phẩm với importID đã nhận được
+                        addProducts(importid);
+                        alert(response.message);
+                        window.location.href = 'https://localhost:44347/Admin/AHome/Import';
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Xử lý lỗi (nếu cần)
+                    console.log(error);
+                }
+            });
+            
+        });
+    });
+
+    // Hàm xử lý thêm sản phẩm với importID đã nhận được
+    function addProducts(importid) {
+        $('#sampleTable1 tbody tr').each(function () {
+            var productId = $(this).find('td:nth-child(2)').text();
+            var price = parseInt($(this).find('td:nth-child(9)').text());
+            var priceImport = parseInt($(this).find('td:nth-child(8)').text());
+            var quantity = parseInt($(this).find('td:nth-child(7)').text());
+            $.ajax({
+                url: '/Import/AddProductImport',
+                type: 'POST',
+                data: {
+                    importID: importid,
+                    quantity: quantity,
+                    price: price,
+                    priceImport: priceImport,
+                    productID: productId,
+                },
+                success: function (response) {
+                },
+                error: function (xhr, status, error) {
+                    // Xử lý lỗi (nếu cần)
+                    console.log(error);
+                }
+            });
+        });
+    }
+</script>
+

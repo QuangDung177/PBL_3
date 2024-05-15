@@ -70,6 +70,7 @@
           <Property Name="managerID" Type="int" />
           <Property Name="importDate" Type="datetime" />
           <Property Name="total" Type="int" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Manager">
           <Key>
@@ -134,6 +135,7 @@
           <Property Name="productID" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="priceImport" Type="int" />
           <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="int" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -585,6 +587,7 @@
           <Property Name="managerID" Type="Int32" />
           <Property Name="importDate" Type="DateTime" Precision="3" />
           <Property Name="total" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Manager" Relationship="Self.FK__Import__managerI__6EF57B66" FromRole="Import" ToRole="Manager" />
           <NavigationProperty Name="ProductImports" Relationship="Self.FK__ProductIm__impor__76969D2E" FromRole="Import" ToRole="ProductImport" />
         </EntityType>
@@ -655,6 +658,7 @@
           <Property Name="productID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="priceImport" Type="Int32" />
           <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Int32" />
           <NavigationProperty Name="Import" Relationship="Self.FK__ProductIm__impor__76969D2E" FromRole="ProductImport" ToRole="Import" />
           <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__produ__778AC167" FromRole="ProductImport" ToRole="Product" />
         </EntityType>
@@ -1082,6 +1086,7 @@
                 <ScalarProperty Name="managerID" ColumnName="managerID" />
                 <ScalarProperty Name="importDate" ColumnName="importDate" />
                 <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1142,6 +1147,7 @@
                 <ScalarProperty Name="productID" ColumnName="productID" />
                 <ScalarProperty Name="priceImport" ColumnName="priceImport" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
