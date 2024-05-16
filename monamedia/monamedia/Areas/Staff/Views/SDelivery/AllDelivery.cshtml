@@ -345,27 +345,10 @@
             modal.find('#fee').val(Fee);
             modal.find('#total').val(Total);
         });
-    });
-    function formatTime(time) {
-        var date = new Date(time);
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-
-        var formattedTime = hours + ':' + minutes + ' ' + day + '/' + month + '/' + year;
-
-        return formattedTime;
-    }
-    function formatCurrency(amount) {
-        return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-    }
-    $(document).ready(function () {
         $('.delivery-btn').click(function () {
             var orderId = $(this).data('order-id');
             $.ajax({
-                url: '/Order/ReceiveDelivery', 
+                url: '/Order/ReceiveDelivery',
                 type: 'POST',
                 data: { orderId: orderId },
                 success: function (data) {
@@ -382,6 +365,21 @@
             });
         });
     });
+    function formatTime(time) {
+        var date = new Date(time);
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        var formattedTime = hours + ':' + minutes + ' ' + day + '/' + month + '/' + year;
+
+        return formattedTime;
+    }
+    function formatCurrency(amount) {
+        return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    }
     $('input[type=radio][name=productType]').change(function () {
         var selectedValue = $('input[type=radio][name=productType]:checked').val();
         switch (selectedValue) {

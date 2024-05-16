@@ -141,19 +141,16 @@
 <script>
     $(document).ready(function () {
         $('#detailModal').on('show.bs.modal', function (e) {
-            var importId = $(e.relatedTarget).data('importid'); // Lấy ID của giảm giá từ button
+            var importId = $(e.relatedTarget).data('importid'); 
             var modal = $(this);
             $.ajax({
-                url: '/Import/GetProductImport', // Đã sửa đường dẫn API
+                url: '/Import/GetProductImport', 
                 type: 'GET',
                 data: { importid: importId },
                 success: function (response) {
                     var tbody = modal.find('.modal-body tbody');
-                    tbody.empty(); // Xóa bất kỳ nội dung cũ nào trong tbody trước khi thêm mới
-
-                    // Kiểm tra xem response có dữ liệu không
+                    tbody.empty(); 
                     if (response && response.length > 0) {
-                        // Duyệt qua danh sách sản phẩm và thêm từng sản phẩm vào tbody
                         $.each(response, function (index, product) {
                             var row = '<tr>' +
                                 '<td>' + product.ProductID + '</td>' +

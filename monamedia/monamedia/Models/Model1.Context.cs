@@ -16,7 +16,7 @@ namespace monamedia.Models
     public partial class AppDbContext : DbContext
     {
         public AppDbContext()
-            : base("name=AppDbContext")
+            : base("name=PBL3Entities")
         {
         }
     
@@ -40,6 +40,5 @@ namespace monamedia.Models
         public virtual DbSet<Specification> Specifications { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Wishlist> Wishlists { get; set; }
     }
 }

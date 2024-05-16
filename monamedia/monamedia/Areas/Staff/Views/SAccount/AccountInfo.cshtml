@@ -212,92 +212,86 @@
                 console.log('Error:', xhr, status, error);
             }
         });
-    });
-    $(document).ready(function () {
         var passwordField = $('#password');
         $('#toggle-password').click(function () {
             var type = passwordField.attr('type') === 'password' ? 'text' : 'password';
             passwordField.attr('type', type);
             $(this).find('i').toggleClass('fa-eye fa-eye-slash');
         });
-    });
-    $(document).ready(function () {
-    $('.update-btn').click(function (e) {
-        var gender1 = $('input[name="gender"]:checked').val() === 'male' ? true : false;
-        var accountID= @ViewBag.accountId;
-        var email= $('#email').val();
-        var name=$('#fullname').val();
-        var birthDate= $('#dob').val();
-        var address= $('#address').val();
-        var phone = $('#phone').val();
-        var gender = gender1;
-        $.ajax({
-            url: '/Staff/SAccount/EditProfile',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                id: accountID,
-                name: name,
-                email: email,
-                phone: phone,
-                address: address,
-                birthdate:birthDate,
-                gender: gender
-            },
-            success: function (response) {
-                var alertElement = document.getElementById("updateInfoAlert");
-                alertElement.style.display = "block";
-                setTimeout(function () {
-                    alertElement.style.display = "none";
-                    location.reload(true);
-                }, 1500);
-            },
-            error: function () {
-                console.log("sai");
-            }
-        });
-    });
-});
-$(document).ready(function () {
-    $('#changePasswordModal').on('shown.bs.modal', function () {
-        $('#currentPassword').val('');
-        $('#newPassword').val(''); 
-        $('#confirmNewPassword').val(''); 
-    });
-    $('.changepassword-btn').click(function (e) {
-        var currentPassword = $('#currentPassword').val();
-        var newPassword = $('#newPassword').val();
-        var confirmNewPassword = $('#confirmNewPassword').val();
-        if (newPassword !== confirmNewPassword) {
-            alert("Mật khẩu mới và xác nhận mật khẩu mới không khớp!");
-            return; 
-        }
-        var alertElement = document.getElementById("changepasswordAlert");
-        alertElement.style.display = "block";
-        var accountID = @ViewBag.accountId;
-        $.ajax({
-            url: '/Staff/SAccount/ChangePassword',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                id: accountID,
-                oldPassword: currentPassword,
-                newPassword: newPassword
-            },
-            success: function (response) {
-                var alertElement = document.getElementById("changepasswordAlert");
-                alertElement.style.display = "block";
-                setTimeout(function () {
-                    alertElement.style.display = "none";
-                    location.reload(true);
-                }, 1500);
-            },
-            error: function () {
-                console.log("Có lỗi xảy ra khi đổi mật khẩu!");
-            }
-        });
-    });
-});
+         $('.update-btn').click(function (e) {
+     var gender1 = $('input[name="gender"]:checked').val() === 'male' ? true : false;
+     var accountID= @ViewBag.accountId;
+     var email= $('#email').val();
+     var name=$('#fullname').val();
+     var birthDate= $('#dob').val();
+     var address= $('#address').val();
+     var phone = $('#phone').val();
+     var gender = gender1;
+     $.ajax({
+         url: '/Staff/SAccount/EditProfile',
+         type: 'POST',
+         dataType: 'json',
+         data: {
+             id: accountID,
+             name: name,
+             email: email,
+             phone: phone,
+             address: address,
+             birthdate:birthDate,
+             gender: gender
+         },
+         success: function (response) {
+             var alertElement = document.getElementById("updateInfoAlert");
+             alertElement.style.display = "block";
+             setTimeout(function () {
+                 alertElement.style.display = "none";
+                 location.reload(true);
+             }, 1500);
+         },
+         error: function () {
+             console.log("sai");
+         }
+     });
+         });
+  $('#changePasswordModal').on('shown.bs.modal', function () {
+      $('#currentPassword').val('');
+      $('#newPassword').val('');
+      $('#confirmNewPassword').val('');
+  });
+  $('.changepassword-btn').click(function (e) {
+      var currentPassword = $('#currentPassword').val();
+      var newPassword = $('#newPassword').val();
+      var confirmNewPassword = $('#confirmNewPassword').val();
+      if (newPassword !== confirmNewPassword) {
+          alert("Mật khẩu mới và xác nhận mật khẩu mới không khớp!");
+          return;
+      }
+      var alertElement = document.getElementById("changepasswordAlert");
+      alertElement.style.display = "block";
+      var accountID = @ViewBag.accountId;
+      $.ajax({
+          url: '/Staff/SAccount/ChangePassword',
+          type: 'POST',
+          dataType: 'json',
+          data: {
+              id: accountID,
+              oldPassword: currentPassword,
+              newPassword: newPassword
+          },
+          success: function (response) {
+              var alertElement = document.getElementById("changepasswordAlert");
+              alertElement.style.display = "block";
+              setTimeout(function () {
+                  alertElement.style.display = "none";
+                  location.reload(true);
+              }, 1500);
+          },
+          error: function () {
+              console.log("Có lỗi xảy ra khi đổi mật khẩu!");
+          }
+      });
+  });
+ });
     function formatMoney(amount) {
         return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
     }

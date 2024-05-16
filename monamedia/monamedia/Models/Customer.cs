@@ -14,8 +14,15 @@ namespace monamedia.Models
     
     public partial class Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.C_Order = new HashSet<C_Order>();
+            this.Products = new HashSet<Product>();
+        }
+    
         public int customerID { get; set; }
-        public int accountID { get; set; }
+        public Nullable<int> accountID { get; set; }
         public string fullName { get; set; }
         public Nullable<System.DateTime> birthDate { get; set; }
         public Nullable<bool> gender { get; set; }
@@ -23,6 +30,10 @@ namespace monamedia.Models
         public string phoneNumber { get; set; }
         public string accountStatus { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<C_Order> C_Order { get; set; }
         public virtual Account Account { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

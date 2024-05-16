@@ -35,7 +35,6 @@ namespace monamedia.Controllers
                 int importID = newimport.importID;
                 return Json(new { success = true, importID,message = "Thêm phiếu nhập thành công" });
             }
-            // Trong trường hợp ModelState không hợp lệ, bạn có thể xử lý lỗi ở đây
             return Json(new { success = false, message = "Nhập lại thông tin" });
         }
         [HttpPost]
@@ -57,22 +56,22 @@ namespace monamedia.Controllers
         }
         public ActionResult GetProductImport(int importid)
         {
-            AppDbContext db=new AppDbContext();
-            var products=(from i in db.ProductImports
-                          join p in db.Products 
-                          on i.productID equals p.productID
-                          where i.importID==importid
-                          select new
-                          {
-                              PriceImport=i.priceImport,
-                              ProductID=i.productID,
-                              Price=i.price,
-                              Quantity=i.quantity,
-                              Name=p.name,
-                              Brand=p.brand,
-                              Color=p.color,
-                              Type=p.type,
-                          }).ToList();
+            AppDbContext db = new AppDbContext();
+            var products = (from i in db.ProductImports
+                            join p in db.Products
+                            on i.productID equals p.productID
+                            where i.importID == importid
+                            select new
+                            {
+                                PriceImport = i.priceImport,
+                                ProductID = i.productID,
+                                Price = i.price,
+                                Quantity = i.quantity,
+                                Name = p.name,
+                                Brand = p.brand,
+                                Color = p.color,
+                                Type = p.type,
+                            }).ToList();
             return Json(products, JsonRequestBehavior.AllowGet);
         }
     }

@@ -522,13 +522,6 @@
                 }
             });
         }
-        $(document).ready(function () {
-            $('.details-button').click(function () {
-                var productId = $(this).data('product-id');
-                getProductDetails(productId);
-            });
-        });
-
         function getProductDetails(productId) {
             $.ajax({
                 url: '/Product/GetProductDetails',
@@ -562,9 +555,12 @@
                     console.log('Error:', xhr, status, error);
                 }
             });
-
         }
         $(document).ready(function () {
+            $('.details-button').click(function () {
+                var productId = $(this).data('product-id');
+                getProductDetails(productId);
+            });
             $('#confirmButton').click(function () {
                 var productID = $('#modalProductID').val();
                 var name = $('#modalProductName').val();
@@ -629,16 +625,6 @@
                     }
                 });
             });
-        });
-
-        var radioButtons = document.querySelectorAll('input[name="productType"]');
-        radioButtons.forEach(function (radio) {
-            radio.addEventListener('change', function () {
-                var selectedType = this.value;
-                filterProductsByType(selectedType);
-            });
-        });
-        $(document).ready(function () {
             $('input[name="specIdOption"]').change(function () {
                 if (this.value === 'existing') {
                     $('#existingSpecIdDropdown').show();
@@ -648,8 +634,6 @@
                     $('#newSpecIdForm').show();
                 }
             });
-        });
-        $(document).ready(function () {
             $('#addProductBtn').click(function () {
                 var productID = $('#productID').val();
                 var productName = $('#productName').val();
@@ -749,5 +733,11 @@
 
             });
         });
-
+        var radioButtons = document.querySelectorAll('input[name="productType"]');
+        radioButtons.forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                var selectedType = this.value;
+                filterProductsByType(selectedType);
+            });
+        });
     </script>

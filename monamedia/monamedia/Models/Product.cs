@@ -19,8 +19,8 @@ namespace monamedia.Models
         {
             this.orderDetails = new HashSet<orderDetail>();
             this.ProductImports = new HashSet<ProductImport>();
-            this.Wishlists = new HashSet<Wishlist>();
             this.Discounts = new HashSet<Discount>();
+            this.Customers = new HashSet<Customer>();
         }
     
         public string productID { get; set; }
@@ -41,8 +41,8 @@ namespace monamedia.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImport> ProductImports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Wishlist> Wishlists { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Discount> Discounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }

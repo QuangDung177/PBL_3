@@ -46,7 +46,7 @@
                             style="background-color: rgb(157, 249, 157); ">
                         Nhập sản phẩm cũ
                     </button>
-                    <button class="btn btn-sm new" data-bs-toggle="modal" data-bs-target="#newModal" title="Sản phẩm mới" id="show-emp"
+                    <button class="btn btn-sm new" data-bs-toggle="modal" data-bs-target="#importNewProductModal" title="Sản phẩm mới" id="show-emp"
                             style="background-color: rgb(56, 212, 243) ">
                         Nhập sản phẩm mới
                     </button>
@@ -212,16 +212,176 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="importNewProductModal" tabindex="-1" aria-labelledby="importNewProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addProductModalLabel">Nhập sản phẩm mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                <form id="addProductForm">
+                    <div class="mb-3">
+                        <label for="productID" class="form-label">ID sản phẩm</label>
+                        <input type="text" class="form-control" id="productID" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Tên sản phẩm</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productBrand" class="form-label">Thương hiệu</label>
+                        <input type="text" class="form-control" id="productBrand" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productColor" class="form-label">Màu sắc</label>
+                        <input type="text" class="form-control" id="productColor" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productRam" class="form-label">Ram</label>
+                        <input type="text" class="form-control" id="productRam" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productMemory" class="form-label">Bộ nhớ</label>
+                        <input type="text" class="form-control" id="productMemory" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productImg" class="form-label">Hình ảnh</label>
+                        <input type="text" class="form-control" id="productImg" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productType" class="form-label">Loại sản phẩm</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="ProductType" id="phoneType" value="Phone">
+                                <label class="form-check-label" for="phoneType">Điện thoại</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="ProductType" id="laptopType" value="Laptop">
+                                <label class="form-check-label" for="laptopType">Máy tính bảng</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="ProductType" id="tabletType" value="Tablet">
+                                <label class="form-check-label" for="tabletType">Laptop</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <input type="radio" id="specIdOptionExisting" name="specIdOption" value="existing" checked>
+                        <label for="specIdOptionExisting">Chọn thông số kỹ thuật có sẵn</label><br>
+                        <input type="radio" id="specIdOptionNew" name="specIdOption" value="new">
+                        <label for="specIdOptionNew">Thêm thông số kỹ thuật mới</label>
+                    </div>
+
+                    <div id="existingSpecIdDropdown" class="mb-3">
+                        <select id="specIdDropdown" class="form-select">
+                            @foreach (var specId in ViewBag.specIDs)
+                            {
+                                <option value="@specId">@specId</option>
+                            }
+                        </select>
+                    </div>
+                    <div id="newSpecIdForm" style="display: none;">
+                        <div class="mb-3">
+                            <label for="specID" class="form-label">ID thông số kỹ thuật</label>
+                            <input type="text" class="form-control" id="specID">
+                        </div>
+                        <div class="mb-3">
+                            <label for="specCPU" class="form-label">CPU</label>
+                            <input type="text" class="form-control" id="specCPU">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specGPU" class="form-label">GPU</label>
+                            <input type="text" class="form-control" id="specGPU">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specOS" class="form-label">Hệ điều hành</label>
+                            <input type="text" class="form-control" id="specOS">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specScreen" class="form-label">Màn hình</label>
+                            <input type="text" class="form-control" id="specScreen">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specPin" class="form-label">Pin</label>
+                            <input type="text" class="form-control" id="specPin">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specCamera" class="form-label">Camera</label>
+                            <input type="text" class="form-control" id="specCamera">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specSize" class="form-label">Kích thước</label>
+                            <input type="text" class="form-control" id="specSize">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specWarrantly" class="form-label">Bảo hành</label>
+                            <input type="text" class="form-control" id="specWarrantly">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specSound" class="form-label">Âm thanh</label>
+                            <input type="text" class="form-control" id="specSound">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specWeight" class="form-label">Trọng lượng</label>
+                            <input type="text" class="form-control" id="specWeight">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specConectivity" class="form-label">Công nghệ kết nối</label>
+                            <input type="text" class="form-control" id="specConectivity">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specCharge" class="form-label">Sạc</label>
+                            <input type="text" class="form-control" id="specCharge">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specYear" class="form-label">Năm ra mắt</label>
+                            <input type="text" class="form-control" id="specYear">
+                        </div>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="productQuantity" class="form-label">Số lượng</label>
+                        <input type="text" class="form-control" id="productQuantity" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="importPrice" class="form-label">Giá nhập</label>
+                        <input type="text" class="form-control" id="importPrice" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Giá bán</label>
+                        <input type="text" class="form-control" id="productPrice" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="importnewProductBtn">Nhập</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts\jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        var rowsPerPage = 10; // Số dòng trên mỗi trang
-        var totalRows = $('#sampleTable tbody tr').length; // Tổng số dòng trong bảng
-        var totalPages = Math.ceil(totalRows / rowsPerPage); // Tổng số trang
-        var currentPage = 1; // Trang hiện tại, bắt đầu từ trang 1
+        var rowsPerPage = 10; 
+        var totalRows = $('#sampleTable tbody tr').length; 
+        var totalPages = Math.ceil(totalRows / rowsPerPage); 
+        var currentPage = 1; 
 
-        // Ẩn tất cả các dòng trừ các dòng trong trang đầu tiên
         $('#sampleTable tbody tr').hide();
         $('#sampleTable tbody tr').slice(0, rowsPerPage).show();
         $('#searchButton').click(function () {
@@ -300,7 +460,6 @@
             var importPrice = $('#detailModal').find('#importprice').val();
             var price = $('#detailModal').find('#price').val();
 
-            // Tạo một hàng mới trong bảng ở trang AddImport và thêm thông tin vào
             var newRow = '<tr>' +
                 '<td><input type="checkbox" class="rowCheckbox"></td>' +
                 '<td>' + productId + '</td>' +
@@ -381,7 +540,7 @@
                     if (response.success) {
                         // Lấy giá trị importID từ phản hồi và gán cho biến importid
                         var importid = response.importID;
-
+                        IMPORTID = response.importID;
                         // Gọi hàm xử lý thêm sản phẩm với importID đã nhận được
                         addProducts(importid);
                         alert(response.message);
@@ -395,11 +554,158 @@
                     console.log(error);
                 }
             });
-            
+        });
+        $('input[name="specIdOption"]').change(function () {
+            if (this.value === 'existing') {
+                $('#existingSpecIdDropdown').show();
+                $('#newSpecIdForm').hide();
+            } else if (this.value === 'new') {
+                $('#existingSpecIdDropdown').hide();
+                $('#newSpecIdForm').show();
+            }
+        });
+        $('#importnewProductBtn').click(function () {
+            var product = {
+                productID: $('#productID').val(),
+                name: $('#name').val(),
+                brand: $('#productBrand').val(),
+                price: 0,
+                quantity: 0,
+                color: $('#productColor').val(),
+                ram: $('#productRam').val(),
+                memory: $('#productMemory').val(),
+                specID: '',
+                img: $('#productImg').val(),
+                type: $('input[name="ProductType"]:checked').val(),
+            };
+            var spec = {
+                SpecID: $('#specID').val(),
+                CPU: $('#specCPU').val(),
+                GPU: $('#specGPU').val(),
+                OS: $('#specOS').val(),
+                screen: $('#specScreen').val(), 
+                pin: $('#specPin').val(),
+                camera: $('#specCamera').val(),
+                size: $('#specSize').val(),
+                warrantly: $('#specWarrantly').val() ? parseInt($('#specWarrantly').val()) : null,
+                sound: $('#specSound').val(),
+                weight: $('#specWeight').val(),
+                ConectivityTechnologies: $('#specConectivity').val(),
+                charge: $('#specCharge').val(),
+                yearOfDebut: $('#specYear').val() ? parseInt($('#specYear').val()) : null,
+            };
+            var importQuantity = $('#productQuantity').val();
+            var importPrice = $('#importPrice').val();
+            var productPrice = $('#productPrice').val();
+            var specID2 = $('#specIdDropdown').val();
+            var selectedOption = $('input[name="specIdOption"]:checked').val();
+            if (selectedOption == "new") {
+                $.ajax({
+                    url: '/Product/AddProductWithNewSpec',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ product: product, spec: spec }),
+                    success: function (response) {
+                        var newRow = '<tr>' +
+                            '<td><input type="checkbox" class="rowCheckbox"></td>' +
+                            '<td>' + product.productID + '</td>' +
+                            '<td>' + product.name + '</td>' +
+                            '<td>' + product.color + '</td>' +
+                            '<td>' + product.brand + '</td>' +
+                            '<td>' + product.type + '</td>' +
+                            '<td>' + importQuantity + '</td>' +
+                            '<td>' + importPrice + '</td>' +
+                            '<td>' + productPrice + '</td>' +
+                            '</tr>';
+                        $('#sampleTable1 tbody').append(newRow);
+                        calculateTotal();
+                        $('#productID').val('');
+                        $('#name').val('');
+                        $('#productBrand').val('');
+                        $('#productColor').val('');
+                        $('#productRam').val('');
+                        $('#productMemory').val('');
+                        $('#productImg').val('');
+                        $('input[name="ProductType"]').prop('checked', false);
+                        $('#specID').val('');
+                        $('#specCPU').val('');
+                        $('#specGPU').val('');
+                        $('#specOS').val('');
+                        $('#specScreen').val('');
+                        $('#specPin').val('');
+                        $('#specCamera').val('');
+                        $('#specSize').val('');
+                        $('#specWarrantly').val('');
+                        $('#specSound').val('');
+                        $('#specWeight').val('');
+                        $('#specConectivity').val('');
+                        $('#specCharge').val('');
+                        $('#specYear').val('');
+                        $('#productQuantity').val('');
+                        $('#importPrice').val('');
+                        $('#productPrice').val('');
+                        $('#importNewProductModal').modal('toggle');
+                        $('.modal-backdrop').remove();
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error:', xhr, status, error);
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: '/Product/AddProductWithExistedSpec',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ product: product, specID: specID2 }),
+                    success: function (response) {
+                        var newRow = '<tr>' +
+                            '<td><input type="checkbox" class="rowCheckbox"></td>' +
+                            '<td>' + product.productID + '</td>' +
+                            '<td>' + product.name + '</td>' +
+                            '<td>' + product.color + '</td>' +
+                            '<td>' + product.brand + '</td>' +
+                            '<td>' + product.type + '</td>' +
+                            '<td>' + importQuantity + '</td>' +
+                            '<td>' + importPrice + '</td>' +
+                            '<td>' + productPrice + '</td>' +
+                            '</tr>';
+                        $('#sampleTable1 tbody').append(newRow);
+                        calculateTotal();
+                        $('#productID').val('');
+                        $('#name').val('');
+                        $('#productBrand').val('');
+                        $('#productColor').val('');
+                        $('#productRam').val('');
+                        $('#productMemory').val('');
+                        $('#productImg').val('');
+                        $('input[name="ProductType"]').prop('checked', false);
+                        $('#specID').val('');
+                        $('#specCPU').val('');
+                        $('#specGPU').val('');
+                        $('#specOS').val('');
+                        $('#specScreen').val('');
+                        $('#specPin').val('');
+                        $('#specCamera').val('');
+                        $('#specSize').val('');
+                        $('#specWarrantly').val('');
+                        $('#specSound').val('');
+                        $('#specWeight').val('');
+                        $('#specConectivity').val('');
+                        $('#specCharge').val('');
+                        $('#specYear').val('');
+                        $('#productQuantity').val('');
+                        $('#importPrice').val('');
+                        $('#productPrice').val('');
+                        $('#importNewProductModal').modal('toggle');
+                        $('.modal-backdrop').remove();
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error:', xhr, status, error);
+                    }
+                });
+            }
         });
     });
-
-    // Hàm xử lý thêm sản phẩm với importID đã nhận được
     function addProducts(importid) {
         $('#sampleTable1 tbody tr').each(function () {
             var productId = $(this).find('td:nth-child(2)').text();
@@ -419,11 +725,15 @@
                 success: function (response) {
                 },
                 error: function (xhr, status, error) {
-                    // Xử lý lỗi (nếu cần)
                     console.log(error);
                 }
             });
         });
     }
+    function addNewProduct(importid) {
+        var productId = $('#productID').val();
+        var quantity=parseInt($('#productQuantity').val());
+        var priceImport = parseInt($('#importPrice').val());
+        var price = parseInt($('#productPrice').val());
+     }
 </script>
-
