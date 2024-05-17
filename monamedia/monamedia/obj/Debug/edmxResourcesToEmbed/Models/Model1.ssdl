@@ -28,7 +28,7 @@
       <PropertyRef Name="customerID" />
     </Key>
     <Property Name="customerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="accountID" Type="int" />
+    <Property Name="accountID" Type="int" Nullable="false" />
     <Property Name="fullName" Type="nvarchar" MaxLength="50" />
     <Property Name="birthDate" Type="date" />
     <Property Name="gender" Type="bit" />
@@ -193,19 +193,7 @@
     <Property Name="customerID" Type="int" Nullable="false" />
     <Property Name="productID" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
-  <Association Name="FK___Order__customer__4BAC3F29">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-    <End Role="_Order" Type="Self._Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="customerID" />
-      </Principal>
-      <Dependent Role="_Order">
-        <PropertyRef Name="customerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK___Order__status__4AB81AF0">
+  <Association Name="FK___Order__staffID__6A30C649">
     <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
     <End Role="_Order" Type="Self._Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -218,7 +206,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Customer__accoun__3B75D760">
-    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
     <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Account">
@@ -229,7 +217,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Export__managerI__5812160E">
+  <Association Name="FK__Export__managerI__6C190EBB">
     <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
     <End Role="Export" Type="Self.Export" Multiplicity="*" />
     <ReferentialConstraint>
@@ -241,7 +229,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Export__orderID__59063A47">
+  <Association Name="FK__Export__orderID__6D0D32F4">
     <End Role="_Order" Type="Self._Order" Multiplicity="0..1" />
     <End Role="Export" Type="Self.Export" Multiplicity="*" />
     <ReferentialConstraint>
@@ -253,7 +241,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Export__staffID__59FA5E80">
+  <Association Name="FK__Export__staffID__6E01572D">
     <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
     <End Role="Export" Type="Self.Export" Multiplicity="*" />
     <ReferentialConstraint>
@@ -265,7 +253,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Import__managerI__5CD6CB2B">
+  <Association Name="FK__Import__managerI__6EF57B66">
     <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
     <End Role="Import" Type="Self.Import" Multiplicity="*" />
     <ReferentialConstraint>
@@ -277,7 +265,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Manager__account__412EB0B6">
+  <Association Name="FK__Manager__account__6FE99F9F">
     <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
     <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
     <ReferentialConstraint>
@@ -289,7 +277,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__orderDeta__order__4E88ABD4">
+  <Association Name="FK__orderDeta__order__70DDC3D8">
     <End Role="_Order" Type="Self._Order" Multiplicity="0..1" />
     <End Role="orderDetail" Type="Self.orderDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -301,7 +289,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__orderDeta__produ__4F7CD00D">
+  <Association Name="FK__orderDeta__produ__71D1E811">
     <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="orderDetail" Type="Self.orderDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -313,7 +301,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Payment__orderID__52593CB8">
+  <Association Name="FK__Payment__orderID__72C60C4A">
     <End Role="_Order" Type="Self._Order" Multiplicity="0..1" />
     <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
     <ReferentialConstraint>
@@ -325,7 +313,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Product__specID__47DBAE45">
+  <Association Name="FK__Product__specID__73BA3083">
     <End Role="Specification" Type="Self.Specification" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -337,7 +325,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductDi__disco__68487DD7">
+  <Association Name="FK__Product_D__disco__75A278F5">
     <End Role="Discount" Type="Self.Discount" Multiplicity="1" />
     <End Role="Product_Discount" Type="Self.Product_Discount" Multiplicity="*" />
     <ReferentialConstraint>
@@ -349,7 +337,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductDi__produ__6754599E">
+  <Association Name="FK__Product_D__produ__74AE54BC">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="Product_Discount" Type="Self.Product_Discount" Multiplicity="*" />
     <ReferentialConstraint>
@@ -361,7 +349,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductIm__impor__5FB337D6">
+  <Association Name="FK__ProductIm__impor__76969D2E">
     <End Role="Import" Type="Self.Import" Multiplicity="1" />
     <End Role="ProductImport" Type="Self.ProductImport" Multiplicity="*" />
     <ReferentialConstraint>
@@ -373,7 +361,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductIm__produ__60A75C0F">
+  <Association Name="FK__ProductIm__produ__778AC167">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="ProductImport" Type="Self.ProductImport" Multiplicity="*" />
     <ReferentialConstraint>
@@ -385,7 +373,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Review__orderDet__5535A963">
+  <Association Name="FK__Review__orderDet__787EE5A0">
     <End Role="orderDetail" Type="Self.orderDetail" Multiplicity="0..1" />
     <End Role="Review" Type="Self.Review" Multiplicity="*" />
     <ReferentialConstraint>
@@ -397,7 +385,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Staff__accountID__3E52440B">
+  <Association Name="FK__Staff__accountID__797309D9">
     <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
     <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
     <ReferentialConstraint>
@@ -409,19 +397,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Wishlist__custom__6383C8BA">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="customerID" />
-      </Principal>
-      <Dependent Role="Wishlist">
-        <PropertyRef Name="customerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Wishlist__produc__6477ECF3">
+  <Association Name="FK__Wishlist__produc__7A672E12">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
     <ReferentialConstraint>
@@ -451,11 +427,7 @@
     <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Wishlist" EntityType="Self.Wishlist" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK___Order__customer__4BAC3F29" Association="Self.FK___Order__customer__4BAC3F29">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="_Order" EntitySet="_Order" />
-    </AssociationSet>
-    <AssociationSet Name="FK___Order__status__4AB81AF0" Association="Self.FK___Order__status__4AB81AF0">
+    <AssociationSet Name="FK___Order__staffID__6A30C649" Association="Self.FK___Order__staffID__6A30C649">
       <End Role="Staff" EntitySet="Staff" />
       <End Role="_Order" EntitySet="_Order" />
     </AssociationSet>
@@ -463,71 +435,67 @@
       <End Role="Account" EntitySet="Account" />
       <End Role="Customer" EntitySet="Customer" />
     </AssociationSet>
-    <AssociationSet Name="FK__Export__managerI__5812160E" Association="Self.FK__Export__managerI__5812160E">
+    <AssociationSet Name="FK__Export__managerI__6C190EBB" Association="Self.FK__Export__managerI__6C190EBB">
       <End Role="Manager" EntitySet="Manager" />
       <End Role="Export" EntitySet="Export" />
     </AssociationSet>
-    <AssociationSet Name="FK__Export__orderID__59063A47" Association="Self.FK__Export__orderID__59063A47">
+    <AssociationSet Name="FK__Export__orderID__6D0D32F4" Association="Self.FK__Export__orderID__6D0D32F4">
       <End Role="_Order" EntitySet="_Order" />
       <End Role="Export" EntitySet="Export" />
     </AssociationSet>
-    <AssociationSet Name="FK__Export__staffID__59FA5E80" Association="Self.FK__Export__staffID__59FA5E80">
+    <AssociationSet Name="FK__Export__staffID__6E01572D" Association="Self.FK__Export__staffID__6E01572D">
       <End Role="Staff" EntitySet="Staff" />
       <End Role="Export" EntitySet="Export" />
     </AssociationSet>
-    <AssociationSet Name="FK__Import__managerI__5CD6CB2B" Association="Self.FK__Import__managerI__5CD6CB2B">
+    <AssociationSet Name="FK__Import__managerI__6EF57B66" Association="Self.FK__Import__managerI__6EF57B66">
       <End Role="Manager" EntitySet="Manager" />
       <End Role="Import" EntitySet="Import" />
     </AssociationSet>
-    <AssociationSet Name="FK__Manager__account__412EB0B6" Association="Self.FK__Manager__account__412EB0B6">
+    <AssociationSet Name="FK__Manager__account__6FE99F9F" Association="Self.FK__Manager__account__6FE99F9F">
       <End Role="Account" EntitySet="Account" />
       <End Role="Manager" EntitySet="Manager" />
     </AssociationSet>
-    <AssociationSet Name="FK__orderDeta__order__4E88ABD4" Association="Self.FK__orderDeta__order__4E88ABD4">
+    <AssociationSet Name="FK__orderDeta__order__70DDC3D8" Association="Self.FK__orderDeta__order__70DDC3D8">
       <End Role="_Order" EntitySet="_Order" />
       <End Role="orderDetail" EntitySet="orderDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK__orderDeta__produ__4F7CD00D" Association="Self.FK__orderDeta__produ__4F7CD00D">
+    <AssociationSet Name="FK__orderDeta__produ__71D1E811" Association="Self.FK__orderDeta__produ__71D1E811">
       <End Role="Product" EntitySet="Product" />
       <End Role="orderDetail" EntitySet="orderDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK__Payment__orderID__52593CB8" Association="Self.FK__Payment__orderID__52593CB8">
+    <AssociationSet Name="FK__Payment__orderID__72C60C4A" Association="Self.FK__Payment__orderID__72C60C4A">
       <End Role="_Order" EntitySet="_Order" />
       <End Role="Payment" EntitySet="Payment" />
     </AssociationSet>
-    <AssociationSet Name="FK__Product__specID__47DBAE45" Association="Self.FK__Product__specID__47DBAE45">
+    <AssociationSet Name="FK__Product__specID__73BA3083" Association="Self.FK__Product__specID__73BA3083">
       <End Role="Specification" EntitySet="Specification" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductDi__disco__68487DD7" Association="Self.FK__ProductDi__disco__68487DD7">
+    <AssociationSet Name="FK__Product_D__disco__75A278F5" Association="Self.FK__Product_D__disco__75A278F5">
       <End Role="Discount" EntitySet="Discount" />
       <End Role="Product_Discount" EntitySet="Product_Discount" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductDi__produ__6754599E" Association="Self.FK__ProductDi__produ__6754599E">
+    <AssociationSet Name="FK__Product_D__produ__74AE54BC" Association="Self.FK__Product_D__produ__74AE54BC">
       <End Role="Product" EntitySet="Product" />
       <End Role="Product_Discount" EntitySet="Product_Discount" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductIm__impor__5FB337D6" Association="Self.FK__ProductIm__impor__5FB337D6">
+    <AssociationSet Name="FK__ProductIm__impor__76969D2E" Association="Self.FK__ProductIm__impor__76969D2E">
       <End Role="Import" EntitySet="Import" />
       <End Role="ProductImport" EntitySet="ProductImport" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductIm__produ__60A75C0F" Association="Self.FK__ProductIm__produ__60A75C0F">
+    <AssociationSet Name="FK__ProductIm__produ__778AC167" Association="Self.FK__ProductIm__produ__778AC167">
       <End Role="Product" EntitySet="Product" />
       <End Role="ProductImport" EntitySet="ProductImport" />
     </AssociationSet>
-    <AssociationSet Name="FK__Review__orderDet__5535A963" Association="Self.FK__Review__orderDet__5535A963">
+    <AssociationSet Name="FK__Review__orderDet__787EE5A0" Association="Self.FK__Review__orderDet__787EE5A0">
       <End Role="orderDetail" EntitySet="orderDetail" />
       <End Role="Review" EntitySet="Review" />
     </AssociationSet>
-    <AssociationSet Name="FK__Staff__accountID__3E52440B" Association="Self.FK__Staff__accountID__3E52440B">
+    <AssociationSet Name="FK__Staff__accountID__797309D9" Association="Self.FK__Staff__accountID__797309D9">
       <End Role="Account" EntitySet="Account" />
       <End Role="Staff" EntitySet="Staff" />
     </AssociationSet>
-    <AssociationSet Name="FK__Wishlist__custom__6383C8BA" Association="Self.FK__Wishlist__custom__6383C8BA">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="Wishlist" EntitySet="Wishlist" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Wishlist__produc__6477ECF3" Association="Self.FK__Wishlist__produc__6477ECF3">
+    <AssociationSet Name="FK__Wishlist__produc__7A672E12" Association="Self.FK__Wishlist__produc__7A672E12">
       <End Role="Product" EntitySet="Product" />
       <End Role="Wishlist" EntitySet="Wishlist" />
     </AssociationSet>

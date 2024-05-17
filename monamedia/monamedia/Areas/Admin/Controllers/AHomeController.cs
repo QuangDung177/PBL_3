@@ -5,10 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Schema;
 
 namespace monamedia.Areas.Admin.Controllers
 {
@@ -275,10 +277,7 @@ namespace monamedia.Areas.Admin.Controllers
             Filter();
             return View(Products);
         }
-        public ActionResult Revenue()
-        {
-            return View();
-        }
+       
         public ActionResult Import(string search="")
         {
             AppDbContext db = new AppDbContext(); DateTime searchDate;
@@ -304,7 +303,35 @@ namespace monamedia.Areas.Admin.Controllers
             ViewBag.specIDs= li;
             return View(Products);
         }
+        public ActionResult Revenue()
+        {
+            Filter();
+            AppDbContext db = new AppDbContext();
+            int stafftotal = db.Staffs.Count();
+            ViewBag.Stafftotal = stafftotal;
+            int producttotal = db.Products.Count();
+            ViewBag.Producttotal = producttotal;
+            int ordertotal = db.C_Order.Count();
+            ViewBag.Ordertotal = ordertotal;
+            var total = db.C_Order.Where(c => c.status == "Giao thành công").Sum(c => c.total);
+            ViewBag.TotalRevenue = total;
+            //
+            List<int> charts = new List<int>(new int[12]);
 
+            // Lấy danh sách các đơn hàng đã giao thành công
+            var successfulOrders = db.C_Order.Where(c => c.status == "Giao thành công").ToList();
 
+            // Tính tổng doanh thu cho mỗi tháng và lưu vào List charts
+            foreach (var order in successfulOrders)
+            {
+                int monthIndex = order.timeOrder.Value.Month - 1; // Chỉ số của tháng trong List
+
+                // Cộng thêm doanh thu của đơn hàng vào tháng tương ứng trong List charts
+                charts[monthIndex] += (int)order.total;
+            }
+
+            // Truyền List charts vào View để sử dụng trong biểu đồ hoặc hiển thị dữ liệu khác
+            return View(charts);
+        }
     }
 }

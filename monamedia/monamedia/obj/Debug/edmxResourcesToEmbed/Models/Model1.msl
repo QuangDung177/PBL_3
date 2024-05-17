@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="PBL3Entities">
+  <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="AppDbContext">
     <EntitySetMapping Name="C_Order">
       <EntityTypeMapping TypeName="PBL3Model.C_Order">
         <MappingFragment StoreEntitySet="_Order">
@@ -192,17 +192,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Wishlists">
+      <EntityTypeMapping TypeName="PBL3Model.Wishlist">
+        <MappingFragment StoreEntitySet="Wishlist">
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="productID" ColumnName="productID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="Product_Discount" TypeName="PBL3Model.Product_Discount" StoreEntitySet="Product_Discount">
       <EndProperty Name="Discount">
         <ScalarProperty Name="discountID" ColumnName="discountID" />
-      </EndProperty>
-      <EndProperty Name="Product">
-        <ScalarProperty Name="productID" ColumnName="productID" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="Wishlist" TypeName="PBL3Model.Wishlist" StoreEntitySet="Wishlist">
-      <EndProperty Name="Customer">
-        <ScalarProperty Name="customerID" ColumnName="customerID" />
       </EndProperty>
       <EndProperty Name="Product">
         <ScalarProperty Name="productID" ColumnName="productID" />
