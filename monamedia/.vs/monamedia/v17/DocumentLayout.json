@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "F:\\PBL3_1\\PBL_3\\monamedia\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|F:\\PBL3_1\\PBL_3\\monamedia\\monamedia\\areas\\admin\\views\\shared\\adminlayoutpage1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|f:\\pbl3_1\\pbl_3\\monamedia\\monamedia\\areas\\admin\\views\\shared\\adminlayoutpage1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\areas\\admin\\views\\shared\\adminlayoutpage1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
@@ -11,7 +11,7 @@
       "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\areas\\admin\\controllers\\ahomecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|f:\\pbl3_1\\pbl_3\\monamedia\\monamedia\\areas\\admin\\views\\ahome\\revenue.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|F:\\PBL3_1\\PBL_3\\monamedia\\monamedia\\areas\\admin\\views\\ahome\\revenue.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{510404A9-4F9A-447A-8693-4387B8131FD4}|monamedia\\monamedia.csproj|solutionrelative:monamedia\\areas\\admin\\views\\ahome\\revenue.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
@@ -242,8 +242,7 @@
               "RelativeToolTip": "monamedia\\Areas\\Admin\\Views\\AHome\\Revenue.cshtml",
               "ViewState": "AQIAAFIAAAAAAAAAAAAswGYAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-13T20:39:15.297Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-13T20:39:15.297Z"
             },
             {
               "$type": "Document",
@@ -255,8 +254,7 @@
               "RelativeToolTip": "monamedia\\Areas\\Admin\\Controllers\\AHomeController.cs",
               "ViewState": "AQIAADQBAAAAAAAAAAAwwDMBAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-12T14:01:59.437Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T14:01:59.437Z"
             },
             {
               "$type": "Document",
