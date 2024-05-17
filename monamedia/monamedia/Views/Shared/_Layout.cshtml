@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿@using monamedia.API
+<!doctype html>
 <html lang="vi">
 
 <!-- Mirrored from look-pretty.monamedia.net/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 09 Apr 2024 02:03:05 GMT -->
@@ -1329,18 +1330,40 @@
                                       fill="#000E3C" />
                             </svg>
                         </div>
-                        <div class="d-none d-lg-flex flex-column">
-                            <span class="subtitle">Đăng nhập</span>
-                            <span class="title">Tài khoản</span>
-                        </div>
-                        <ul class="info-menu">
-                            <li>
-                                <a href="/Sign/Index" title="Login">Đăng nhập</a>
-                            </li>
-                            <li>
-                                <a href="/Login/Index" title="Register">Đăng ký</a>
-                            </li>
-                        </ul>
+                        @if (Session["CustomerInfo"] != null)
+                        {
+                            var customerInfo = (CustomerInfo)Session["CustomerInfo"];
+                            <div class="d-none d-lg-flex flex-column">
+                                <span class="subtitle">Xin chào</span>
+                                <span class="title">@customerInfo.FullName</span>
+                            </div>
+                            <ul class="info-menu">
+                                <li>
+                                    <a href="/Sign/Edit" title="Edit Account">Chỉnh sửa thông tin</a>
+                                </li>
+                                <li>
+                                    <a href="/Account/Logout" title="Logout">Đăng xuất</a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <div class="d-none d-lg-flex flex-column">
+                                <span class="subtitle">Đăng nhập</span>
+                                <span class="title">Tài khoản</span>
+                            </div>
+                            <ul class="info-menu">
+                                <li>
+                                    <a href="/Sign/Index" title="Login">Đăng nhập</a>
+                                </li>
+                                <li>
+                                    <a href="/Login/Index" title="Register">Đăng ký</a>
+                                </li>
+                            </ul>
+                        }
+
+
+
 
                     </div>
                     <div class="info-box me-2">
@@ -1348,7 +1371,7 @@
                             <span class="wishlist-count icon-badge yith-wcwl-items-count">
                                 0
                             </span>
-                            <a href="wishlist/index.html" class="fs-sm fw-light text-uppercase">
+                            <a href="@Url.Action("Thanhtoan","Thanhtoan")" class="fs-sm fw-light text-uppercase">
                                 <i class="ele-icon electio-heart"></i>
                             </a>
                         </div>
@@ -1362,7 +1385,7 @@
                             <span class="icon-badge" id="mini-cart-count">
                                 0
                             </span>
-                            <a href="#">
+                            <a href="@Url.Action("Thanhtoan","Thanhtoan")">
                                 <i class="ele-icon electio-shopping-bag"></i>
                             </a>
                         </div>
@@ -1370,7 +1393,7 @@
                             <span class="subtitle">
                                 0&nbsp;&#8363;
                             </span>
-                            <span class="title">Tổng</span>
+                            <a href="" class="title">Tổng</a>
                         </div>
                     </div>
                     <!-- menu trigger -->
@@ -1419,7 +1442,7 @@
                                     <li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-4587 current_page_item active menu-item-4628 nav-item dropdown d-lg-flex nav-item-display align-self-stretch overflow-visible align-items-center"><a title="Trang chủ" class=" xpc-nav-link  nav-link animate-in" target="_self" href="index.html" data-anim-type="fade-in"><span class="xpc-dropdown-title text-sm  xpc-header-text">Trang chủ </span></a></li>
                                     <li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4584 nav-item dropdown d-lg-flex nav-item-display align-self-stretch overflow-visible align-items-center"><a title="Giới thiệu" class=" xpc-nav-link  nav-link animate-in" target="_self" href="about-us/index.html" data-anim-type="fade-in"><span class="xpc-dropdown-title text-sm  xpc-header-text">Giới thiệu </span></a></li>
                                     <li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-4738 nav-item dropdown d-lg-flex nav-item-display align-self-stretch overflow-visible align-items-center mega-item xpc-mega-style-default">
-                                        <a title="Sản phẩm" class=" xpc-nav-link  nav-link animate-in dropdown-toggle" target="_self" href="shop/index.html" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="menu-item-dropdown-4738" data-anim-type="fade-in"><span class="xpc-dropdown-title text-sm  xpc-header-text">Sản phẩm </span></a>
+                                        <a title="Sản phẩm" class=" xpc-nav-link  nav-link animate-in dropdown-toggle" target="_self" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="menu-item-dropdown-4738" data-anim-type="fade-in"><span class="xpc-dropdown-title text-sm  xpc-header-text">Sản phẩm </span></a>
                                         <div class="dropdown-menu start-0" aria-labelledby="menu-item-dropdown-4738" role="navigation">
                                             <div class="submenu-box  overflow-hidden2">
                                                 <div class="container overflow-hidden">
@@ -1475,7 +1498,7 @@
                                                                                                 <ul class="electio-menu-icon-list-items">
                                                                                                     <li class="electio-menu-icon-list-item">
                                                                                                         <span class="elementor-repeater-item-781c04e">
-                                                                                                            <a href="#">
+                                                                                                            <a href="/Laptop/Index">
 
                                                                                                                 <span class="elementor-icon-list-text">Laptop</span>
 
@@ -1485,54 +1508,8 @@
 
                                                                                                         </span>
                                                                                                     </li>
-                                                                                                    <li class="electio-menu-icon-list-item">
-                                                                                                        <span class="elementor-repeater-item-e51aab8">
-                                                                                                            <a href="#">
-
-                                                                                                                <span class="elementor-icon-list-text">Monitor</span>
-
-
-
-                                                                                                            </a>
-
-                                                                                                        </span>
-                                                                                                    </li>
-                                                                                                    <li class="electio-menu-icon-list-item">
-                                                                                                        <span class="elementor-repeater-item-a367ba2">
-                                                                                                            <a href="#">
-
-                                                                                                                <span class="elementor-icon-list-text">Hardware</span>
-
-
-
-                                                                                                            </a>
-
-                                                                                                        </span>
-                                                                                                    </li>
-                                                                                                    <li class="electio-menu-icon-list-item">
-                                                                                                        <span class="elementor-repeater-item-c0bdb90">
-                                                                                                            <a href="#">
-
-                                                                                                                <span class="elementor-icon-list-text">Keyboard</span>
-
-
-
-                                                                                                            </a>
-
-                                                                                                        </span>
-                                                                                                    </li>
-                                                                                                    <li class="electio-menu-icon-list-item">
-                                                                                                        <span class="elementor-repeater-item-efbcf11">
-                                                                                                            <a href="#">
-
-                                                                                                                <span class="elementor-icon-list-text">Mouse</span>
-
-
-
-                                                                                                            </a>
-
-                                                                                                        </span>
-                                                                                                    </li>
+                                                                                                 
+                                                                                                 
                                                                                                 </ul>
                                                                                             </div>
                                                                                         </div>
@@ -1547,36 +1524,9 @@
                                                                                                     <ul class="electio-menu-icon-list-items">
                                                                                                         <li class="electio-menu-icon-list-item">
                                                                                                             <span class="elementor-repeater-item-781c04e">
-                                                                                                                <a href="#">
+                                                                                                                <a href="/Laptop/Phone">
 
-                                                                                                                    <span class="elementor-icon-list-text">Apple</span>
-
-
-
-                                                                                                                </a>
-
-                                                                                                            </span>
-                                                                                                        </li>
-                                                                                                        <li class="electio-menu-icon-list-item">
-                                                                                                            <span class="elementor-repeater-item-219c3dd">
-                                                                                                                <a href="#">
-
-                                                                                                                    <span class="elementor-icon-list-text">Samsung</span>
-
-
-                                                                                                                    <span class="item_label">
-                                                                                                                        hot
-                                                                                                                    </span>
-
-                                                                                                                </a>
-
-                                                                                                            </span>
-                                                                                                        </li>
-                                                                                                        <li class="electio-menu-icon-list-item">
-                                                                                                            <span class="elementor-repeater-item-1c86344">
-                                                                                                                <a href="#">
-
-                                                                                                                    <span class="elementor-icon-list-text">One Plus</span>
+                                                                                                                    <span class="elementor-icon-list-text">Phone</span>
 
 
 
@@ -1584,30 +1534,7 @@
 
                                                                                                             </span>
                                                                                                         </li>
-                                                                                                        <li class="electio-menu-icon-list-item">
-                                                                                                            <span class="elementor-repeater-item-062dea7">
-                                                                                                                <a href="#">
-
-                                                                                                                    <span class="elementor-icon-list-text">Oppo</span>
-
-
-
-                                                                                                                </a>
-
-                                                                                                            </span>
-                                                                                                        </li>
-                                                                                                        <li class="electio-menu-icon-list-item">
-                                                                                                            <span class="elementor-repeater-item-16afbc1">
-                                                                                                                <a href="#">
-
-                                                                                                                    <span class="elementor-icon-list-text">Nokia</span>
-
-
-
-                                                                                                                </a>
-
-                                                                                                            </span>
-                                                                                                        </li>
+                                                                                                     
                                                                                                     </ul>
                                                                                                 </div>
                                                                                             </div>
@@ -1616,7 +1543,7 @@
                                                                                     <div class="elementor-element elementor-element-2c08f683 e-con-full e-flex e-con e-child" data-id="2c08f683" data-element_type="container" data-settings="{&quot;content_width&quot;:&quot;full&quot;}">
                                                                                         <div class="elementor-element elementor-element-4bf4219b elementor-widget elementor-widget-heading" data-id="4bf4219b" data-element_type="widget" data-widget_type="heading.default">
                                                                                             <div class="elementor-widget-container">
-                                                                                                <h2 class="elementor-heading-title elementor-size-default">Games & Video</h2>
+                                                                                                <h2 class="elementor-heading-title elementor-size-default">Tablet</h2>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="elementor-element elementor-element-521ffa04 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-electio_icon_list" data-id="521ffa04" data-element_type="widget" data-widget_type="electio_icon_list.default">
@@ -1624,21 +1551,9 @@
                                                                                                 <ul class="electio-menu-icon-list-items">
                                                                                                     <li class="electio-menu-icon-list-item">
                                                                                                         <span class="elementor-repeater-item-781c04e">
-                                                                                                            <a href="#">
+                                                                                                            <a href="/Laptop/Tablet">
 
-                                                                                                                <span class="elementor-icon-list-text">Controller</span>
-
-
-
-                                                                                                            </a>
-
-                                                                                                        </span>
-                                                                                                    </li>
-                                                                                                    <li class="electio-menu-icon-list-item">
-                                                                                                        <span class="elementor-repeater-item-219c3dd">
-                                                                                                            <a href="#">
-
-                                                                                                                <span class="elementor-icon-list-text">Remote</span>
+                                                                                                                <span class="elementor-icon-list-text">Tablet</span>
 
 
 
@@ -1646,144 +1561,16 @@
 
                                                                                                         </span>
                                                                                                     </li>
-                                                                                                    <li class="electio-menu-icon-list-item">
-                                                                                                        <span class="elementor-repeater-item-1c86344">
-                                                                                                            <a href="#">
-
-                                                                                                                <span class="elementor-icon-list-text">VR</span>
-
-
-                                                                                                                <span class="item_label">
-                                                                                                                    NEW
-                                                                                                                </span>
-
-                                                                                                            </a>
-
-                                                                                                        </span>
-                                                                                                    </li>
-                                                                                                    <li class="electio-menu-icon-list-item">
-                                                                                                        <span class="elementor-repeater-item-062dea7">
-                                                                                                            <a href="#">
-
-                                                                                                                <span class="elementor-icon-list-text">Keyboard</span>
-
-
-
-                                                                                                            </a>
-
-                                                                                                        </span>
-                                                                                                    </li>
-                                                                                                    <li class="electio-menu-icon-list-item">
-                                                                                                        <span class="elementor-repeater-item-16afbc1">
-                                                                                                            <a href="#">
-
-                                                                                                                <span class="elementor-icon-list-text">Mouse</span>
-
-
-
-                                                                                                            </a>
-
-                                                                                                        </span>
-                                                                                                    </li>
+                                                                                                  
                                                                                                 </ul>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="elementor-element elementor-element-a51d0aa e-con-full e-flex e-con e-child" data-id="a51d0aa" data-element_type="container" data-settings="{&quot;content_width&quot;:&quot;full&quot;}">
-                                                                                            <div class="elementor-element elementor-element-d41362b elementor-widget elementor-widget-heading" data-id="d41362b" data-element_type="widget" data-widget_type="heading.default">
-                                                                                                <div class="elementor-widget-container">
-                                                                                                    <h2 class="elementor-heading-title elementor-size-default">Smart Home </h2>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="elementor-element elementor-element-b413b38 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-electio_icon_list" data-id="b413b38" data-element_type="widget" data-widget_type="electio_icon_list.default">
-                                                                                                <div class="elementor-widget-container">
-                                                                                                    <ul class="electio-menu-icon-list-items">
-                                                                                                        <li class="electio-menu-icon-list-item">
-                                                                                                            <span class="elementor-repeater-item-781c04e">
-                                                                                                                <a href="#">
-
-                                                                                                                    <span class="elementor-icon-list-text">Smart Watch</span>
-
-
-
-                                                                                                                </a>
-
-                                                                                                            </span>
-                                                                                                        </li>
-                                                                                                        <li class="electio-menu-icon-list-item">
-                                                                                                            <span class="elementor-repeater-item-219c3dd">
-                                                                                                                <a href="#">
-
-                                                                                                                    <span class="elementor-icon-list-text">Speaker</span>
-
-
-                                                                                                                    <span class="item_label">
-                                                                                                                        hot
-                                                                                                                    </span>
-
-                                                                                                                </a>
-
-                                                                                                            </span>
-                                                                                                        </li>
-                                                                                                        <li class="electio-menu-icon-list-item">
-                                                                                                            <span class="elementor-repeater-item-1c86344">
-                                                                                                                <a href="#">
-
-                                                                                                                    <span class="elementor-icon-list-text">TWS</span>
-
-
-
-                                                                                                                </a>
-
-                                                                                                            </span>
-                                                                                                        </li>
-                                                                                                        <li class="electio-menu-icon-list-item">
-                                                                                                            <span class="elementor-repeater-item-062dea7">
-                                                                                                                <a href="#">
-
-                                                                                                                    <span class="elementor-icon-list-text">TV Remote</span>
-
-
-
-                                                                                                                </a>
-
-                                                                                                            </span>
-                                                                                                        </li>
-                                                                                                        <li class="electio-menu-icon-list-item">
-                                                                                                            <span class="elementor-repeater-item-16afbc1">
-                                                                                                                <a href="#">
-
-                                                                                                                    <span class="elementor-icon-list-text">FM Radio</span>
-
-
-
-                                                                                                                </a>
-
-                                                                                                            </span>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </div>
-                                                                                            </div>
+                                                                                           
+                                                                                            <d
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="elementor-element elementor-element-7c318ca7 e-con-full e-flex e-con e-child" data-id="7c318ca7" data-element_type="container" data-settings="{&quot;content_width&quot;:&quot;full&quot;}">
-                                                                                        <div class="elementor-element elementor-element-5fcba6af elementor-widget elementor-widget-electio_banner" data-id="5fcba6af" data-element_type="widget" data-widget_type="electio_banner.default">
-                                                                                            <div class="elementor-widget-container">
-                                                                                                <!-- banner widget -->
-                                                                                                <div class="sidebar-banner-widget-3 wow fadeInUp">
-                                                                                                    <a href="#" class="banner-1">
-                                                                                                        <span class="banner-img" data-background="https://electio.ecom.themepreview.xyz/home-one/wp-content/uploads/sites/2/2024/01/megamenu-banner-2.png"></span>
-                                                                                                        <div class="inner-box">
-                                                                                                            <span class="badge-title text-uppercase">Tiết kiệm tới 500,000 ₫</span>
-                                                                                                            <h3 class="et__title">
-                                                                                                                <p>Giảm giá tới 30%</p>
-                                                                                                            </h3>
-                                                                                                            <span class="tag-line mb-20 d-block">Bắt đầu với <span class="text-light-red">1,390,000 ₫</span></span>
-                                                                                                        </div>
-                                                                                                    </a>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
+                                                                               
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -1844,13 +1631,13 @@
     <!--cart drawer start-->
     <div class="cart-drawer position-fixed">
         <div class="drawer-close d-flex align-items-center justify-content-between position-absolute start-0 top-0 w-100 px-4 py-4 border-bottom">
-            <h6 class="mb-0 fw-medium">Giỏ hàng  (0 sản phẩm)</h6>
-            <a href="javascript:void(0)" class="drawer-close"><i class="fas fa-xmark"></i></a>
+            <h6 class="mb-0 fw-medium">Giỏ hàng</h6>
+            <a  href="/ThanhToan/Index" class="drawer-close"><i class="fas fa-xmark"></i></a>
         </div>
         <ul class="cart-list shopping-cart-wrapper">
             <div class="ts-tiny-cart-wrapper cart-list">
                 <div class="cart-icon">
-                    <a class="cart-control" href="cart/index.html"
+                    <a class="cart-control" href="/ThanhToan/Index"
                        title="Xem giỏ hàng">
                         <span class="ic-cart"></span>
                     </a>
@@ -1967,11 +1754,11 @@
                                     <div class="single-fea-category">
                                         <h4 class="font-medium text-capitalize"><a href="product-category/smart-phones-2/index.html">Điện thoại</a></h4>
                                         <ul>
-                                            <li><a href="#">Điện thoại 1</a></li>
-                                            <li><a href="#">Điện thoại 2</a></li>
-                                            <li><a href="#">Điện thoại 3</a></li>
-                                            <li><a href="#">Điện thoại 4</a></li>
-                                            <li><a href="#">Điện thoại 5</a></li>
+                                            <li><a href="#">Iphone 15 pro max</a></li> 
+                                            <li><a href="#">SAMSUNG GalaxyZ Flip5</a></li>
+                                            <li><a href="#">Oppo RENO 5G</a></li>
+                                            <li><a href="#">XIAOMI PAD6</a></li>
+                                            <li><a href="#">XIAOMI REDMI</a></li>
                                         </ul>
                                         <div class="img-wrapper">
                                             <img src='~/wp-content/uploads/2023/10/smartphone.png' alt='' />
@@ -1982,11 +1769,11 @@
                                     <div class="single-fea-category">
                                         <h4 class="font-medium text-capitalize"><a href="product-category/games-video/index.html">Máy tính bảng</a></h4>
                                         <ul>
-                                            <li><a href="#">Máy tính bảng 1</a></li>
-                                            <li><a href="#">Máy tính bảng 2</a></li>
-                                            <li><a href="#">Máy tính bảng 3</a></li>
-                                            <li><a href="#">Máy tính bảng 4</a></li>
-                                            <li><a href="#">Máy tính bảng 5</a></li>
+                                            <li><a href="#">iPad Pro</a></li>
+                                            <li><a href="#">iPad Air 5</a></li>
+                                            <li><a href="#">iPad Gen10</a></li>
+                                            <li><a href="#">iPad Pro11</a></li>
+                                            <li><a href="#">iPad Air4</a></li>
                                         </ul>
                                         <div class="img-wrapper">
                                             <img src='~/wp-content/uploads/2023/10/laptop-1.png' alt='' />
@@ -1997,11 +1784,12 @@
                                     <div class="single-fea-category">
                                         <h4 class="font-medium text-capitalize"><a href="product-category/computers/index.html">Máy tính</a></h4>
                                         <ul>
-                                            <li><a href="#">Máy tính 1</a></li>
-                                            <li><a href="#">Máy tính 2</a></li>
-                                            <li><a href="#">Máy tính 3</a></li>
-                                            <li><a href="#">Máy tính 4</a></li>
-                                            <li><a href="#">Máy tính 5</a></li>
+                                            <li><a href="#">Apple MacBook Air</a></li>
+                                            <li><a href="#">Asus Zenbook</a></li>
+                                            <li><a href="#">Asus ROG</a></li>
+                                            <li><a href="#">Asus TUF</a></li>
+                                            <li><a href="#">Asus Vivobook</a></li>
+
                                         </ul>
                                         <div class="img-wrapper">
                                             <img src='~/wp-content/uploads/2023/10/laptop-1.png' alt='' />
@@ -2028,153 +1816,6 @@
                         </div>
                     </section>
                     <!-- feature section end -->
-                </div>
-            </div>
-        </div>
-        <div class="elementor-element elementor-element-2360a41 e-con-full mona-sec-home-banner e-flex e-con e-parent" data-id="2360a41" data-element_type="container" data-settings="{&quot;content_width&quot;:&quot;full&quot;}" data-core-v316-plus="true">
-            <div class="elementor-element elementor-element-9a599f7 e-flex e-con-boxed e-con e-child" data-id="9a599f7" data-element_type="container" data-settings="{&quot;content_width&quot;:&quot;boxed&quot;}">
-                <div class="e-con-inner">
-                    <div class="elementor-element elementor-element-cfd5284 e-flex e-con-boxed elementor-invisible e-con e-child" data-id="cfd5284" data-element_type="container" data-settings="{&quot;animation&quot;:&quot;slideInLeft&quot;,&quot;content_width&quot;:&quot;boxed&quot;}">
-                        <div class="e-con-inner">
-                            <div class="elementor-element elementor-element-ee5b910 elementor-widget elementor-widget-electio_banner" data-id="ee5b910" data-element_type="widget" data-widget_type="electio_banner.default">
-                                <div class="elementor-widget-container">
-                                    <div class="el-discover-feature dark">
-                                        <!-- banner img -->
-                                        <span class="banner-img" data-background="../electio.ecom.themepreview.xyz/home-one/wp-content/uploads/sites/2/2023/10/yellow-bg.png"></span>
-
-                                        <span class="inner-box">
-                                            <span class="elect-banner-subtitle">Khám phá</span>
-                                            <span class="title h3">
-
-                                                <span>Smart watch</span>
-                                            </span>
-                                            <span class="des">Giảm tới 70% &amp; giao hàng miễn phí</span>
-                                            <a href="shop/index.html" class="el-btn btn-dark-outline rounded-0">Khám phá ngay</a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-9048b0c e-flex e-con-boxed elementor-invisible e-con e-child" data-id="9048b0c" data-element_type="container" data-settings="{&quot;animation&quot;:&quot;slideInRight&quot;,&quot;content_width&quot;:&quot;boxed&quot;}">
-                        <div class="e-con-inner">
-                            <div class="elementor-element elementor-element-2bd42d5 elementor-widget elementor-widget-electio_banner" data-id="2bd42d5" data-element_type="widget" data-widget_type="electio_banner.default">
-                                <div class="elementor-widget-container">
-                                    <div class="el-discover-feature dark">
-                                        <!-- banner img -->
-                                        <span class="banner-img" data-background="../electio.ecom.themepreview.xyz/home-one/wp-content/uploads/sites/2/2023/10/cyan-bg.png"></span>
-
-                                        <span class="inner-box">
-                                            <span class="elect-banner-subtitle">Chất lượng</span>
-                                            <span class="title h3">
-
-                                                <span>Trang trí nội thất</span>
-                                            </span>
-                                            <span class="des">Giảm tới 70% &amp; Giao hàng miễn phí</span>
-                                            <a href="shop/index.html" class="el-btn btn-dark-outline rounded-0">Khám phá ngay</a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="elementor-element elementor-element-19dc75f e-con-full mona-sec-home-banner e-flex e-con e-parent" data-id="19dc75f" data-element_type="container" data-settings="{&quot;content_width&quot;:&quot;full&quot;}" data-core-v316-plus="true">
-            <div class="elementor-element elementor-element-87e97ec e-flex e-con-boxed e-con e-child" data-id="87e97ec" data-element_type="container" data-settings="{&quot;content_width&quot;:&quot;boxed&quot;}">
-                <div class="e-con-inner">
-                    <div class="elementor-element elementor-element-cd26d0a e-flex e-con-boxed elementor-invisible e-con e-child" data-id="cd26d0a" data-element_type="container" data-settings="{&quot;animation&quot;:&quot;zoomIn&quot;,&quot;content_width&quot;:&quot;boxed&quot;}">
-                        <div class="e-con-inner">
-                            <div class="elementor-element elementor-element-4d7ba10 elementor-widget elementor-widget-electio_product_grid" data-id="4d7ba10" data-element_type="widget" data-widget_type="electio_product_grid.default">
-                                <div class="elementor-widget-container">
-                                    <div class="row row-cols-1">
-                                        <div class="col">
-                                            <div class="el-single-product">
-                                                <div class="action-btns-wrapper">
-                                                    <a href="#" class="xpc-quick-view action-btn " data-product_id="4227">
-                                                        <span class="xpc-quick-view-text product__quick_view_text">Quick View</span>
-                                                        <i class="ele-icon electio-search product__quick_view_icon"></i>
-
-                                                        <!-- loader-image -->
-                                                        <div class="wc-loading-button-open">
-                                                            <div class="xpc-loading-circle">
-                                                                <svg class="xpc-spinner" viewBox="0 0 50 50">
-                                                                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <button class="action-btn">
-
-                                                        <div class="woocommerce product compare-button woosc-compare-button">
-                                                            <a href="#" class="compare button woosc-btn woosc-btn-4227"
-                                                               data-id="4227" rel="nofollow">
-                                                            </a>
-                                                        </div>
-
-                                                    </button>
-
-                                                    <a href="#" data-wishlist-link="~/wp-admin/admin-ajaxcfb2.html?nonce=f781830c7f"
-                                                       data-id="4227"
-                                                       class="electio-add-to-wishlist  action-btn">
-                                                        <i class="btn-icon text-body-default ele-icon electio-heart-2"></i>
-                                                    </a>
-                                                </div>
-
-                                                <div class="product-img-wrapper">
-                                                    <div class="img-box">
-                                                        <a href="product/sony-playstation-vr2-approx-110-communication-with-ps5/index.html">
-                                                            <img decoding="async" src="~/wp-content/uploads/2023/10/9-interactive-vr-headset.png" alt="" class="main-img">
-                                                            <img decoding="async" src="~/wp-content/uploads/2023/10/10.png" alt="product img" class="hover-img">
-
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content-wrapper">
-                                                    <a href="~/product/sony-playstation-vr2-approx-110-communication-with-ps5/index.html">Sony PlayStation VR2 Approx. 110°, Communication​ with PS5</a>
-                                                    @*<a href="~/product/sony-playstation-vr2-approx-110-communication-with-ps5/index.html" class="title">Sony PlayStation VR2 Approx. 110°, Communication​ with PS5</a>*@
-                                                    <div class="btm-content-wrapper">
-                                                        <div class="pricing-wrapper">
-                                                            <del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1,205,000&nbsp;<span class="woocommerce-Price-currencySymbol">&#8363;</span></bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi>1,150,000&nbsp;<span class="woocommerce-Price-currencySymbol">&#8363;</span></bdi></span></ins>
-                                                        </div>
-                                                        <div class="star-rating">  <span style="width:0%"><strong class="rating">0</strong> out of 5</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="electio_product_style">
-                                                    <a href="#" data-link="https://look-pretty.monamedia.net/wp-admin/admin-ajax.php?action=electio_product_add&amp;id=4227&amp;nonce=b54cd14021" class="add-to-cart-btn electio-add-to-cart add-to-cart-btn" data-product_id="4227" data-name="Sony PlayStation VR2 Approx. 110°, Communication​ with PS5" data-img="~/wp-content/uploads/2023/10/9-interactive-vr-headset-150x150.png">
-                                                        Add To Cart
-                                                        <i class="ele-icon electio-arrow-right"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-a4dfd26 e-flex e-con-boxed elementor-invisible e-con e-child" data-id="a4dfd26" data-element_type="container" data-settings="{&quot;animation&quot;:&quot;slideInRight&quot;,&quot;content_width&quot;:&quot;boxed&quot;}">
-                        <div class="e-con-inner">
-                            <div class="elementor-element elementor-element-338195c elementor-widget elementor-widget-electio_banner" data-id="338195c" data-element_type="widget" data-widget_type="electio_banner.default">
-                                <div class="elementor-widget-container">
-                                    <div class="el-discover-feature left-version light">
-                                        <!-- banner img -->
-                                        <span class="banner-img" data-background="../electio.ecom.themepreview.xyz/home-one/wp-content/uploads/sites/2/2023/10/red-bg.png"></span>
-                                        <span class="inner-box">
-                                            <span class="title h3">
-                                                Tiết kiệm                                            <span>Speakers</span>
-                                            </span>
-                                            <span class="price h4">899,000 ₫</span>
-                                            <span class="des">Giảm tới 70% & Giao hàng miễn phí</span>
-                                            <a href="shop/index.html" class="el-btn btn-light-outline rounded-0">Khám phá ngay</a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
