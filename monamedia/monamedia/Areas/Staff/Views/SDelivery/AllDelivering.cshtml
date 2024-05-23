@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewBag.Title = "ĐƠN HÀNG - ĐANG GIAO";
+    Layout = "~/Areas/Staff/Views/Shared/StaffLayoutPage1.cshtml";
+}
+@model List<monamedia.ViewModels.DeliveringViewModel>
+@section Styles
+{
+    <style>
+        h2 {
+            font-size: 30px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .table tbody tr {
+            background-color: #f8f9fa;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+            .btn-success:hover {
+                background-color: #218838;
+                border-color: #218838;
+            }
+
+        .navbar {
+            margin-left: 90px;
+        }
+
+        .row.mb-3 {
+            display: flex;
+            align-items: center;
+        }
+
+            .row.mb-3 img {
+                max-width: 60px;
+                height: auto;
+                display: block;
+            }
+
+        .table-container {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #ced4da;
+        }
+
+        #orderContainer .row {
+            display: flex;
+            align-items: center;
+        }
+
+        #orderContainer .col-md-6 {
+            flex: 1;
+        }
+
+
+        #orderContainer .form-check-inline label {
+            margin-bottom: 0;
+        }
+
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background-color: rgba(40, 167, 69, 0.5);
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+}
+<h2>Danh sách đơn hàng đang giao</h2>
+<div id="orderContainer" class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <form class="d-flex" style="width:100%" onsubmit="return search()">
+                        <input id="searchInput" class="form-control me-2" type="search" placeholder="Nhập tên khách hàng" aria-label="Search" style="width: 80%">
+                        <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-6" style="display: flex; align-items: center; justify-content: flex-end;">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="productType" id="waiting" value="waiting">
+                <label class="form-check-label" for="waiting">
+                    Chờ giao
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="productType" id="deliverring" value="delivering" checked>
+                <label class="form-check-label" for="delivering">
+                    Đang giao
+                </label>
+            </div>
+            <div class="form-check form-check-inline" style="margin-right: 300px;">
+                <input class="form-check-input" type="radio" name="productType" id="delivered" value="delivered">
+                <label class="form-check-label" for="delivered">
+                    Đã giao
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tên khách hàng</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col">Địa chỉ</th>
+                            <th scope="col">Thời gian lấy hàng</th>
+                            <th scope="col">Tổng tiền</th>
+                            <th scope="col">Xác nhận</th>
+                            <th scope="col">Xác nhận</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.NameCustomer</td>
+                                <td>@order.Phone</td>
+                                <td>@order.Address</td>
+                                <td>@order.pickUpTime.ToString()</td>
+                                <td>@(string.Format("{0:#,##0}", @order.total)) đ</td>
+                                <td>
+                                    <button class="btn btn-danger failure-button" data-order-id="@order.OrderID">Thất bại</button>
+                                </td>
+                                <td><button class="btn btn-success success-button" data-order-id="@order.OrderID">Thành công</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="customAlert" class="custom-alert" role="alert">
+    <strong>Xác nhận tình trạng đơn hàng thành công</strong>
+</div>
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script>
+    function search() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.querySelector(".table");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+        return false;
+    }
+    $('input[type=radio][name=productType]').change(function () {
+        var selectedValue = $('input[type=radio][name=productType]:checked').val();
+        switch (selectedValue) {
+            case 'waiting':
+                window.location.href = '/Staff/SDelivery/AllDelivery';
+                break;
+            case 'delivering':
+                window.location.href = '/Staff/SDelivery/AllDelivering';
+                break;
+            case 'delivered':
+                window.location.href = '/Staff/SDelivery/AllDelivered';
+                break;
+            default:
+                break;
+        }
+    });
+    $(document).ready(function () {
+        $('.failure-button').click(function () {
+            var orderId = $(this).data('order-id');
+            console.log(orderId);
+            $.ajax({
+                url: '/Order/DeliveryFailure',
+                type: 'POST',
+                data: { orderId: orderId },
+                success: function (data) {
+                    var alertElement = document.getElementById("customAlert");
+                    alertElement.style.display = "block";
+                    setTimeout(function () {
+                        alertElement.style.display = "none";
+                        location.reload(true);
+                    }, 1500);
+                },
+                error: function (xhr, status, error) {
+                    console.log('Lỗi:', xhr, status, error);
+                }
+            });
+        });
+        $('.success-button').click(function () {
+            var orderId = $(this).data('order-id');
+            console.log(orderId);
+            $.ajax({
+                url: '/Order/DeliverySuccess',
+                type: 'POST',
+                data: { orderId: orderId },
+                success: function (data) {
+                    var alertElement = document.getElementById("customAlert");
+                    alertElement.style.display = "block";
+                    setTimeout(function () {
+                        alertElement.style.display = "none";
+                        location.reload(true);
+                    }, 1500);
+                },
+                error: function (xhr, status, error) {
+                    console.log('Lỗi:', xhr, status, error);
+                }
+            });
+        });
+    });
+</script>
+

@@ -1,0 +1,743 @@
+﻿
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Areas/Staff/Views/Shared/StaffLayoutPage1.cshtml";
+}
+@model List<monamedia.Models.Product>
+@section Styles {
+    <style>
+        h2 {
+            font-size: 30px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .product-info {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .details-button {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+
+        .product-info img {
+            margin-left: auto;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #e0e0e0, #ffffff);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+            }
+
+        .add-product-btn {
+            margin-left: 10px;
+        }
+
+        .card-container {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #ced4da;
+            background: linear-gradient(to right, #81c3d7, #e0e5ef);
+        }
+
+        .card-text, .card-title {
+            margin-left: 10px;
+        }
+
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background-color: rgba(40, 167, 69, 0.9);
+            color: white;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            font-weight: bold; /* This line makes the text bold */
+            display: none;
+        }
+
+        .name-staff {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            width: 200px;
+            height: 50px;
+        }
+    </style>
+}   
+
+    <h2>Danh sách sản phẩm</h2>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <form class="d-flex" style="width:100%" onsubmit="return search()">
+                        <input id="searchInput" class="form-control me-2" type="search" placeholder="Nhập tên sản phẩm" aria-label="Search" style="width: 80%">
+                        <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-6" style="display: flex; align-items: center; justify-content: flex-end;">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="productType" id="allProducts" value="all" checked>
+                <label class="form-check-label" for="allProducts">
+                    Tất cả
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="productType" id="phones" value="Phone">
+                <label class="form-check-label" for="phones">
+                    Điện thoại
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="productType" id="tablets" value="Tablet">
+                <label class="form-check-label" for="tablets">
+                    Máy tính bảng
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="productType" id="laptops" value="Laptop">
+                <label class="form-check-label" for="laptops">
+                    Laptop
+                </label>
+            </div>
+            <button class="btn btn-primary add-product-btn" data-bs-toggle="modal" data-bs-target="#addProductModal">Thêm sản phẩm</button>
+        </div>
+    </div>
+
+    <div id="searchResults" class="row card-container">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4" style="margin-top:20px;">
+                <div class="card mb-3" data-product-type="@product.type">
+                    <div class="product-info">
+                        <div>
+                            <h5 class="card-title">@product.name</h5>
+                            <p class="card-text">Thương hiệu: @product.brand</p>
+                            <p class="card-text">Màu sắc: @product.color</p>
+                            <p class="card-text">Số lượng: @product.quantity</p>
+                            <p class="card-text">Giá: @(string.Format("{0:#,##0}", product.price)) đ</p>
+                            <button class="btn btn-primary details-button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-product-id="@product.productID">Chỉnh sửa</button>
+                        </div>
+                        <img src="~/img/@product.img" alt="Product Image" class="custom-img">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thông tin chi tiết</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                    <input type="hidden" id="modalProductID">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductName"><strong>Tên sản phẩm</strong></label>
+                                <input type="text" class="form-control" id="modalProductName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductBrand"><strong>Thương hiệu</strong></label>
+                                <input type="text" class="form-control" id="modalProductBrand">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductRam"><strong>Ram</strong></label>
+                                <input type="text" class="form-control" id="modalProductRam">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductMemory"><strong>Bộ nhớ</strong></label>
+                                <input type="text" class="form-control" id="modalProductMemory">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductQuantity"><strong>Số lượng</strong></label>
+                                <input type="text" class="form-control" id="modalProductQuantity" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductPrice"><strong>Giá</strong></label>
+                                <input type="text" class="form-control" id="modalProductPrice" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductColor"><strong>Màu sắc</strong></label>
+                                <input type="text" class="form-control" id="modalProductColor">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductCPU"><strong>CPU</strong></label>
+                                <input type="text" class="form-control" id="modalProductCPU">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductGPU"><strong>GPU</strong></label>
+                                <input type="text" class="form-control" id="modalProductGPU">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductOS"><strong>Hệ điều hành</strong></label>
+                                <input type="text" class="form-control" id="modalProductOS">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductScreen"><strong>Màn hình</strong></label>
+                                <input type="text" class="form-control" id="modalProductScreen">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductPin"><strong>Pin</strong></label>
+                                <input type="text" class="form-control" id="modalProductPin">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductCharge"><strong>Sạc</strong></label>
+                                <input type="text" class="form-control" id="modalProductCharge">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductCamera"><strong>Camera</strong></label>
+                                <input type="text" class="form-control" id="modalProductCamera">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductSize"><strong>Kích thước</strong></label>
+                                <input type="text" class="form-control" id="modalProductSize">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductWarrantly"><strong>Bảo hành</strong></label>
+                                <input type="text" class="form-control" id="modalProductWarrantly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductSound"><strong>Âm thanh</strong></label>
+                                <input type="text" class="form-control" id="modalProductSound">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductWeight"><strong>Trọng lượng</strong></label>
+                                <input type="text" class="form-control" id="modalProductWeight">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductCT"><strong>Công nghệ kết nối</strong></label>
+                                <input type="text" class="form-control" id="modalProductCT">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="modalProductYear"><strong>Năm ra mắt</strong></label>
+                                <input type="text" class="form-control" id="modalProductYear">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmButton">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Thêm sản phẩm mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                    <form id="addProductForm">
+                        <div class="mb-3">
+                            <label for="productID" class="form-label">ID sản phẩm</label>
+                            <input type="text" class="form-control" id="productID" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productName" class="form-label">Tên sản phẩm</label>
+                            <input type="text" class="form-control" id="productName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productBrand" class="form-label">Thương hiệu</label>
+                            <input type="text" class="form-control" id="productBrand" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productColor" class="form-label">Màu sắc</label>
+                            <input type="text" class="form-control" id="productColor" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productRam" class="form-label">Ram</label>
+                            <input type="text" class="form-control" id="productRam" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productMemory" class="form-label">Bộ nhớ</label>
+                            <input type="text" class="form-control" id="productMemory" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productImg" class="form-label">Hình ảnh</label>
+                            <input type="text" class="form-control" id="productImg" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productType" class="form-label">Loại sản phẩm</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="ProductType" id="phoneType" value="Phone">
+                                    <label class="form-check-label" for="phoneType">Điện thoại</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="ProductType" id="laptopType" value="Laptop">
+                                    <label class="form-check-label" for="laptopType">Máy tính bảng</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="ProductType" id="tabletType" value="Tablet">
+                                    <label class="form-check-label" for="tabletType">Laptop</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productQuantity" class="form-label">Số lượng</label>
+                            <input type="text" class="form-control" id="productQuantity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productPrice" class="form-label">Giá</label>
+                            <input type="text" class="form-control" id="productPrice" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="radio" id="specIdOptionExisting" name="specIdOption" value="existing" checked>
+                            <label for="specIdOptionExisting">Chọn thông số kỹ thuật có sẵn</label><br>
+                            <input type="radio" id="specIdOptionNew" name="specIdOption" value="new">
+                            <label for="specIdOptionNew">Thêm thông số kỹ thuật mới</label>
+                        </div>
+
+                        <div id="existingSpecIdDropdown" class="mb-3">
+                            <select id="specIdDropdown" class="form-select">
+                                @foreach (var specId in ViewBag.SpecIDs)
+                                {
+                                    <option value="@specId">@specId</option>
+                                }
+                            </select>
+                        </div>
+                        <div id="newSpecIdForm" style="display: none;">
+                            <div class="mb-3">
+                                <label for="specID" class="form-label">ID thông số kỹ thuật</label>
+                                <input type="text" class="form-control" id="specID">
+                            </div>
+                            <div class="mb-3">
+                                <label for="specCPU" class="form-label">CPU</label>
+                                <input type="text" class="form-control" id="specCPU">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specGPU" class="form-label">GPU</label>
+                                <input type="text" class="form-control" id="specGPU">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specOS" class="form-label">Hệ điều hành</label>
+                                <input type="text" class="form-control" id="specOS">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specScreen" class="form-label">Màn hình</label>
+                                <input type="text" class="form-control" id="specScreen">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specPin" class="form-label">Pin</label>
+                                <input type="text" class="form-control" id="specPin">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specCamera" class="form-label">Camera</label>
+                                <input type="text" class="form-control" id="specCamera">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specSize" class="form-label">Kích thước</label>
+                                <input type="text" class="form-control" id="specSize">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specWarrantly" class="form-label">Bảo hành</label>
+                                <input type="text" class="form-control" id="specWarrantly">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specSound" class="form-label">Âm thanh</label>
+                                <input type="text" class="form-control" id="specSound">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specWeight" class="form-label">Trọng lượng</label>
+                                <input type="text" class="form-control" id="specWeight">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specConectivity" class="form-label">Công nghệ kết nối</label>
+                                <input type="text" class="form-control" id="specConectivity">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specCharge" class="form-label">Sạc</label>
+                                <input type="text" class="form-control" id="specCharge">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="specYear" class="form-label">Năm ra mắt</label>
+                                <input type="text" class="form-control" id="specYear">
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="addProductBtn">Thêm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="editAlert" class="custom-alert" role="alert">
+        <strong>Thành công!</strong> Sản phẩm đã được chỉnh sửa
+    </div>
+    <div id="addAlert" class="custom-alert" role="alert">
+        <strong>Thành công!</strong> Sản phẩm đã được thêm
+    </div>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script>
+        function search() {
+            var input, filter, cards, cardContainer, title, i, column;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            cardContainer = document.getElementById("searchResults");
+            cards = cardContainer.getElementsByClassName("card");
+
+            for (i = 0; i < cards.length; i++) {
+                title = cards[i].querySelector(".card-title");
+                if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                    column = cards[i].closest(".col-md-4");
+                    column.style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+            var columns = cardContainer.getElementsByClassName("col-md-4");
+            for (var j = 0; j < columns.length; j++) {
+                if (!columns[j].querySelector(".card:not([style='display: none;'])")) {
+                    columns[j].style.display = "none";
+                }
+            }
+            return false;
+        }
+        function filterProductsByType(type) {
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function (card) {
+                var productType = card.getAttribute('data-product-type');
+                if (type === 'all' || productType === type) {
+                    card.parentNode.style.display = 'block';
+                } else {
+                    card.parentNode.style.display = 'none';
+                }
+            });
+        }
+        function getProductDetails(productId) {
+            $.ajax({
+                url: '/Product/GetProductDetails',
+                type: 'GET',
+                data: { productId: productId },
+                success: function (response) {
+                    $('#modalProductID').val(response.ProductID);
+                    $('#modalProductName').val(response.ProductName);
+                    $('#modalProductBrand').val(response.ProductBrand);
+                    $('#modalProductPrice').val(response.ProductPrice);
+                    $('#modalProductQuantity').val(response.ProductQuantity);
+                    $('#modalProductColor').val(response.ProductColor);
+                    $('#modalProductRam').val(response.ProductRam);
+                    $('#modalProductMemory').val(response.ProductMemory);
+                    $('#modalProductCPU').val(response.CPU);
+                    $('#modalProductGPU').val(response.GPU);
+                    $('#modalProductOS').val(response.OS);
+                    $('#modalProductScreen').val(response.Screen);
+                    $('#modalProductPin').val(response.Pin);
+                    $('#modalProductCamera').val(response.Camera);
+                    $('#modalProductSize').val(response.Size);
+                    $('#modalProductWarrantly').val(response.Warrantly);
+                    $('#modalProductSound').val(response.Sound);
+                    $('#modalProductWeight').val(response.Weight);
+                    $('#modalProductCT').val(response.CT);
+                    $('#modalProductCharge').val(response.Charge);
+                    $('#modalProductYear').val(response.Year);
+                    $('#exampleModal').modal('show');
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error:', xhr, status, error);
+                }
+            });
+        }
+        $(document).ready(function () {
+            $('.details-button').click(function () {
+                var productId = $(this).data('product-id');
+                getProductDetails(productId);
+            });
+            $('#confirmButton').click(function () {
+                var productID = $('#modalProductID').val();
+                var name = $('#modalProductName').val();
+                var brand = $('#modalProductBrand').val();
+                var ram = $('#modalProductRam').val();
+                var memory = $('#modalProductMemory').val();
+                var quantity = $('#modalProductQuantity').val();
+                var price = $('#modalProductPrice').val();
+                var color = $('#modalProductColor').val();
+                var cpu = $('#modalProductCPU').val();
+                var gpu = $('#modalProductGPU').val();
+                var os = $('#modalProductOS').val();
+                var screen = $('#modalProductScreen').val();
+                var pin = $('#modalProductPin').val();
+                var charge = $('#modalProductCharge').val();
+                var camera = $('#modalProductCamera').val();
+                var size = $('#modalProductSize').val();
+                var warrantly = $('#modalProductWarrantly').val();
+                var sound = $('#modalProductSound').val();
+                var weight = $('#modalProductWeight').val();
+                var ct = $('#modalProductCT').val();
+                var year = $('#modalProductYear').val();
+                var productViewModel = {
+                    ProductID: productID,
+                    Name: name,
+                    Brand: brand,
+                    Ram: ram,
+                    Memory: memory,
+                    Quantity: quantity,
+                    Price: price,
+                    Color: color,
+                    CPU: cpu,
+                    GPU: gpu,
+                    OS: os,
+                    Screen: screen,
+                    Pin: pin,
+                    Charge: charge,
+                    Camera: camera,
+                    Size: size,
+                    Warrantly: warrantly,
+                    Sound: sound,
+                    Weight: weight,
+                    CT: ct,
+                    Year: year
+                };
+                $.ajax({
+                    url: '/Product/UpdateProduct',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(productViewModel),
+                    success: function (response) {
+                        $('#exampleModal').modal('hide');
+                        var alertElement = document.getElementById("editAlert");
+                        alertElement.style.display = "block";
+                        setTimeout(function () {
+                            location.reload(true);
+                            alertElement.style.display = "none";
+                        }, 2500);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error:', xhr, status, error);
+                    }
+                });
+            });
+            $('input[name="specIdOption"]').change(function () {
+                if (this.value === 'existing') {
+                    $('#existingSpecIdDropdown').show();
+                    $('#newSpecIdForm').hide();
+                } else if (this.value === 'new') {
+                    $('#existingSpecIdDropdown').hide();
+                    $('#newSpecIdForm').show();
+                }
+            });
+            $('#addProductBtn').click(function () {
+                var productID = $('#productID').val();
+                var productName = $('#productName').val();
+                var productBrand = $('#productBrand').val();
+                var productColor = $('#productColor').val();
+                var productRam = $('#productRam').val();
+                var productMemory = $('#productMemory').val();
+                var productImg = $('#productImg').val();
+                var productType = $('input[name="ProductType"]:checked').val();
+                var productQuantity = $('#productQuantity').val();
+                var productPrice = $('#productPrice').val();
+                var specID1 = $('#specID').val();
+                var specID2 = $('#specIdDropdown').val();
+                var specCPU = $('#specCPU').val();
+                var specGPU = $('#specGPU').val();
+                var specOS = $('#specOS').val();
+                var specScreen = $('#specScreen').val();
+                var specPin = $('#specPin').val();
+                var specCamera = $('#specCamera').val();
+                var specSize = $('#specSize').val();
+                var specWarrantly = $('#specWarrantly').val();
+                var specSound = $('#specSound').val();
+                var specWeight = $('#specWeight').val();
+                var specConectivity = $('#specConectivity').val();
+                var specCharge = $('#specCharge').val();
+                var specYear = $('#specYear').val();
+
+                var product = {
+                    productID: productID,
+                    name: productName,
+                    brand: productBrand,
+                    price: productPrice ? parseInt(productPrice) : null,
+                    quantity: productQuantity ? parseInt(productQuantity) : null,
+                    color: productColor,
+                    ram: productRam,
+                    memory: productMemory,
+                    specID: '',
+                    img: productImg,
+                    type: productType
+                };
+                var spec = {
+                    SpecID: specID1,
+                    CPU: specCPU,
+                    GPU: specGPU,
+                    OS: specOS,
+                    screen: specScreen,
+                    pin: specPin,
+                    camera: specCamera,
+                    size: specSize,
+                    warrantly: specWarrantly ? parseInt(specWarrantly) : null,
+                    sound: specSound,
+                    weight: specWeight,
+                    conectivityTechnologies: specConectivity,
+                    charge: specCharge,
+                    yearOfDebut: specYear ? parseInt(specYear) : null
+                };
+                var selectedOption = $('input[name="specIdOption"]:checked').val();
+                if (selectedOption == "new") {
+                    $.ajax({
+                        url: '/Product/AddProductWithNewSpec',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ product: product, spec: spec }),
+                        success: function (response) {
+                            $('#addProductModal').modal('hide');
+                            var alertElement = document.getElementById("addAlert");
+                            alertElement.style.display = "block";
+                            setTimeout(function () {
+                                location.reload(true);
+                                alertElement.style.display = "none";
+                            }, 2500);
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error:', xhr, status, error);
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: '/Product/AddProductWithExistedSpec',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ product: product, specID: specID2 }),
+                        success: function (response) {
+                            $('#addProductModal').modal('hide');
+                            var alertElement = document.getElementById("addAlert");
+                            alertElement.style.display = "block";
+                            setTimeout(function () {
+                                location.reload(true);
+                                alertElement.style.display = "none";
+                            }, 2500);
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error:', xhr, status, error);
+                        }
+                    });
+                }
+
+            });
+        });
+        var radioButtons = document.querySelectorAll('input[name="productType"]');
+        radioButtons.forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                var selectedType = this.value;
+                filterProductsByType(selectedType);
+            });
+        });
+    </script>

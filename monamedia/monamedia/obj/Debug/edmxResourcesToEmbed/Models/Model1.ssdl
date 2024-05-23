@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PBL3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="_Order">
+    <Key>
+      <PropertyRef Name="orderID" />
+    </Key>
+    <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="staffID" Type="int" />
+    <Property Name="customerID" Type="int" />
+    <Property Name="timeOrder" Type="datetime" />
+    <Property Name="method" Type="nvarchar" MaxLength="30" />
+    <Property Name="fee" Type="int" />
+    <Property Name="total" Type="int" />
+    <Property Name="status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="accountID" />
+    </Key>
+    <Property Name="accountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="role" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="accountID" Type="int" />
+    <Property Name="fullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="birthDate" Type="date" />
+    <Property Name="gender" Type="bit" />
+    <Property Name="address" Type="nvarchar" MaxLength="70" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="15" />
+    <Property Name="accountStatus" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="discountID" />
+    </Key>
+    <Property Name="discountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameDiscount" Type="nvarchar" MaxLength="100" />
+    <Property Name="ngayBatDau" Type="datetime" />
+    <Property Name="ngayKetThuc" Type="datetime" />
+    <Property Name="per_cent" Type="int" />
+  </EntityType>
+  <EntityType Name="Export">
+    <Key>
+      <PropertyRef Name="exportID" />
+    </Key>
+    <Property Name="exportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="staffID" Type="int" />
+    <Property Name="managerID" Type="int" />
+    <Property Name="orderID" Type="int" />
+    <Property Name="pickUpTime" Type="datetime" />
+    <Property Name="status" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Import">
+    <Key>
+      <PropertyRef Name="importID" />
+    </Key>
+    <Property Name="importID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="managerID" Type="int" />
+    <Property Name="importDate" Type="datetime" />
+    <Property Name="total" Type="int" />
+    <Property Name="status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Manager">
+    <Key>
+      <PropertyRef Name="managerID" />
+    </Key>
+    <Property Name="managerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="accountID" Type="int" />
+    <Property Name="fullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="birthDate" Type="date" />
+    <Property Name="gender" Type="bit" />
+    <Property Name="address" Type="nvarchar" MaxLength="70" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="15" />
+    <Property Name="experience" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="orderDetail">
+    <Key>
+      <PropertyRef Name="orderDetailID" />
+    </Key>
+    <Property Name="orderDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="orderID" Type="int" />
+    <Property Name="productID" Type="varchar" MaxLength="30" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="price" Type="int" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="paymentID" />
+    </Key>
+    <Property Name="paymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="orderID" Type="int" />
+    <Property Name="paymentTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="price" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="color" Type="nvarchar" MaxLength="15" />
+    <Property Name="ram" Type="nvarchar" MaxLength="100" />
+    <Property Name="memory" Type="nvarchar" MaxLength="100" />
+    <Property Name="specID" Type="varchar" MaxLength="50" />
+    <Property Name="img" Type="varchar" MaxLength="30" />
+    <Property Name="type" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Product_Discount">
+    <Key>
+      <PropertyRef Name="productID" />
+      <PropertyRef Name="discountID" />
+    </Key>
+    <Property Name="productID" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="discountID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductImport">
+    <Key>
+      <PropertyRef Name="importID" />
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="importID" Type="int" Nullable="false" />
+    <Property Name="productID" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="priceImport" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="price" Type="int" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="reviewID" />
+    </Key>
+    <Property Name="reviewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="orderDetailID" Type="int" />
+    <Property Name="star" Type="int" />
+    <Property Name="cmtCustomer" Type="nvarchar" MaxLength="100" />
+    <Property Name="cmtStaff" Type="nvarchar" MaxLength="100" />
+    <Property Name="cmtTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Specification">
+    <Key>
+      <PropertyRef Name="SpecID" />
+    </Key>
+    <Property Name="SpecID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CPU" Type="nvarchar" MaxLength="150" />
+    <Property Name="GPU" Type="nvarchar" MaxLength="100" />
+    <Property Name="OS" Type="nvarchar" MaxLength="50" />
+    <Property Name="screen" Type="varchar" MaxLength="100" />
+    <Property Name="pin" Type="varchar" MaxLength="100" />
+    <Property Name="camera" Type="nvarchar(max)" />
+    <Property Name="size" Type="nvarchar" MaxLength="200" />
+    <Property Name="warrantly" Type="int" />
+    <Property Name="sound" Type="nvarchar(max)" />
+    <Property Name="weight" Type="varchar" MaxLength="30" />
+    <Property Name="conectivityTechnologies" Type="nvarchar(max)" />
+    <Property Name="charge" Type="nvarchar" MaxLength="100" />
+    <Property Name="yearOfDebut" Type="int" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="staffID" />
+    </Key>
+    <Property Name="staffID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="accountID" Type="int" />
+    <Property Name="fullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="birthDate" Type="date" />
+    <Property Name="gender" Type="bit" />
+    <Property Name="address" Type="nvarchar" MaxLength="70" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="15" />
+    <Property Name="salary" Type="int" />
+  </EntityType>
+  <EntityType Name="Wishlist">
+    <Key>
+      <PropertyRef Name="customerID" />
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="customerID" Type="int" Nullable="false" />
+    <Property Name="productID" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <Association Name="FK___Order__customer__4BAC3F29">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="_Order" Type="Self._Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="_Order">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___Order__status__4AB81AF0">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="_Order" Type="Self._Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="staffID" />
+      </Principal>
+      <Dependent Role="_Order">
+        <PropertyRef Name="staffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customer__accoun__3B75D760">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="accountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Export__managerI__5812160E">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+    <End Role="Export" Type="Self.Export" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="managerID" />
+      </Principal>
+      <Dependent Role="Export">
+        <PropertyRef Name="managerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Export__orderID__59063A47">
+    <End Role="_Order" Type="Self._Order" Multiplicity="0..1" />
+    <End Role="Export" Type="Self.Export" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="_Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="Export">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Export__staffID__59FA5E80">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Export" Type="Self.Export" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="staffID" />
+      </Principal>
+      <Dependent Role="Export">
+        <PropertyRef Name="staffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Import__managerI__5CD6CB2B">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+    <End Role="Import" Type="Self.Import" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="managerID" />
+      </Principal>
+      <Dependent Role="Import">
+        <PropertyRef Name="managerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Manager__account__412EB0B6">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountID" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="accountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orderDeta__order__4E88ABD4">
+    <End Role="_Order" Type="Self._Order" Multiplicity="0..1" />
+    <End Role="orderDetail" Type="Self.orderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="_Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="orderDetail">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orderDeta__produ__4F7CD00D">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="orderDetail" Type="Self.orderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="orderDetail">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payment__orderID__52593CB8">
+    <End Role="_Order" Type="Self._Order" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="_Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__specID__47DBAE45">
+    <End Role="Specification" Type="Self.Specification" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specification">
+        <PropertyRef Name="SpecID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="specID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductDi__disco__68487DD7">
+    <End Role="Discount" Type="Self.Discount" Multiplicity="1" />
+    <End Role="Product_Discount" Type="Self.Product_Discount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discount">
+        <PropertyRef Name="discountID" />
+      </Principal>
+      <Dependent Role="Product_Discount">
+        <PropertyRef Name="discountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductDi__produ__6754599E">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Product_Discount" Type="Self.Product_Discount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="Product_Discount">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIm__impor__5FB337D6">
+    <End Role="Import" Type="Self.Import" Multiplicity="1" />
+    <End Role="ProductImport" Type="Self.ProductImport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Import">
+        <PropertyRef Name="importID" />
+      </Principal>
+      <Dependent Role="ProductImport">
+        <PropertyRef Name="importID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIm__produ__60A75C0F">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductImport" Type="Self.ProductImport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="ProductImport">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Review__orderDet__5535A963">
+    <End Role="orderDetail" Type="Self.orderDetail" Multiplicity="0..1" />
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orderDetail">
+        <PropertyRef Name="orderDetailID" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="orderDetailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__accountID__3E52440B">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountID" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="accountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wishlist__custom__6383C8BA">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="Wishlist">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wishlist__produc__6477ECF3">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="Wishlist">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PBL3ModelStoreContainer">
+    <EntitySet Name="_Order" EntityType="Self._Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Export" EntityType="Self.Export" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Import" EntityType="Self.Import" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orderDetail" EntityType="Self.orderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Discount" EntityType="Self.Product_Discount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductImport" EntityType="Self.ProductImport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Specification" EntityType="Self.Specification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Wishlist" EntityType="Self.Wishlist" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK___Order__customer__4BAC3F29" Association="Self.FK___Order__customer__4BAC3F29">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="_Order" EntitySet="_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK___Order__status__4AB81AF0" Association="Self.FK___Order__status__4AB81AF0">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="_Order" EntitySet="_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customer__accoun__3B75D760" Association="Self.FK__Customer__accoun__3B75D760">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Export__managerI__5812160E" Association="Self.FK__Export__managerI__5812160E">
+      <End Role="Manager" EntitySet="Manager" />
+      <End Role="Export" EntitySet="Export" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Export__orderID__59063A47" Association="Self.FK__Export__orderID__59063A47">
+      <End Role="_Order" EntitySet="_Order" />
+      <End Role="Export" EntitySet="Export" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Export__staffID__59FA5E80" Association="Self.FK__Export__staffID__59FA5E80">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Export" EntitySet="Export" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Import__managerI__5CD6CB2B" Association="Self.FK__Import__managerI__5CD6CB2B">
+      <End Role="Manager" EntitySet="Manager" />
+      <End Role="Import" EntitySet="Import" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Manager__account__412EB0B6" Association="Self.FK__Manager__account__412EB0B6">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Manager" EntitySet="Manager" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orderDeta__order__4E88ABD4" Association="Self.FK__orderDeta__order__4E88ABD4">
+      <End Role="_Order" EntitySet="_Order" />
+      <End Role="orderDetail" EntitySet="orderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orderDeta__produ__4F7CD00D" Association="Self.FK__orderDeta__produ__4F7CD00D">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="orderDetail" EntitySet="orderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payment__orderID__52593CB8" Association="Self.FK__Payment__orderID__52593CB8">
+      <End Role="_Order" EntitySet="_Order" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__specID__47DBAE45" Association="Self.FK__Product__specID__47DBAE45">
+      <End Role="Specification" EntitySet="Specification" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductDi__disco__68487DD7" Association="Self.FK__ProductDi__disco__68487DD7">
+      <End Role="Discount" EntitySet="Discount" />
+      <End Role="Product_Discount" EntitySet="Product_Discount" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductDi__produ__6754599E" Association="Self.FK__ProductDi__produ__6754599E">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Product_Discount" EntitySet="Product_Discount" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIm__impor__5FB337D6" Association="Self.FK__ProductIm__impor__5FB337D6">
+      <End Role="Import" EntitySet="Import" />
+      <End Role="ProductImport" EntitySet="ProductImport" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIm__produ__60A75C0F" Association="Self.FK__ProductIm__produ__60A75C0F">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductImport" EntitySet="ProductImport" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Review__orderDet__5535A963" Association="Self.FK__Review__orderDet__5535A963">
+      <End Role="orderDetail" EntitySet="orderDetail" />
+      <End Role="Review" EntitySet="Review" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__accountID__3E52440B" Association="Self.FK__Staff__accountID__3E52440B">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wishlist__custom__6383C8BA" Association="Self.FK__Wishlist__custom__6383C8BA">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Wishlist" EntitySet="Wishlist" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wishlist__produc__6477ECF3" Association="Self.FK__Wishlist__produc__6477ECF3">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Wishlist" EntitySet="Wishlist" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
