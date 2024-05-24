@@ -288,22 +288,32 @@ namespace monamedia.Areas.Admin.Controllers
             var total = db.C_Order.Where(c => c.status == "Giao thành công").Sum(c => c.total);
             ViewBag.TotalRevenue = total;
             //
-            List<int> charts = new List<int>(new int[12]);
-
-            // Lấy danh sách các đơn hàng đã giao thành công
-            var successfulOrders = db.C_Order.Where(c => c.status == "Giao thành công").ToList();
-
-            // Tính tổng doanh thu cho mỗi tháng và lưu vào List charts
-            foreach (var order in successfulOrders)
+         
+            return View();
+        }
+        public ActionResult Chart(DateTime startDate, DateTime endDate)
+        {
+            using (AppDbContext db = new AppDbContext())
             {
-                int monthIndex = order.timeOrder.Value.Month - 1; // Chỉ số của tháng trong List
+                // Khởi tạo mảng JSON để lưu doanh thu theo tháng
+                var chartData = new List<object>();
 
-                // Cộng thêm doanh thu của đơn hàng vào tháng tương ứng trong List charts
-                charts[monthIndex] += (int)order.total;
+                // Lấy danh sách các đơn hàng đã giao thành công
+                var successfulOrders = db.C_Order.Where(c => c.status == "Giao thành công" && c.timeOrder>= startDate && c.timeOrder<= endDate).ToList();
+
+                // Tính tổng doanh thu cho mỗi tháng và thêm vào mảng JSON
+                for (int i = 1; i <= 12; i++)
+                {
+                    int monthRevenue = successfulOrders.Where(order => order.timeOrder.Value.Month == i).Sum(order => order.total.GetValueOrDefault());
+
+
+                    // Thêm dữ liệu vào mảng JSON
+                    chartData.Add(new { Month = i, Revenue = monthRevenue });
+                }
+
+                // Trả về dữ liệu dưới dạng JSON
+                return Json(chartData, JsonRequestBehavior.AllowGet);
             }
-
-            // Truyền List charts vào View để sử dụng trong biểu đồ hoặc hiển thị dữ liệu khác
-            return View(charts);
         }
         public ActionResult Import(string search="")
         {

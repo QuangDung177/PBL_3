@@ -2,10 +2,12 @@
     ViewBag.Title = "Revenue";
     Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
 }
-@model List<int>
 <head>
     <!-- Thêm Chart.js từ CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Thêm jQuery từ CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <style>
     .row_element-button {
@@ -40,10 +42,23 @@
         padding-left: 20px;
         color: red;
     }
+
+    .btn-choice {
+        background-color: rgb(208, 208, 208);
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+        background-color: #00FFFF;
+    }
+
+    .hidden {
+        display: none;
+    }
 </style>
 <main class="main">
     <div class="main_title">
-        <p class="main_title-label "><b>Thống kê doanh thu</b></p>
+        <p class="main_title-label"><b>Thống kê doanh thu</b></p>
         <div id="clock"></div>
     </div>
     <div class="row" style="margin-left: 20px; padding-bottom: 20px;">
@@ -102,45 +117,235 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="title">
+            <div class="title" id="content">
                 <div class="row_element-button">
+                    <div>
+                        <label><i>Thống kê theo:</i> </label>
+                        <button class="btn btn-choice" id="btn-time">Thời gian</button>
+                        <button class="btn btn-choice" id="btn-staff">Nhân viên</button>
+                        <button class="btn btn-choice" id="btn-product">Sản phẩm</button>
+                    </div>
+
+                    <div>
+                        <form class="d-flex align-items-center">
+                            <label for="ngaybatdau" class="mx-2 my-1" style="white-space: nowrap;">Ngày bắt đầu</label>
+                            <input class="form-control mx-2 my-1" type="date" id="ngaybatdau" name="ngaybatdau" placeholder="Ngày bắt đầu" required>
+                        </form>
+                    </div>
+                    <div>
+                        <form class="d-flex align-items-center">
+                            <label for="ngayketthuc" class="mx-2 my-1" style="white-space: nowrap;">Ngày kết thúc</label>
+                            <input class="form-control mx-2 my-1" type="date" id="ngayketthuc" name="ngayketthuc" placeholder="Ngày kết thúc" required>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="timefields hidden">
                     <canvas id="myChart" width="800" height="400"></canvas>
+                </div>
+                <div class="stafffields hidden">
+                    <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable1">
+                        <thead>
+                            <tr>
+                                <th width="100">ID nhân viên</th>
+                                <th width="200">Tên nhân viên</th>
+                                <th width="100">Số lượng xác nhận</th>
+                                <th width="100">Tổng doanh thu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="productfields hidden">
+                    <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th width="100">ID sản phẩm</th>
+                                <th width="200">Tên sản phẩm</th>
+                                <th width="100">Màu sắc</th>
+                                <th width="100">Thương hiệu</th>
+                                <th width="100">Loại sản phẩm</th>
+                                <th width="100">Số lượng bán</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </main>
-<
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts\jquery-3.7.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-        // Hàm JavaScript chart nhận giá trị doanhThu và vẽ biểu đồ
-        function chart(doanhThu) {
-            var labels = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+    $(document).ready(function () {
+        var myChart; // Biến để lưu trữ tham chiếu đến biểu đồ
+        function getAndValidateDates() {
+            var startDate = $('#ngaybatdau').val();
+            var endDate = $('#ngayketthuc').val();
 
-            // Tạo biểu đồ
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
+            if (new Date(startDate) >= new Date(endDate)) {
+                alert('Ngày bắt đầu phải trước ngày kết thúc.');
+                return null;
+            }
+
+            return { startDate: startDate, endDate: endDate };
+        }
+        function setStaffExportTable() {
+            var dates = getAndValidateDates();
+            if (!dates) return;
+
+            $.ajax({
+                url: '/Admin/Staff/GetStaffExport', // Thay đổi URL theo cần thiết
+                type: 'GET',
                 data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Doanh thu theo tháng',
-                        data: doanhThu,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
+                    startDate: dates.startDate,
+                    endDate: dates.endDate
                 },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
+                success: function (data) {
+                    var tbody = $('#sampleTable1 tbody');
+                    tbody.empty(); // Xóa tbody hiện tại
+
+                    $.each(data, function (index, item) {
+                        var row = $('<tr>');
+                        row.append($('<td>').text(item.StaffID));
+                        row.append($('<td>').text(item.FullName));
+                        row.append($('<td>').text(item.DeliveredQuantity));
+                        row.append($('<td>').text(item.TotalRevenue));
+
+                        tbody.append(row);
+                    });
+                },
+                error: function (error) {
+                    console.error('Error fetching staff exports:', error);
                 }
             });
         }
-        // Gọi hàm chart với giá trị doanhThu từ Model
-        chart(@Html.Raw(Json.Encode(Model)));
+
+        $('#btn-staff').click(function () {
+            setStaffExportTable();
+        });
+        function setproducttable() {
+            var dates = getAndValidateDates();
+            if (!dates) return;
+            $.ajax({
+                url: '/Product/Getsoldproduct', // Thay đổi URL theo cần thiết
+                type: 'GET',
+                data: {
+                    startDate: dates.startDate,
+                    endDate: dates.endDate
+                },
+                success: function (data) {
+                    var tbody = $('#sampleTable tbody');
+                    tbody.empty(); // Xóa tbody hiện tại
+
+                    $.each(data, function (index, item) {
+                        var row = $('<tr>');
+                        row.append($('<td>').text(item.ProductID));
+                        row.append($('<td>').text(item.Name));
+                        row.append($('<td>').text(item.Color));
+                        row.append($('<td>').text(item.Brand));
+                        row.append($('<td>').text(item.Type));
+                        row.append($('<td>').text(item.QuantitySold));
+
+                        tbody.append(row);
+                    });
+                },
+                error: function (error) {
+                    console.error('Error fetching sold products:', error);
+                }
+            });
+        }
+       
+        // Hàm xử lý gửi yêu cầu AJAX
+        function sendAjaxRequest() {
+            // Lấy ngày bắt đầu và kết thúc từ input
+          
+            var dates = getAndValidateDates();
+            if (!dates) return;
+            // Gửi yêu cầu AJAX với tham số startDate và endDate
+            $.ajax({
+                url: '/AHome/Chart', // Thay đổi URL thành đường dẫn cụ thể của hành động Chart trong AHomeController của bạn
+                type: 'GET',
+                data: {
+                    startDate: dates.startDate,
+                    endDate: dates.endDate }, // Truyền tham số vào đây
+                dataType: 'json',
+                success: function (data) {
+                    // Khởi tạo mảng chứa dữ liệu các tháng và doanh thu tương ứng
+                    var labels = [];
+                    var revenues = [];
+
+                    // Lặp qua dữ liệu trả về từ hàm Chart() để lấy các giá trị
+                    for (var i = 0; i < data.length; i++) {
+                        labels.push('Tháng ' + data[i].Month); // Thêm tên tháng vào mảng labels
+                        revenues.push(data[i].Revenue); // Thêm doanh thu vào mảng revenues
+                    }
+
+                    // Kiểm tra nếu biểu đồ đã được tạo trước đó, thì xóa nó
+                    if (myChart) {
+                        myChart.destroy();
+                    }
+
+                    // Tạo biểu đồ bar mới
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Doanh thu theo tháng',
+                                data: revenues,
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                },
+                error: function () {
+                    console.log('Đã xảy ra lỗi khi lấy dữ liệu doanh thu từ server.');
+                }
+            });
+        }
+
+        // Lắng nghe sự kiện click của nút thời gian và gọi hàm xử lý
+        $('#btn-time').click(function () {
+            sendAjaxRequest();
+        });
+        $('#btn-product').click(function () {
+            setproducttable();
+        });
+        // JavaScript để xử lý sự kiện click và hiển thị/ẩn các thẻ
+        $('#btn-time').click(function () {
+            $('.timefields').removeClass('hidden');
+            $('.stafffields').addClass('hidden');
+            $('.productfields').addClass('hidden');
+        });
+
+        $('#btn-staff').click(function () {
+            $('.timefields').addClass('hidden');
+            $('.stafffields').removeClass('hidden');
+            $('.productfields').addClass('hidden');
+        });
+
+        $('#btn-product').click(function () {
+            $('.timefields').addClass('hidden');
+            $('.stafffields').addClass('hidden');
+            $('.productfields').removeClass('hidden');
+        });
+    });
+
+
+
 </script>

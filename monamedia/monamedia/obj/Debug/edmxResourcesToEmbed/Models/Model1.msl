@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="PBL3Entities">
+  <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="AppDbContext">
     <EntitySetMapping Name="C_Order">
       <EntityTypeMapping TypeName="PBL3Model.C_Order">
         <MappingFragment StoreEntitySet="_Order">
@@ -94,8 +94,8 @@
           <ScalarProperty Name="orderDetailID" ColumnName="orderDetailID" />
           <ScalarProperty Name="orderID" ColumnName="orderID" />
           <ScalarProperty Name="productID" ColumnName="productID" />
-          <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

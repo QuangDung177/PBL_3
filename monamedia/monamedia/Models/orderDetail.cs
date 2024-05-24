@@ -23,8 +23,8 @@ namespace monamedia.Models
         public int orderDetailID { get; set; }
         public Nullable<int> orderID { get; set; }
         public string productID { get; set; }
-        public Nullable<int> quantity { get; set; }
         public Nullable<int> price { get; set; }
+        public Nullable<int> quantity { get; set; }
     
         public virtual C_Order C_Order { get; set; }
         public virtual Product Product { get; set; }

@@ -115,8 +115,27 @@ namespace monamedia.Controllers
             }
             return Json(new { success = true, message = "Thêm sản phẩm thành công." });
         }
+        public ActionResult Getsoldproduct(DateTime startDate, DateTime endDate)
+        {
+            AppDbContext db = new AppDbContext(); 
+            var soldProducts = (from od in db.orderDetails
+                                join o in db.C_Order on od.orderID equals o.orderID
+                                join p in db.Products on od.productID equals p.productID
+                                where (o.timeOrder >= startDate && o.timeOrder <= endDate&& o.status == "Giao thành công")
+                                group od by new { od.productID, p.name, p.brand, p.color, p.type } into g
+                                select new SoldProductViewModel
+                                {
+                                    ProductID = g.Key.productID,
+                                    Name = g.Key.name,
+                                    Brand = g.Key.brand,
+                                    Color = g.Key.color,
+                                    Type = g.Key.type,
+                                    QuantitySold = g.Sum(x => x.quantity) != null ? g.Sum(x => x.quantity) : 0
+                                }).ToList();
 
-
-
+            return Json(soldProducts, JsonRequestBehavior.AllowGet);
+        }
     }
+
+
 }

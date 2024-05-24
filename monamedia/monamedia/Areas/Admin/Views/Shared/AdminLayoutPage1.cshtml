@@ -241,7 +241,23 @@
         </ul>
     </aside>
 
-
+    <!-- Modal thông báo -->
+    <div class="modal" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="alertMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main content -->
     <div class="container body-content" style="margin-left: 200px;">
@@ -285,7 +301,15 @@
                 });
         });
     </script>
-   
+    <script>
+        // Hàm hiển thị modal thông báo
+        function showAlert(message) {
+            // Đặt nội dung thông báo
+            $('#alertMessage').text(message);
+            // Hiển thị modal
+            $('#alertModal').modal('show');
+        }
+    </script>
 
     <script>
         function time() {

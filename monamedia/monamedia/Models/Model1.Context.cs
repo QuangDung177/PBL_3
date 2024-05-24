@@ -16,7 +16,7 @@ namespace monamedia.Models
     public partial class AppDbContext : DbContext
     {
         public AppDbContext()
-            : base("name=PBL3Entities")
+            : base("name=AppDbContext")
         {
         }
     
