@@ -78,7 +78,9 @@
                                     <td>@import.importID</td>
                                     <td>@import.managerID</td>
                                     <td>@import.importDate.Value.ToString("dd-MM-yyyy")</td>
-                                    <td>@import.total</td>
+                                    <td class="total">
+                                        <span class="number">@import.total</span> <span style="margin-left: 5px;">VND</span>
+                                    </td>
                                     <td>@import.status</td>
                                     <td class="table-td-center">
                                         <button class="btn btn-primary btn-sm detail" data-bs-toggle="modal" data-bs-target="#detailModal" title="Chi tiết" id="show-emp" data-importid="@import.importID"
@@ -174,5 +176,8 @@
                 }
             });
         });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        formatNumbers('total');
     });
 </script>

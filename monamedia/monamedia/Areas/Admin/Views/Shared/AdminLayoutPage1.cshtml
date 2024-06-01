@@ -310,6 +310,17 @@
             $('#alertModal').modal('show');
         }
     </script>
+    <script>
+        function formatNumbers(className) {
+            document.querySelectorAll('.' + className + ' .number').forEach(function (element) {
+                var number = parseFloat(element.textContent.replace(/,/g, ''));
+                if (!isNaN(number)) {
+                    var formattedNumber = number.toLocaleString('en-US');
+                    element.textContent = formattedNumber;
+                }
+            });
+        }
+    </script>
 
     <script>
         function time() {

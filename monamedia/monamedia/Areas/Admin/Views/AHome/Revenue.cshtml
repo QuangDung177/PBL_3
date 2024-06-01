@@ -110,7 +110,10 @@
                 </div>
                 <div class="info">
                     <h4>Tổng doanh thu</h4>
-                    <p style="color: black;"><b>@ViewBag.TotalRevenue đồng</b></p>
+                    <div style="display:flex">
+                        <p class="totalrevenue" style="color: black; margin-right: 5px;"><b><span class="number">@ViewBag.TotalRevenue</span></b></p>
+                        <p style="color: black;"><b><span>đồng</span></b></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -347,5 +350,7 @@
     });
 
 
-
+    document.addEventListener('DOMContentLoaded', function () {
+        formatNumbers('totalrevenue');
+    });
 </script>

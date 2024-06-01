@@ -183,7 +183,7 @@
                     <div id="staffFields">
                         <div class="form-group col-md-6">
                             <label for="salary">Lương</label>
-                            <input type="number" class="form-control" id="salary" name="salary" readonly>
+                            <input type="text" class="form-control" id="salary" name="salary" readonly>
                         </div>
                     </div>
                     <!-- Thêm các trường dữ liệu riêng của khách hàng -->
@@ -290,7 +290,7 @@
                 }
                 $('#address').val(response.Address);
                 $('#phoneNumber').val(response.PhoneNumber);
-                $('#salary').val(response.Salary);
+                $('#salary').val(response.Salary.toLocaleString('en-US') + ' VND');
                 $('#detailModal').modal('show');
 
             },
@@ -328,7 +328,9 @@
         });
 
     }
-
+    document.addEventListener('DOMContentLoaded', function () {
+        formatNumbers('total');
+    });
 
 </script>
 

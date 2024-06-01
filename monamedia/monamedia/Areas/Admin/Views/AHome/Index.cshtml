@@ -140,7 +140,7 @@
                                     </td>
                                     <td>@staff.address</td>
                                     <td>@staff.phoneNumber</td>
-                                    <td>@staff.salary</td>
+                                    <td class="salary"><span class="number">@staff.salary</span><span style="margin-left: 5px;">VND</span></td>
                                     <td class="table-td-center">
                                         <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
                                                 style="background-color: rgb(251, 226, 197); ">
@@ -232,6 +232,9 @@
                 alert('Vui lòng chọn ít nhất một nhân viên để xóa.');
             }
         });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        formatNumbers('salary');
     });
 </script>
 
