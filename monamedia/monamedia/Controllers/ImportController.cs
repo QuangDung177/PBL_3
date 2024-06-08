@@ -10,7 +10,6 @@ namespace monamedia.Controllers
 {
     public class ImportController : Controller
     {
-        // GET: Import
         public ActionResult Index()
         {
             return View();
