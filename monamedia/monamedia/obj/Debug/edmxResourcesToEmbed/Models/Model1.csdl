@@ -204,6 +204,16 @@
     <NavigationProperty Name="Account" Relationship="Self.FK__Staff__accountID__787EE5A0" FromRole="Staff" ToRole="Account" />
     <NavigationProperty Name="Exports" Relationship="Self.FK__Export__staffID__6D0D32F4" FromRole="Staff" ToRole="Export" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <Association Name="FK___Order__customer__693CA210">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
     <End Role="C_Order" Type="Self.C_Order" Multiplicity="*" />
@@ -419,6 +429,7 @@
     <EntitySet Name="Reviews" EntityType="Self.Review" />
     <EntitySet Name="Specifications" EntityType="Self.Specification" />
     <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <AssociationSet Name="FK___Order__customer__693CA210" Association="Self.FK___Order__customer__693CA210">
       <End Role="Customer" EntitySet="Customers" />
       <End Role="C_Order" EntitySet="C_Order" />

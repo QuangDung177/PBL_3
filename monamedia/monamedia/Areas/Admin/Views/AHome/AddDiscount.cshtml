@@ -198,7 +198,8 @@
             var selectedProductIds = [];
 
             if (name.trim() === '' || percent.trim() === '' || ngayBatDau.trim() === '' || ngayKetThuc.trim() === '') {
-                alert("Vui lòng nhập đầy đủ thông tin.");
+       
+                swal("", "Vui lòng nhập đầy đủ thông tin.", "warning");
                 return; // Dừng thực thi nếu thông tin còn thiếu
             }
            
@@ -207,15 +208,15 @@
             var endDate = new Date($('#ngayKetThuc').val());
             var currentDate = new Date();
             if (startDate < currentDate) {
-                alert("Ngày bắt đầu phải lớn hơn ngày hiện tại. Vui lòng chọn lại!");
+                swal("", "Ngày bắt đầu phải lớn hơn ngày hiện tại. Vui lòng chọn lại!", "error");
                 return; // Dừng thực thi nếu ngày bắt đầu không hợp lệ
             }
             if (startDate > endDate) {
-                alert("Ngày bắt đầu phải trước ngày kết thúc. Vui lòng chọn lại!");
+                swal("", "Ngày bắt đầu phải trước ngày kết thúc. Vui lòng chọn lại!", "error");
                 return; // Dừng thực thi nếu ngày bắt đầu lớn hơn hoặc bằng ngày kết thúc
             }
             if (!$('input[name="Discount"]:checked').val()) {
-                alert("Vui lòng chọn ít nhất một loại giảm giá.");
+                swal("", "Vui lòng chọn ít nhất một loại giảm giá.", "info");
                 return; // Dừng thực thi nếu không có loại giảm giá nào được chọn
             }
 

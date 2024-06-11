@@ -136,12 +136,12 @@
     var newPassword = document.getElementById("newpassword").value;
     var confirmNewPassword = document.getElementById("confnewpassword").value;
     if (oldPassword !== "@Model.Account.password") {
-        alert("Mật khẩu cũ không đúng!");
+        swal("", "Mật khẩu cũ không đúng!", "error");
         return;
     }
     // So sánh mật khẩu mới và xác nhận mật khẩu mới
     if (newPassword !== confirmNewPassword) {
-        alert("Xác nhận mật khẩu mới không khớp!");
+        swal("", "Xác nhận mật khẩu mới không khớp!", "error");
         return;
     }
 
@@ -154,7 +154,7 @@
         // Xử lý phản hồi từ server
         if (response.success) {
            alert(response.message);
-            alert("Mật khẩu đã được đổi thành công. Bạn sẽ được chuyển hướng đến trang đăng nhập.");
+            swal("", "Mật khẩu đã được đổi thành công. Bạn sẽ được chuyển hướng đến trang đăng nhập.", "success");
            /* $('#passModal').modal('hide');
             // Xóa giá trị của các trường nhập mật khẩu trên form
             $('#oldpassword').val('');

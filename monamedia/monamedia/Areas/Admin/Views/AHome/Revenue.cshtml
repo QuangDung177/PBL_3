@@ -191,7 +191,8 @@
             var endDate = $('#ngayketthuc').val();
 
             if (new Date(startDate) >= new Date(endDate)) {
-                alert('Ngày bắt đầu phải trước ngày kết thúc.');
+               
+                swal("", "Ngày bắt đầu phải trước ngày kết thúc.", "error");
                 return null;
             }
 

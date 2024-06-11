@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -131,6 +132,26 @@ namespace monamedia.Areas.Admin.Controllers
             db.Staffs.Add(s);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public JsonResult CheckUserName(string userName)
+        {
+            AppDbContext db = new AppDbContext();
+            // Kiểm tra xem userName có tồn tại trong cơ sở dữ liệu không
+            bool isExist = db.Accounts.Any(u => u.userName == userName);
+
+            // Trả về kết quả dưới dạng JSON
+            return Json(new { isExist = isExist });
+        }
+        [HttpPost]
+        public JsonResult CheckEmail(string email)
+        {
+            AppDbContext db = new AppDbContext();
+            // Kiểm tra xem email có tồn tại trong cơ sở dữ liệu không
+            bool isExist = db.Accounts.Any(u => u.email == email);
+
+            // Trả về kết quả dưới dạng JSON
+            return Json(new { isExist = isExist });
         }
         public ActionResult EditStaff(int idStaff, int idAccount)
         {

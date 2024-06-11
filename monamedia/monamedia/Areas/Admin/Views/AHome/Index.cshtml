@@ -190,7 +190,8 @@
                                                     }
                                                 } else {
                                                     // Nếu không có nhân viên nào được chọn, thông báo cho người dùng
-                                                    alert('Vui lòng chọn ít nhất một nhân viên để xóa.');
+                                                   
+                                                    swal("", "Vui lòng chọn ít nhất một nhân viên để xóa.", "warning");
                                                 }
                                             }
                                         </script>
@@ -225,11 +226,12 @@
                 // Hiển thị hộp thoại xác nhận
                 if (confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')) {
                     // Nếu người dùng chọn "OK" trong hộp thoại xác nhận, chuyển hướng đến trang DeleteStaff và truyền danh sách ID
+
                     window.location.href = '/Admin/AHome/DeleteStaff?selectedStaffIDs=' + selectedStaffIds.join(',') + '&selectedAccountIDs=' + selectedAccountIDs.join(',');
                 }
             } else {
                 // Nếu không có nhân viên nào được chọn, thông báo cho người dùng
-                alert('Vui lòng chọn ít nhất một nhân viên để xóa.');
+                swal("", "Vui lòng chọn ít nhất một nhân viên để xóa.", "warning");
             }
         });
     });

@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Website Bán Điện Thoại</title>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/limontesweetalert2/7.2.0/sweetalert2.min.css/>" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/site.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
@@ -51,6 +57,7 @@
             left: 0;
             padding-top: 20px;
         }
+
 
         .sidebar__menu {
             padding: 15px;
@@ -179,8 +186,8 @@
     <!--sidebar-->
     <div class="sidebar"></div>
     <aside class="sidebar">
-        <p class="sidebar__username"><b>@ViewBag.ManagerName </b></p>
-        <p class="sidebar__user-designation">Chào mừng bạn trở lại</p>
+        <p class="sidebar__username" style="margin-left: 20px;"><b>@ViewBag.ManagerName </b></p>
+        <p class="sidebar__user-designation" style="margin-left: 20px;">Chào mừng bạn trở lại</p>
 
         <hr>
         <ul class="sidebar__menu">

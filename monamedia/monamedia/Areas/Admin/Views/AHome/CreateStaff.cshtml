@@ -29,7 +29,7 @@
 
                         <div class="form-group col-md-4">
                             <label class="control-label">Ngày sinh</label>
-                            <input class="form-control" type="date" id="birthDate" name="birthDate" placeholder="Ngày sinh">
+                            <input class="form-control" type="date" id="birthDate" name="birthDate" placeholder="Ngày sinh" required>
                         </div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
@@ -54,29 +54,133 @@
                         </div>
                     </div>
                     <div class="row" style="padding-bottom: 20px;">
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Lương</label>
-                                <input class="form-control" type="number" id="salary" name="salary" placeholder="Lương" required>
-                            </div>
-                        
+                        <div class="form-group  col-md-4">
+                            <label class="control-label">Lương</label>
+                            <input class="form-control" type="text" id="salary" name="salary" placeholder="Lương" min="0" required>
+                        </div>
+
                         <div class="form-group col-md-4">
                             <label class="control-label">Email</label>
                             <input class="form-control" type="text" id="email" name="email" placeholder="Email" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Vai trò</label>
-                            <input class="form-control" type="text" id="role" name="role" placeholder="Vai trò" value="Staff" readonly >
+                            <input class="form-control" type="text" id="role" name="role" placeholder="Vai trò" value="Staff" readonly>
                         </div>
                     </div>
-                        <button type="submit" class="btn btn-success">Tạo</button>
-                        <a href="/Admin/AHome" class="btn btn-danger">Hủy</a>
+                    <button type="submit" class="btn btn-success">Tạo</button>
+                    <a href="/Admin/AHome" class="btn btn-danger">Hủy</a>
                 </form>
-                            </div>
-                        </div>
-                    
-                
             </div>
+        </div>
+
+
+    </div>
 </main>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts\jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#userName').blur(function () { // Bắt sự kiện khi người dùng rời khỏi trường nhập userName
+            var userName = $(this).val(); // Lấy giá trị của userName
+            checkUserName(userName); // Gọi hàm kiểm tra userName
+        });
+        $('#email').blur(function () { // Bắt sự kiện khi người dùng rời khỏi trường nhập userName
+            var email = $(this).val(); // Lấy giá trị của userName
+            checkEmail(email); // Gọi hàm kiểm tra userName
+        });
+    });
+
+    function checkUserName(userName) {
+        $.ajax({
+            url: '/Admin/AHome/CheckUserName',
+            type: 'POST',
+            data: { userName: userName },
+            success: function (data) {
+                if (data.isExist) {
+                    // userName không tồn tại, bạn có thể thực hiện hành động phù hợp ở đây
+                    
+                    swal("", "Tên đăng nhập đã tồn tại.", "error");
+                } 
+            },
+            error: function () {
+                swal('Đã xảy ra lỗi khi kiểm tra tên đăng nhập.');
+            }
+        });
+    }
+    function checkEmail(email) {
+        $.ajax({
+            url: '/Admin/AHome/CheckEmail',
+            type: 'POST',
+            data: { email: email },
+            success: function (data) {
+                if (data.isExist) {
+                    // Email không tồn tại, bạn có thể thực hiện hành động phù hợp ở đây
+
+                    swal("", "Email đã tồn tại.", "error");
+                }
+            },
+            error: function () {
+                swal('Đã xảy ra lỗi khi kiểm tra Email.');
+            }
+        });
+    }
+    function formatNumber(value) {
+        return value.replace(/\D/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    document.getElementById('salary').addEventListener('input', function (e) {
+        let value = e.target.value;
+        e.target.value = formatNumber(value);
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lắng nghe sự kiện submit của form
+        document.querySelector('form').addEventListener('submit', function (e) {
+            // Kiểm tra xem các trường đã được nhập đầy đủ hay chưa
+            let isValid = true;
+            document.querySelectorAll('input[required]').forEach(function (input) {
+                if (!input.value.trim()) { // Kiểm tra xem giá trị của trường có tồn tại hay không
+                    isValid = false;
+                    input.classList.add('is-invalid'); // Thêm class is-invalid để highlight trường cần nhập
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+
+            // Nếu có trường nào chưa được nhập đầy đủ, ngăn chặn gửi form đi và hiển thị thông báo
+            if (!isValid) {
+                e.preventDefault();
+                alert('Vui lòng nhập đầy đủ thông tin');
+            }
+            else {
+                // Ngăn chặn hành động mặc định của form (không gửi đi)
+                e.preventDefault();
+
+                // Lấy giá trị từ trường lương
+                let salaryInput = document.getElementById('salary').value;
+
+                // Chuyển đổi giá trị thành số nguyên và gán lại vào trường lương
+                document.getElementById('salary').value = parseInt(salaryInput.replace(/,/g, ''), 10);
+
+                // Gửi form đi
+                Swal.fire({
+
+                    position: "center",
+                    icon: "success",
+                    title: "Thêm thành công",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // Gửi form đi
+                    this.submit();
+                });
+            }
+        });
+    });
+
+
+</script>
 
 
 

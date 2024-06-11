@@ -59,7 +59,7 @@
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="form-group  col-md-4">
                             <label class="control-label">Lương</label>
-                            <input class="form-control" type="number" id="salary" name="salary" placeholder="Lương" required value="@Model.Staff.salary">
+                            <input class="form-control" type="text" id="salary" name="salary" placeholder="Lương" required value="@Model.Staff.salary">
                         </div>
 
                         <div class="form-group col-md-4">
@@ -81,5 +81,70 @@
 
     </div>
 </main>
+<script src="sweetalert2.all.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts\jquery-3.7.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
 
+
+    document.addEventListener('DOMContentLoaded', formatSalaryInput);
+    document.getElementById('salary').addEventListener('input', formatSalaryInput);
+
+    function formatSalaryInput() {
+        let salaryInput = document.getElementById('salary');
+        if (salaryInput.value) {
+            let formattedSalary = parseFloat(salaryInput.value.replace(/,/g, '')).toLocaleString('en-US');
+            salaryInput.value = formattedSalary;
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lắng nghe sự kiện submit của form
+        document.querySelector('form').addEventListener('submit', function (e) {
+            // Kiểm tra xem các trường đã được nhập đầy đủ hay chưa
+            let isValid = true;
+            document.querySelectorAll('input[required]').forEach(function (input) {
+                if (!input.value.trim()) { // Kiểm tra xem giá trị của trường có tồn tại hay không
+                    isValid = false;
+                    input.classList.add('is-invalid'); // Thêm class is-invalid để highlight trường cần nhập
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+
+            // Nếu có trường nào chưa được nhập đầy đủ, ngăn chặn gửi form đi và hiển thị thông báo
+            if (!isValid) {
+                e.preventDefault();
+                swal("", "Vui lòng nhập đầy đủ thông tin.", "warning");
+            }
+            else {
+                // Ngăn chặn hành động mặc định của form (không gửi đi)
+                e.preventDefault();
+
+                // Lấy giá trị từ trường lương
+                let salaryInput = document.getElementById('salary').value;
+
+                // Chuyển đổi giá trị thành số nguyên và gán lại vào trường lương
+                document.getElementById('salary').value = parseInt(salaryInput.replace(/,/g, ''), 10);
+
+
+
+                // Gửi form đi
+                Swal.fire({
+                  
+                    position: "center",
+                    icon: "success",
+                    title: "Thông tin đã được cập nhật.",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // Gửi form đi
+                    this.submit();
+                });
+            }
+        });
+    });
+
+
+</script>
 
