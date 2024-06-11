@@ -223,7 +223,7 @@
                 </div>
                 <div class="form-group">
                     <label for="staffReply">Phản hồi của nhân viên:</label>
-                    <textarea class="form-control" id="staffReply" rows="4"></textarea>
+                    <textarea class="form-control" id="staffReply" rows="4" required></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -270,6 +270,10 @@
     $(document).ready(function () {
         $('.sendreply-btn').click(function () {
             var cmtStaff = document.getElementById("staffReply").value;
+            if (cmtStaff == "") {
+                alert("Vui lòng nhập phản hồi");
+                return;
+            }
             $.ajax({
                 url: '/Staff/SReview/ReplyReview',
                 type: 'POST',
